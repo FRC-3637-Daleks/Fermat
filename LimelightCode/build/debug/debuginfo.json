@@ -1,0 +1,16 @@
+[
+  {
+    "artifact": "frcCpp (in project Euler-Imported)",
+    "target": "roborio",
+    "component": "frcUserProgram",
+    "debugfile": "frcCpp_roborio.debugconfig",
+    "language": "cpp"
+  },
+  {
+    "artifact": "frcCpp (in project LimelightCode)",
+    "target": "roborio",
+    "component": "frcUserProgram",
+    "debugfile": "frcCpp_roborio.debugconfig",
+    "language": "cpp"
+  }
+]
