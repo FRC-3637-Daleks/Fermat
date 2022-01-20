@@ -10,12 +10,15 @@ void Limelight::Update() {
 	//Set ta to a variable
 	Area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
 
-	// set a variable distance using a linear regression of ax+b using tvert on desmos
+	// set a variable distance using an equation
 	Distance = CalcDistance(Area);
 
 	SmartDashboard::PutString("Distance", "The distance is " + std::to_string(Distance));
 }
 
+
+//Calculates Distance using the 'ta' variable from the limlight
+//double area: ta variable from limelight
 double Limelight::CalcDistance(double area)
 {
   return 33.2*pow(area, -0.468);
