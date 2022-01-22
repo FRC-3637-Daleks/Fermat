@@ -2,13 +2,6 @@
 
 #include "Euler.h"
 
-#define STARTING_HEIGHT				0.058 // meters
-#define HIGH_SHOOT				    2.6416 // meters
-#define LOW_SHOOT                   1.2192 // meters
-#define SHOOT_ANGLE					1 // rad (57 degrees)
-
-
-
 class Limelight {
     public:
         Limelight(DalekDrive *drive);
@@ -18,6 +11,9 @@ class Limelight {
         double CalcDistance(double area);
         double CalcVelocity(double angle, double distance, double height);
         double Distance;
+        const double ANGLE = 57; // angle of shooter in degrees
+        const double HEIGHT = 2.6416; // height of top target in meterss
+        const double INITALHEIGHT = 0.058; //initial height of shooter in meters
     private:
         DalekDrive *m_drive;
         double Area;

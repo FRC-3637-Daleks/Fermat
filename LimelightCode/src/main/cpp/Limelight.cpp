@@ -21,15 +21,10 @@ double Limelight::CalcDistance(double area)
   return 33.2*pow(area, -0.468);
 }
 
-double Limelight::CalcVelocity(int shoot, double xDistance)
+double Limelight::CalcVelocity(double angle, double distance, double height)
 {
-	int yDistance=0;
-	if (shoot==2){
-		yDistance = HIGH_SHOOT-STARTING_HEIGHT;
-	}else{
-		yDistance = LOW_SHOOT-STARTING_HEIGHT;
-	}
-	return sqrt((4.9*pow(xDistance, 2))/(pow(cos(SHOOT_ANGLE), 2)*(yDistance - (xDistance * (tan(SHOOT_ANGLE))))));
+	double xDistance = 0;
+	return sqrt((4.9*pow(xDistance, 2))/(pow(cos(angle), 2)*(height - INITALHEIGHT - (xDistance * (tan(angle))))));
 }
 
 void Limelight::LightOff() {
