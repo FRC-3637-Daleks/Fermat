@@ -1,4 +1,4 @@
-#include "Euler.h"
+#include "Fermat.h"
 
 #pragma once
 

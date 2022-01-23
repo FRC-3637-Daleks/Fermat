@@ -1,6 +1,16 @@
 #pragma once
 
-#include "Euler.h"
+#include "Fermat.h"
+
+#define SHOOT_ANGLE 1 //rad (57 degrees)
+#define HIGH_SHOOT 2.6416 //meters
+#define LOW_SHOOT 1.2192 //meters
+#define START_HEIGHT 0.058 //meters
+#define DIST_COEFFICIENT 33.2 //inches
+#define DIST_EXPONENT -0.468
+#define ANGLE_COEFFICIENT 0 //rad
+#define ANGLE_EXPONENT 0
+
 
 class Limelight {
     public:
@@ -9,13 +19,10 @@ class Limelight {
 		void LightOff();
 		void LightOn();
         double CalcDistance(double area);
-        double CalcVelocity(double angle, double distance, double height);
-        double Distance;
-        const double ANGLE = 57; // angle of shooter in degrees
-        const double HEIGHT = 2.6416; // height of top target in meterss
-        const double INITALHEIGHT = 0.058; //initial height of shooter in meters
+        double CalcVelocity(double points, double xDistance);
+        double CalcShootAngle(double velocty);
+        double distance, area, low_velocity, high_velocity;
     private:
         DalekDrive *m_drive;
         double Area;
-
 };
