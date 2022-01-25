@@ -10,6 +10,8 @@
 #define DIST_EXPONENT -0.468
 #define ANGLE_COEFFICIENT 0 //rad
 #define ANGLE_EXPONENT 0
+#define ANGLE_PRODUCT 1.59 
+#define ANGLE_OFFSET 0.0228 
 
 
 class Limelight {
@@ -21,6 +23,7 @@ class Limelight {
         double CalcDistance(double area);
         double CalcVelocity(double points, double xDistance);
         double CalcShootAngle(double velocty);
+        double CalcTurnAngle(double xPos);
         double distance, area, low_velocity, high_velocity;
     private:
         DalekDrive *m_drive;

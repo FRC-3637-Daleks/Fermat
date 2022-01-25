@@ -47,6 +47,11 @@ double Limelight::CalcShootAngle(double velocity) // maybe necessary depending o
 	return ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT);
 }
 
+double Limelight::CalcTurnAngle(double xPos)
+{
+	return ANGLE_PRODUCT*xPos + ANGLE_OFFSET;
+}
+
 void Limelight::LightOff() {
 	nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 1);
 }
