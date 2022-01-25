@@ -38,17 +38,19 @@ double Limelight::CalcDistance(double area) // (in) outputs inches
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s) outputs meters per second
 {
 	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
-
+	SmartDashboard::PutNumber("velocity",sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) ));
 	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
 }
 
 double Limelight::CalcShootAngle(double velocity) // maybe necessary depending on design
 {
+	SmartDashboard::PutNumber("ShootAngle", ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT));
 	return ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT);
 }
 
 double Limelight::CalcTurnAngle(double xPos)
 {
+	SmartDashboard::PutNumber("TurnAngle", ANGLE_PRODUCT*xPos + ANGLE_OFFSET);
 	return ANGLE_PRODUCT*xPos + ANGLE_OFFSET;
 }
 
