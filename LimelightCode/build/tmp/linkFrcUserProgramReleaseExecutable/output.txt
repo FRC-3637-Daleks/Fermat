@@ -1,4 +1,4 @@
-See file:///C:/Users/visva/Documents/FRC%20Coding/LimelightCode/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt for all output for linkFrcUserProgramReleaseExecutable.
+See file:///C:/Users/visva/Documents/FRC%20Coding/FRC%20Github/Fermat/LimelightCode/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt for all output for linkFrcUserProgramReleaseExecutable.
 linking frcUserProgram successful.
 
-Finished linkFrcUserProgramReleaseExecutable, see full log file:///C:/Users/visva/Documents/FRC%20Coding/LimelightCode/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt.
+Finished linkFrcUserProgramReleaseExecutable, see full log file:///C:/Users/visva/Documents/FRC%20Coding/FRC%20Github/Fermat/LimelightCode/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt.

@@ -15,7 +15,7 @@ c++
 -O2
 -nostdinc
 -I
-"C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include"
+"C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include"
 -I
 C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4e57ecd72678f63898f8089b6ef6672d\\navx-cpp-4.0.428-headers
 -I

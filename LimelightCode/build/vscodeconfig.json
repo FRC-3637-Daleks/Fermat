@@ -40,7 +40,7 @@
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\b8d397ee666b555a6c7428dd61689fb3\\cameraserver-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4b043cf15bb0fb22ea4fff2bc6ad9acf\\cscore-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\67a79c1c661a84cbc99042d108434bbc\\opencv-cpp-3.4.7-5-headers\\",
-      "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\",
+      "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\3e31c2ba266507f0809ae6939f4d94e1\\navx-cpp-4.0.428-sources\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\c11ac8e89d5d96484714352999b178d2\\wpilibNewCommands-cpp-2021.3.1-sources\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\956037d9e358b9c19106c2292f6a77c5\\wpilibOldCommands-cpp-2021.3.1-sources\\",
@@ -93,7 +93,7 @@
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\b8d397ee666b555a6c7428dd61689fb3\\cameraserver-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4b043cf15bb0fb22ea4fff2bc6ad9acf\\cscore-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\67a79c1c661a84cbc99042d108434bbc\\opencv-cpp-3.4.7-5-headers\\",
-      "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+      "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
     ],
     "binaries": [
       {
@@ -102,7 +102,7 @@
           {
             "source": {
               "srcDirs": [
-                "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\cpp\\"
+                "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\cpp\\"
               ],
               "includes": [
                 "**/*.cpp",
@@ -112,7 +112,7 @@
             },
             "exportedHeaders": {
               "srcDirs": [
-                "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+                "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
               ],
               "includes": [
                 "**/*.cpp",
@@ -166,7 +166,7 @@
           "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\b8d397ee666b555a6c7428dd61689fb3\\cameraserver-cpp-2021.3.1-headers\\",
           "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4b043cf15bb0fb22ea4fff2bc6ad9acf\\cscore-cpp-2021.3.1-headers\\",
           "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\67a79c1c661a84cbc99042d108434bbc\\opencv-cpp-3.4.7-5-headers\\",
-          "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+          "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
         ],
         "sharedLibrary": false,
         "executable": true
@@ -176,7 +176,7 @@
       {
         "source": {
           "srcDirs": [
-            "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\cpp\\"
+            "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\cpp\\"
           ],
           "includes": [
             "**/*.cpp",
@@ -208,7 +208,7 @@
       {
         "source": {
           "srcDirs": [
-            "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+            "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
           ],
           "includes": [
             "**/*.cpp",
@@ -283,7 +283,7 @@
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\b8d397ee666b555a6c7428dd61689fb3\\cameraserver-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4b043cf15bb0fb22ea4fff2bc6ad9acf\\cscore-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\67a79c1c661a84cbc99042d108434bbc\\opencv-cpp-3.4.7-5-headers\\",
-      "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\",
+      "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\3e31c2ba266507f0809ae6939f4d94e1\\navx-cpp-4.0.428-sources\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\c11ac8e89d5d96484714352999b178d2\\wpilibNewCommands-cpp-2021.3.1-sources\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\956037d9e358b9c19106c2292f6a77c5\\wpilibOldCommands-cpp-2021.3.1-sources\\",
@@ -336,7 +336,7 @@
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\b8d397ee666b555a6c7428dd61689fb3\\cameraserver-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4b043cf15bb0fb22ea4fff2bc6ad9acf\\cscore-cpp-2021.3.1-headers\\",
       "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\67a79c1c661a84cbc99042d108434bbc\\opencv-cpp-3.4.7-5-headers\\",
-      "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+      "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
     ],
     "binaries": [
       {
@@ -345,7 +345,7 @@
           {
             "source": {
               "srcDirs": [
-                "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\cpp\\"
+                "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\cpp\\"
               ],
               "includes": [
                 "**/*.cpp",
@@ -355,7 +355,7 @@
             },
             "exportedHeaders": {
               "srcDirs": [
-                "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+                "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
               ],
               "includes": [
                 "**/*.cpp",
@@ -408,7 +408,7 @@
           "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\b8d397ee666b555a6c7428dd61689fb3\\cameraserver-cpp-2021.3.1-headers\\",
           "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\4b043cf15bb0fb22ea4fff2bc6ad9acf\\cscore-cpp-2021.3.1-headers\\",
           "C:\\Users\\visva\\.gradle\\caches\\transforms-2\\files-2.1\\67a79c1c661a84cbc99042d108434bbc\\opencv-cpp-3.4.7-5-headers\\",
-          "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+          "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
         ],
         "sharedLibrary": false,
         "executable": true
@@ -418,7 +418,7 @@
       {
         "source": {
           "srcDirs": [
-            "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\cpp\\"
+            "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\cpp\\"
           ],
           "includes": [
             "**/*.cpp",
@@ -449,7 +449,7 @@
       {
         "source": {
           "srcDirs": [
-            "C:\\Users\\visva\\Documents\\FRC Coding\\LimelightCode\\src\\main\\include\\"
+            "C:\\Users\\visva\\Documents\\FRC Coding\\FRC Github\\Fermat\\LimelightCode\\src\\main\\include\\"
           ],
           "includes": [
             "**/*.cpp",

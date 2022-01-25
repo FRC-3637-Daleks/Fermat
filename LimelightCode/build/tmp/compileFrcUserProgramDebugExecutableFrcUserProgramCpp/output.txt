@@ -1,111 +1,111 @@
-See file:///C:/Users/visva/Documents/FRC%20Coding/LimelightCode/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
-compiling DalekDrive.cpp successful.
+See file:///C:/Users/visva/Documents/FRC%20Coding/FRC%20Github/Fermat/LimelightCode/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
+compiling Limelight.cpp successful.
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\Limelight.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
      enum class LimitSwitch { kForward, kReverse };
                 ^~~~~~~~~~~
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp: In constructor 'DalekDrive::DalekDrive(int, int, int, int, DalekDrive::driveType)':
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:31:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+
+compiling DalekDrive.cpp successful.
+In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
+     enum class LimitSwitch { kForward, kReverse };
+                ^~~~~~~~~~~
+C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp: In constructor 'DalekDrive::DalekDrive(int, int, int, int, DalekDrive::driveType)':
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:31:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_leftEncoder[FRONT] = new CANEncoder(*m_leftMotor[FRONT]);
                                                            ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:32:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:32:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_leftEncoder[REAR]   = new CANEncoder(*m_leftMotor[REAR]);
                                                            ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:33:61: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:33:61: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_rightEncoder[FRONT] = new CANEncoder(*m_rightMotor[FRONT]);
                                                              ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:34:60: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:34:60: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_rightEncoder[REAR]  = new CANEncoder(*m_rightMotor[REAR]);
                                                             ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp: In member function 'void DalekDrive::InitDalekDrive()':
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:276:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp: In member function 'void DalekDrive::InitDalekDrive()':
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:276:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_leftEncoder[FRONT] = new CANEncoder(*m_leftMotor[FRONT]);
                                                            ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:277:58: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:277:58: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_leftEncoder[REAR]  = new CANEncoder(*m_leftMotor[REAR]);
                                                           ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:278:60: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:278:60: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_rightEncoder[FRONT]= new CANEncoder(*m_rightMotor[FRONT]);
                                                             ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
-C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:279:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
+C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:279:59: warning: 'rev::CANEncoder::CANEncoder(rev::CANSparkMax&, rev::CANEncoder::EncoderType, int)' is deprecated: Use CANSparkMax::GetEncoder instead [-Wdeprecated-declarations]
   m_rightEncoder[REAR] = new CANEncoder(*m_rightMotor[REAR]);
                                                            ^
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:32:0,
                  from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANEncoder.h:65:14: note: declared here
      explicit CANEncoder(CANSparkMax& device, EncoderType sensorType = CANEncoder::EncoderType::kHallSensor, int counts_per_rev = 42);
               ^~~~~~~~~~
 
-compiling Limelight.cpp successful.
-In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\Limelight.cpp:1:
-C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
-     enum class LimitSwitch { kForward, kReverse };
-                ^~~~~~~~~~~
-C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
-
 compiling Robot.cpp successful.
 In file included from C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\include/Euler.h:28,
-                 from C:\Users\visva\Documents\FRC Coding\LimelightCode\src\main\cpp\Robot.cpp:1:
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\include/Fermat.h:28,
+                 from C:\Users\visva\Documents\FRC Coding\FRC Github\Fermat\LimelightCode\src\main\cpp\Robot.cpp:1:
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
      enum class LimitSwitch { kForward, kReverse };
                 ^~~~~~~~~~~
 C:\Users\visva\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
 
-Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/visva/Documents/FRC%20Coding/LimelightCode/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.
+Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/visva/Documents/FRC%20Coding/FRC%20Github/Fermat/LimelightCode/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.
