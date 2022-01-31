@@ -30,12 +30,12 @@ void Limelight::Update() {
 	SmartDashboard::PutNumber("ty", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0));
 }
 
-double Limelight::CalcDistance(double area) // (in) outputs inches
+double Limelight::CalcDistance(double area) // (m)
 {
-  return DIST_EXPONENT*pow(area, DIST_EXPONENT);
+  return (DIST_EXPONENT*pow(area, DIST_EXPONENT))*0.0254;
 }
 
-double Limelight::CalcVelocity(double points, double xDistance) // (m/s) outputs meters per second
+double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
 {
 	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
 	SmartDashboard::PutNumber("velocity",sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) ));
