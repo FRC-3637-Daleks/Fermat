@@ -22,8 +22,8 @@ class DalekDrive {
 	public:
 	enum class driveType { kMecanum, kDifferential };
 	DalekDrive(int leftMotorChannel, int leftSlaveMotorChannel, int rightMotorChannel, int rightSlaveMotorChannel, driveType t);
-	DalekDrive(CANSparkMax* leftMotor, CANSparkMax* leftSlaveMotor, CANSparkMax* rightMotor, CANSparkMax* rightSlaveMotor, driveType t);
-	DalekDrive(CANSparkMax& leftMotor, CANSparkMax& leftSlaveMotor, CANSparkMax& rightMotor, CANSparkMax& rightSlaveMotor, driveType t);
+	DalekDrive(WPI_TalonFX* leftMotor, WPI_TalonFX* leftSlaveMotor, WPI_TalonFX* rightMotor, WPI_TalonFX* rightSlaveMotor, driveType t);
+	DalekDrive(WPI_TalonFX& leftMotor, WPI_TalonFX& leftSlaveMotor, WPI_TalonFX& rightMotor, WPI_TalonFX& rightSlaveMotor, driveType t);
 
 	~DalekDrive();
 
@@ -56,14 +56,14 @@ class DalekDrive {
 	void printFaults(int side, int faults);
 	float DeadZone(float input, float range);
 	bool LidarInRange (int sensorOne, int sensorTwo);
-	CANSparkMax *m_leftMotor[NUM_MOTORS_PER_SIDE];
-	CANSparkMax *m_rightMotor[NUM_MOTORS_PER_SIDE];
+	WPI_TalonFX *m_leftMotor[NUM_MOTORS_PER_SIDE];
+	WPI_TalonFX *m_rightMotor[NUM_MOTORS_PER_SIDE];
     SpeedControllerGroup *m_left;
     SpeedControllerGroup *m_right;
 	DifferentialDrive *m_diffdrive;
 	MecanumDrive *m_mecanum;
-	CANEncoder *m_leftEncoder[NUM_MOTORS_PER_SIDE];
-	CANEncoder *m_rightEncoder[NUM_MOTORS_PER_SIDE];
+	TalonFXSensorCollection *m_leftEncoder[NUM_MOTORS_PER_SIDE];
+	TalonFXSensorCollection *m_rightEncoder[NUM_MOTORS_PER_SIDE];
 	driveType m_type;
 	bool m_needFree;
 };

@@ -6,16 +6,16 @@ using namespace rev;
 
 DalekDrive::DalekDrive(int leftFront, int leftRear, int rightFront, int rightRear, DalekDrive::driveType t)
 {
-	m_leftMotor[FRONT]   = new CANSparkMax(leftFront, CANSparkMax::MotorType::kBrushless);
+	m_leftMotor[FRONT]   = new WPI_TalonFX(leftFront);
 	if (m_leftMotor[FRONT] == NULL)
 		std::bad_alloc();
-	m_rightMotor[FRONT]  = new CANSparkMax(rightFront, CANSparkMax::MotorType::kBrushless);
+	m_rightMotor[FRONT]  = new WPI_TalonFX(rightFront);
 	if (m_rightMotor[FRONT] == NULL)
 		std::bad_alloc();
-	m_leftMotor[REAR]    = new CANSparkMax(leftRear, CANSparkMax::MotorType::kBrushless);
+	m_leftMotor[REAR]    = new WPI_TalonFX(leftRear);
 	if (m_leftMotor[REAR] == NULL)
 		std::bad_alloc();
-	m_rightMotor[REAR]   = new CANSparkMax(rightRear, CANSparkMax::MotorType::kBrushless);
+	m_rightMotor[REAR]   = new WPI_TalonFX(rightRear);
 	if (m_rightMotor[REAR] == NULL)
 		std::bad_alloc();
 	m_left  = new SpeedControllerGroup(*m_leftMotor[FRONT], *m_leftMotor[REAR]);
@@ -28,15 +28,15 @@ DalekDrive::DalekDrive(int leftFront, int leftRear, int rightFront, int rightRea
 	else {
 	    m_mecanum        	= new MecanumDrive(*m_leftMotor[FRONT], *m_leftMotor[REAR], *m_rightMotor[FRONT], *m_rightMotor[REAR]);
 	}
-	m_leftEncoder[FRONT]	= new CANEncoder(*m_leftMotor[FRONT]);
-	m_leftEncoder[REAR]  	= new CANEncoder(*m_leftMotor[REAR]);
-	m_rightEncoder[FRONT]	= new CANEncoder(*m_rightMotor[FRONT]);
-	m_rightEncoder[REAR] 	= new CANEncoder(*m_rightMotor[REAR]);
+	m_leftEncoder[FRONT]	= new TalonFXSensorCollection(*m_leftMotor[FRONT]);
+	m_leftEncoder[REAR]  	= new TalonFXSensorCollection(*m_leftMotor[REAR]);
+	m_rightEncoder[FRONT]	= new TalonFXSensorCollection(*m_rightMotor[FRONT]);
+	m_rightEncoder[REAR] 	= new TalonFXSensorCollection(*m_rightMotor[REAR]);
 	m_needFree          	= true;
 	InitDalekDrive();
 }
 
-DalekDrive::DalekDrive(CANSparkMax* leftFront, CANSparkMax* leftRear, CANSparkMax* rightFront, CANSparkMax* rightRear, DalekDrive::driveType t)
+DalekDrive::DalekDrive(WPI_TalonFX* leftFront, WPI_TalonFX* leftRear, WPI_TalonFX* rightFront, WPI_TalonFX* rightRear, DalekDrive::driveType t)
 {
 	m_leftMotor[FRONT]   = leftFront;
 	m_rightMotor[FRONT]  = rightFront;
@@ -55,7 +55,7 @@ DalekDrive::DalekDrive(CANSparkMax* leftFront, CANSparkMax* leftRear, CANSparkMa
 	InitDalekDrive();
 }
 
-DalekDrive::DalekDrive(CANSparkMax& leftFront, CANSparkMax& leftRear, CANSparkMax& rightFront, CANSparkMax& rightRear, DalekDrive::driveType t)
+DalekDrive::DalekDrive(WPI_TalonFX& leftFront, WPI_TalonFX& leftRear, WPI_TalonFX& rightFront, WPI_TalonFX& rightRear, DalekDrive::driveType t)
 {
 	m_leftMotor[FRONT]   = &leftFront;
 	m_rightMotor[FRONT]  = &rightFront;
@@ -109,10 +109,10 @@ DalekDrive::TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInp
 		m_diffdrive->TankDrive(leftStick->GetY() * MAX_SPEED, rightStick->GetY() * MAX_SPEED, squaredInputs);
 		SmartDashboard::PutNumber("joystick left", leftStick->GetY());
 		SmartDashboard::PutNumber("right joystick", rightStick->GetY());
-		SmartDashboard::PutNumber("right encoder", m_rightEncoder[FRONT]->GetVelocity());
-		SmartDashboard::PutNumber("left encoder", m_leftEncoder[FRONT]->GetVelocity());
-		SmartDashboard::PutNumber("right output", m_rightMotor[FRONT]->GetAppliedOutput());
-		SmartDashboard::PutNumber("left output", m_leftMotor[FRONT]->GetAppliedOutput());
+		SmartDashboard::PutNumber("right encoder", m_rightMotor[FRONT]->GetSelectedSensorVelocity());
+		SmartDashboard::PutNumber("left encoder", m_leftMotor[FRONT]->GetSelectedSensorVelocity());
+		SmartDashboard::PutNumber("right output", m_rightMotor[FRONT]->GetMotorOutputVoltage());
+		SmartDashboard::PutNumber("left output", m_leftMotor[FRONT]->GetMotorOutputVoltage());
 		SmartDashboard::PutNumber("right current", m_rightMotor[FRONT]->GetOutputCurrent());
 		SmartDashboard::PutNumber("left current", m_leftMotor[FRONT]->GetOutputCurrent());
 		SmartDashboard::PutNumber("right voltage", m_rightMotor[FRONT]->GetBusVoltage());
@@ -246,9 +246,9 @@ DalekDrive::Cartesian(double ySpeed, double xSpeed, double zRotation, double gyr
 double
 DalekDrive::GetVelocity()
 {
-	SmartDashboard::PutNumber("right encoder", m_rightEncoder[FRONT]->GetVelocity());
-	SmartDashboard::PutNumber("left encoder", m_leftEncoder[FRONT]->GetVelocity());
-	return WHEEL_CIRCUMFERENCE * (m_leftEncoder[FRONT]->GetVelocity() + m_rightEncoder[FRONT]->GetVelocity()) / (120 * GEAR_RATIO); // right is incorrect so im cganhing it here
+	SmartDashboard::PutNumber("right encoder", m_rightMotor[FRONT]->GetSelectedSensorVelocity());
+	SmartDashboard::PutNumber("left encoder", m_leftMotor[FRONT]->GetSelectedSensorVelocity());
+	return WHEEL_CIRCUMFERENCE * (m_leftMotor[FRONT]->GetSelectedSensorVelocity() + m_rightMotor[FRONT]->GetSelectedSensorVelocity()) / (120 * GEAR_RATIO); // right is incorrect so im cganhing it here
 }
 	
 void
@@ -273,38 +273,38 @@ void
 DalekDrive::InitDalekDrive(void)
 {
 	// Setup Encoder access
-	m_leftEncoder[FRONT] = new CANEncoder(*m_leftMotor[FRONT]);
-	m_leftEncoder[REAR]  = new CANEncoder(*m_leftMotor[REAR]);
-	m_rightEncoder[FRONT]= new CANEncoder(*m_rightMotor[FRONT]);
-	m_rightEncoder[REAR] = new CANEncoder(*m_rightMotor[REAR]);
-	m_leftEncoder[FRONT]->SetInverted(true);
-	m_leftEncoder[REAR]->SetInverted(true);
-	m_rightEncoder[FRONT]->SetInverted(false);
-	m_rightEncoder[REAR]->SetInverted(false);
+	m_leftEncoder[FRONT] = new TalonFXSensorCollection(*m_leftMotor[FRONT]);
+	m_leftEncoder[REAR]  = new TalonFXSensorCollection(*m_leftMotor[REAR]);
+	m_rightEncoder[FRONT]= new TalonFXSensorCollection(*m_rightMotor[FRONT]);
+	m_rightEncoder[REAR] = new TalonFXSensorCollection(*m_rightMotor[REAR]);
+	m_leftMotor[FRONT]->SetInverted(true);
+	m_leftMotor[REAR]->SetInverted(true);
+	m_rightMotor[FRONT]->SetInverted(false);
+	m_rightMotor[REAR]->SetInverted(false);
 
 	// Configure the SparkMax
-    m_leftMotor[FRONT]->SetCANTimeout(CAN_TIMEOUT);
-	m_leftMotor[FRONT]->SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_leftMotor[FRONT]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
-	m_leftMotor[FRONT]->SetOpenLoopRampRate(RAMP_RATE);
+    m_leftMotor[FRONT]->ConfigFactoryDefault(CAN_TIMEOUT);
+	//m_leftMotor[FRONT]->SetIdleMode(TalonFX::IdleMode::kBrake);
+    //m_leftMotor[FRONT]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
+	m_leftMotor[FRONT]->ConfigOpenloopRamp(RAMP_RATE, CAN_TIMEOUT);
 	m_leftMotor[FRONT]->SetInverted(true);
 
-    m_rightMotor[FRONT]->SetCANTimeout(CAN_TIMEOUT);
-	m_rightMotor[FRONT]->SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_rightMotor[FRONT]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
-	m_rightMotor[FRONT]->SetOpenLoopRampRate(RAMP_RATE);
+    m_rightMotor[FRONT]->ConfigFactoryDefault(CAN_TIMEOUT);
+	//m_rightMotor[FRONT]->SetIdleMode(TalonFX::IdleMode::kBrake);
+    //m_rightMotor[FRONT]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
+	m_rightMotor[FRONT]->ConfigOpenloopRamp(RAMP_RATE);
 	m_rightMotor[FRONT]->SetInverted(true);
 
-    m_leftMotor[REAR]->SetCANTimeout(CAN_TIMEOUT);
-  	m_leftMotor[REAR]->SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_leftMotor[REAR]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
-	m_leftMotor[REAR]->SetOpenLoopRampRate(RAMP_RATE);
+    m_leftMotor[REAR]->ConfigFactoryDefault(CAN_TIMEOUT);
+  	//m_leftMotor[REAR]->SetIdleMode(TalonFX::IdleMode::kBrake);
+    //m_leftMotor[REAR]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
+	m_leftMotor[REAR]->ConfigOpenloopRamp(RAMP_RATE);
 	m_leftMotor[REAR]->SetInverted(true);
 
-    m_rightMotor[REAR]->SetCANTimeout(CAN_TIMEOUT);
-	m_rightMotor[REAR]->SetIdleMode(CANSparkMax::IdleMode::kBrake);
-    m_rightMotor[REAR]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
-	m_rightMotor[REAR]->SetOpenLoopRampRate(RAMP_RATE);
+    m_rightMotor[REAR]->ConfigFactoryDefault(CAN_TIMEOUT);
+	//m_rightMotor[REAR]->SetIdleMode(TalonFX::IdleMode::kBrake);
+    //m_rightMotor[REAR]->SetSmartCurrentLimit(STALL_LIMIT, FREE_LIMIT, 0);
+	m_rightMotor[REAR]->ConfigOpenloopRamp(RAMP_RATE);
 	m_rightMotor[REAR]->SetInverted(true);
 
     m_leftMotor[FRONT]->StopMotor();  m_leftMotor[REAR]->StopMotor();
@@ -331,13 +331,15 @@ DalekDrive::printFaults(int p, int faults)
 	case LEFT: 
 		SmartDashboard::PutNumber("Left Drive Motor reported faults", faults);
 		if(m_leftMotor[REAR]) {
-			SmartDashboard::PutNumber("Left slave status", m_leftMotor[REAR]->GetFaults());
+			Faults fault = Faults(16);
+			SmartDashboard::PutNumber("Left slave status", m_leftMotor[REAR]->GetFaults(fault));
 		}
         break; 
     case RIGHT:
 		SmartDashboard::PutNumber("Right Drive Motor reported faults", faults);
 		if(m_rightMotor[REAR]) {
-			SmartDashboard::PutNumber("Right slave status", m_rightMotor[REAR]->GetFaults());
+			Faults fault = Faults(16);
+			SmartDashboard::PutNumber("Right slave status", m_rightMotor[REAR]->GetFaults(fault));
 		}
         break;
     default:
@@ -363,23 +365,26 @@ DalekDrive::DriveOk()
 	#endif
 
 	// Check for motor faults
-	mstat = m_leftMotor[FRONT]->GetFaults();
+	Faults fault = Faults(16);
+	mstat = m_leftMotor[FRONT]->GetFaults(fault);
 	if(mstat != 0) {
 		printFaults(LEFT, mstat);
 		return false;
 	}
-	mstat = m_leftMotor[FRONT]->GetStickyFaults();
+	StickyFaults stickyFault = StickyFaults(16);
+	mstat = m_leftMotor[FRONT]->GetStickyFaults(stickyFault);
 	if(mstat) {
 		printFaults(LEFT, mstat);
 		return false;
 	}
-
-	mstat = m_rightMotor[FRONT]->GetFaults();
+	fault = Faults(16);
+	mstat = m_rightMotor[FRONT]->GetFaults(fault);
 	if(mstat) {
 		printFaults(RIGHT, mstat);
 		return false;
 	}
-	mstat = m_rightMotor[FRONT]->GetStickyFaults();
+	stickyFault = StickyFaults(16);
+	mstat = m_rightMotor[FRONT]->GetStickyFaults(stickyFault);
 	if(mstat) {
 		printFaults(RIGHT, mstat);
 		return false;

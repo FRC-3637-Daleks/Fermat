@@ -22,6 +22,7 @@
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/Compressor.h>
+#include <frc/system/plant/DCMotor.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
 #include <AHRS.h>
@@ -102,6 +103,7 @@ class Robot : public TimedRobot {
 	AHRS *m_ahrs;
 	frc::DoubleSolenoid *m_climb_solenoid;
 	Limelight *m_limelight;
+	
 
 	bool timeChanged = false;
 	double waitSeconds = 0.0, timeOffset = 0.0;
