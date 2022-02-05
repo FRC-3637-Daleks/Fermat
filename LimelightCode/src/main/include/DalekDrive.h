@@ -8,7 +8,7 @@
 #define STALL_LIMIT					60
 #define FREE_LIMIT					20
 #define RAMP_RATE					0.5
-#define MAX_SPEED					1.0
+#define MAX_SPEED					0.25
 #define NUM_MOTORS_PER_SIDE			2
 #define LEFT						0
 #define RIGHT						1
@@ -20,50 +20,20 @@ using namespace rev;
 
 class DalekDrive {
 	public:
-	enum class driveType { kMecanum, kDifferential };
-	DalekDrive(int leftMotorChannel, int leftSlaveMotorChannel, int rightMotorChannel, int rightSlaveMotorChannel, driveType t);
-	DalekDrive(WPI_TalonFX* leftMotor, WPI_TalonFX* leftSlaveMotor, WPI_TalonFX* rightMotor, WPI_TalonFX* rightSlaveMotor, driveType t);
-	DalekDrive(WPI_TalonFX& leftMotor, WPI_TalonFX& leftSlaveMotor, WPI_TalonFX& rightMotor, WPI_TalonFX& rightSlaveMotor, driveType t);
-
-	~DalekDrive();
-
-	void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs = true);
-	void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs = true);
-	void TankDrive(double leftValue, double rightValue, bool squaredInputs = true);
-
-	void ArcadeDrive(Joystick* stick, bool squaredInputs = true);
-	void ArcadeDrive(Joystick& stick, bool squaredInputs = true);
-	void ArcadeDrive(double moveValue, double rotateValue, bool squaredInputs = true);
-
-	void Polar(Joystick* stick);
-	void Polar(Joystick& stick);
-	void Polar(double magnitude, double angle, double zRotation);
-
-	void Cartesian(Joystick* stick, double gyroAngle = 0.0);
-	void Cartesian(Joystick& stick, double gyroAngle = 0.0);
-	void Cartesian(double ySpeed, double xSpeed, double zRotation, double gyroAngle = 0.0);
-
-	void SetLeftRightMotorOutputs(double leftOutput, double rightOutput);
-	void SetInvertedMotor(int side, bool isInverted);
-	bool DriveOk();
-
-	void DriveBaseSquare(int leftSensor, int RightSensor);
-	double GetVelocity();
-
+		DalekDrive();
+		double squareInput(double v);
+		void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs);
+		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs);
+		void TankDrive(double l, double r, bool squaredInputs);
+	
 	private:
-	void InitDalekDrive();
-	double squareInput(double v);
-	void printFaults(int side, int faults);
-	float DeadZone(float input, float range);
-	bool LidarInRange (int sensorOne, int sensorTwo);
-	WPI_TalonFX *m_leftMotor[NUM_MOTORS_PER_SIDE];
-	WPI_TalonFX *m_rightMotor[NUM_MOTORS_PER_SIDE];
-    SpeedControllerGroup *m_left;
-    SpeedControllerGroup *m_right;
-	DifferentialDrive *m_diffdrive;
-	MecanumDrive *m_mecanum;
-	TalonFXSensorCollection *m_leftEncoder[NUM_MOTORS_PER_SIDE];
-	TalonFXSensorCollection *m_rightEncoder[NUM_MOTORS_PER_SIDE];
-	driveType m_type;
-	bool m_needFree;
+		enum MotorCount {
+			leftFront = 0,
+			leftRear = 1,
+			rightFront = 2,
+			rightRear = 3
+		};
+
+		WPI_TalonFX *m_left[2];
+		WPI_TalonFX *m_right[2];
 };

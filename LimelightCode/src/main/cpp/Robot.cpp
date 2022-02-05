@@ -11,6 +11,7 @@ void Robot::RobotInit()
     m_xbox        = new frc::XboxController(XBOX);
     m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
+    m_drive       = new DalekDrive();
     m_climb_solenoid = new frc::DoubleSolenoid(PCM, CLIMB_DEPLOY, CLIMB_EXHAUST);
     m_ahrs        = new AHRS(SPI::Port::kMXP);
     m_compressor  = new frc::Compressor(PCM);
@@ -28,6 +29,7 @@ void Robot::RobotInit()
   frc::SmartDashboard::PutNumber("Auton Phase", 0);
   frc::SmartDashboard::PutBoolean("Pickup Ball End", false);
   frc::SmartDashboard::PutBoolean("Pickup Ball Start", false);
+  frc::SmartDashboard::PutBoolean("start button pressed", false);
   //frc::SmartDashboard::PutNumber("Starting # of Balls", 3);
 
   m_ahrs->ZeroYaw();
@@ -59,17 +61,15 @@ void Robot::TeleopInit()
   
 }
 
+//create brake function
+
 void Robot::TeleopPeriodic()
 {
-    if (m_drive) {
-	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger()) { // JUST FOR TESTING
-      } else {
-        m_drive->TankDrive(m_leftStick, m_rightStick, true);
-        frc::SmartDashboard::PutBoolean("start button pressed", false);
-      }
+	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger()) {
+      m_drive->TankDrive(m_leftStick, m_rightStick, false);
+    } else {
+      m_drive->TankDrive(0.0, 0.0, false);
     }
-
-
 }
 
 void Robot::TestInit()
