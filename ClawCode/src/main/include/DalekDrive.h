@@ -14,6 +14,7 @@
 #define RIGHT						1
 #define FRONT						0
 #define REAR						1
+#define ENCODER_FEET                6300 //encoder values for 1 feet
 
 using namespace frc;
 using namespace rev;
@@ -25,6 +26,8 @@ class DalekDrive {
 		void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs);
 		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs);
 		void TankDrive(double l, double r, bool squaredInputs);
+		void Stop();
+		bool DriveToFeet(float feet);
 	
 	private:
 		enum MotorCount {
