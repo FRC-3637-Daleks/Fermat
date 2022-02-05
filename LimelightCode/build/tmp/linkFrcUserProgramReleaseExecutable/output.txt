@@ -1,4 +1,0 @@
-See file:///C:/Users/19085/git/Fermat/LimelightCode/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt for all output for linkFrcUserProgramReleaseExecutable.
-linking frcUserProgram successful.
-
-Finished linkFrcUserProgramReleaseExecutable, see full log file:///C:/Users/19085/git/Fermat/LimelightCode/build/tmp/linkFrcUserProgramReleaseExecutable/output.txt.
