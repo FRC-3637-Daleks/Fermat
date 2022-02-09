@@ -92,14 +92,14 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
-	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger()) {
+	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger() && canDrive) {
       m_drive->TankDrive(m_leftStick, m_rightStick, false);
     } else {
-      m_drive->TankDrive(0.0, 0.0, false);
+      m_drive->Stop();
     }
 
     if(m_rightStick->GetRawButtonPressed(2)){
-      m_drive->Stop();
+      canDrive = !canDrive;
     }
 }
 

@@ -104,6 +104,7 @@ class Robot : public TimedRobot {
 	frc::DoubleSolenoid *m_climb_solenoid;
 	Limelight *m_limelight;
 	
+	bool canDrive = true;
 	bool timeChanged = false;
 	double waitSeconds = 0.0, timeOffset = 0.0;
 	int auton_start, auton_end;
