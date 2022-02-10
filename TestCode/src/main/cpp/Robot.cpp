@@ -72,15 +72,16 @@ void Robot::AutonomousPeriodic()
   }
   if(phase == 1)
   {
-    if(m_drive->DriveToFeet(m_limelight->CalcDistance(m_limelight->area))){
+    if(true){ //m_drive->DriveToFeet(m_limelight->CalcDistance(m_limelight->area))
       phase++;
     }
   }
-  if(phase == 2){m_drive->TankDrive(0.0,0.0, false);}
+  if(phase == 2){
+    if(m_drive->Turn(90.0f, false)){
+      phase++;
+    }
+  }if(phase == 3){m_drive->Stop();}
   SmartDashboard::PutNumber("phase", phase);
-	//if (!driveto && i=0){
-  //   i=1
-  // }
 }
 
 void Robot::TeleopInit()
@@ -88,18 +89,16 @@ void Robot::TeleopInit()
   
 }
 
-//create brake function
-
 void Robot::TeleopPeriodic()
 {
 	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger() && canDrive) {
-      m_drive->TankDrive(m_leftStick, m_rightStick, false);
+      m_drive->TankDrive(m_leftStick, m_rightStick, false); // drives robot based on JoySticks
     } else {
       m_drive->Stop();
     }
 
     if(m_rightStick->GetRawButtonPressed(2)){
-      canDrive = !canDrive;
+      canDrive = !canDrive; // flips ability to drive when second button is pressed on m_rightStick
     }
 }
 
