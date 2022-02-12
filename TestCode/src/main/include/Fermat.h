@@ -21,7 +21,6 @@
 #include <frc/DigitalInput.h>
 #include <frc/Solenoid.h>
 #include <frc/DoubleSolenoid.h>
-#include <frc/Compressor.h>
 #include <frc/system/plant/DCMotor.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
@@ -30,6 +29,7 @@
 #include <ctre/Phoenix.h>
 #include <DalekDrive.h>
 #include <Limelight.h>
+#include <RaspberryPi.h>
 
 #define PI	3.14159265358979323846
 

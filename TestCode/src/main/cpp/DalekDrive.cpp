@@ -42,7 +42,7 @@ DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInp
 }
 
 bool
-DalekDrive::DriveToFeet(float feet)
+DalekDrive::DriveToFeet(double feet)
 {
 	double dis = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
 	SmartDashboard::PutNumber("Distance", dis);
@@ -73,7 +73,7 @@ DalekDrive::Stop(){
 }
 
 bool
-DalekDrive::Turn(float degrees, bool isRight){
+DalekDrive::Turn(double degrees){
 	/*pseudocode time
 		calculate the motor power based on degrees
 		move robot
@@ -81,40 +81,30 @@ DalekDrive::Turn(float degrees, bool isRight){
 		negative degrees - right forward
 		gear ratio 1:6
 		small gear 12, big gear 72
-		circumfrence is 8*pi = 25.13274123
+		circumfrence 8*pi = 25.13274123
 
 		if distance < total distance traveled: set motor speed to how fast youre turning (1)
 		else stop return false
 	*/
-
+	
+	//adjust the degrees to account for the motors overshooting
+	//degrees = degrees>0?(degrees - 20):(degrees+18); //one side is slightly faster than the other
 	double radAngle = degrees * (pi / 180);
 	double totalDistance = (13.5/12) * radAngle;
 	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
+	SmartDashboard::PutNumber("Total Distance", totalDistance);
 	
-	double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
+	//double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
+	
+	double speed = ((MAX_SPEED*10*abs(totalDistance)-abs(distanceTraveled))/abs(totalDistance))*MAX_SPEED;
 	SmartDashboard::PutNumber("Speed", speed);
-
-	if(isRight) {
-		if(totalDistance>0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= totalDistance){
-			TankDrive(-1.0*speed, speed, false);
-			return false;
-		} else if(totalDistance<0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= totalDistance){
-			TankDrive(speed, -1.0*speed, false);
-			return false;
-		}else {
-			return true;
-		}
-	}
-
-	if(!isRight) {
-		if(totalDistance>0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= totalDistance){
-			TankDrive(speed, speed, false);
-			return false;
-		} else if(totalDistance<0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= totalDistance){
-			TankDrive(-1*speed, speed, false);
-			return false;
-		}else {
-			return true;
-		}
+	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance&&speed>.31){
+		TankDrive(-1.0*speed, speed, false);
+		return false;
+	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance&&speed>.31){
+		TankDrive(speed, -1.0*speed, false);
+		return false;
+	}else {
+		return true;
 	}
 }

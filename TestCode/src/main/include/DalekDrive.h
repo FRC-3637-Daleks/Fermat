@@ -32,8 +32,8 @@ class DalekDrive {
 		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs);
 		void TankDrive(double l, double r, bool squaredInputs);
 		void Stop();
-		bool DriveToFeet(float feet);
-		bool Turn(float degrees, bool isLeft);
+		bool DriveToFeet(double feet);
+		bool Turn(double degrees);
 	
 	private:
 		enum MotorCount {
