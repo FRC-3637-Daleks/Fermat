@@ -16,8 +16,9 @@ void Robot::RobotInit()
     m_drive       = new DalekDrive();
     m_climb_solenoid = new frc::DoubleSolenoid(PCM, CLIMB_DEPLOY, CLIMB_EXHAUST);
     m_ahrs        = new AHRS(SPI::Port::kMXP);
-    m_compressor  = new frc::Compressor(PCM);
+    //m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
+    m_pi = new RaspberryPi(m_drive);
   }
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
@@ -41,7 +42,7 @@ void Robot::RobotInit()
   m_ahrs->ZeroYaw();
   m_ahrs->Reset();
   m_ahrs->ResetDisplacement();
-  m_compressor->Start();
+  //m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
 }
 
@@ -91,8 +92,11 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
+    
 	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger() && canDrive) {
       m_drive->TankDrive(m_leftStick, m_rightStick, false); // drives robot based on JoySticks
+    } else if (m_xbox->GetAButton()){
+      m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
     } else {
       m_drive->Stop();
     }

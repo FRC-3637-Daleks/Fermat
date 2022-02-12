@@ -98,11 +98,12 @@ class Robot : public TimedRobot {
 	frc::Joystick *m_leftStick;
 	frc::Joystick *m_rightStick;
 	frc::DigitalInput *m_cinput;
-	frc::Compressor *m_compressor;
+	//frc::Compressor *m_compressor;
 	DalekDrive *m_drive;
 	AHRS *m_ahrs;
 	frc::DoubleSolenoid *m_climb_solenoid;
 	Limelight *m_limelight;
+	RaspberryPi *m_pi;
 	
 	bool canDrive = true;
 	bool timeChanged = false;

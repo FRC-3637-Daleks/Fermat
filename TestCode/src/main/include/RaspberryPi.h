@@ -3,7 +3,7 @@
 class RaspberryPi{
     public:
         RaspberryPi(DalekDrive *drive);
-        bool SwerveTurn(double degree, double distance);
+        void SwerveTurn(double degree, double distance);
     private:
         DalekDrive *m_drive;
 };
