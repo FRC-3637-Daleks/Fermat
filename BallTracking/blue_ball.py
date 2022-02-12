@@ -95,7 +95,9 @@ while True:
             drawColor = (0, 255, 0) # green
             cv2.circle(frame, (int(x), int(y)), int(radius), drawColor, 2)
             cv2.circle(frame, center, 3, drawColor, -1)
+
             sd.putNumber("Distance", groundDist)
+            sd.putNumber("Angle", angle)
             sentToDashboard = 1
             count = 0
 
