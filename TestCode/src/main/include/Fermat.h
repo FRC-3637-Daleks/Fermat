@@ -30,6 +30,9 @@
 #include <DalekDrive.h>
 #include <Limelight.h>
 #include <RaspberryPi.h>
+#include <Climb.h>
+#include <Intake.h>
+#include <Shooter.h>
 
 #define PI	3.14159265358979323846
 

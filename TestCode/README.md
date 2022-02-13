@@ -7,3 +7,9 @@ In the Limelight Class, factors such as angles and distance are calculated
 In the DalekDrive Class, functions for movement are accessible
 ## RaspberryPi Code
 In the RaspberryPi Class, ball tracking data from the RaspberryPi is recieved and the robot tracks the ball.
+## Climb Code
+*Currently Empty*
+## Intake Code
+*Currently Empty*
+## Shooter Code
+*Currently Empty*
