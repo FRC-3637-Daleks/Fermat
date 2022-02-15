@@ -27,5 +27,5 @@ class Limelight {
         double distance, low_velocity, high_velocity;
     private:
         DalekDrive *m_drive;
-        double Area;
+        double area;
 };

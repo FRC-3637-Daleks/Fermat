@@ -81,7 +81,7 @@ void Robot::AutonomousPeriodic()
     if(m_drive->Turn(90.0)){
       phase++;
     }
-  }if(phase == 3){m_drive->Stop();}
+  }if(phase == 3){m_drive->StopLeft(); m_drive->StopRight();}
   SmartDashboard::PutNumber("phase", phase);
 }
 
@@ -92,14 +92,17 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
-    
-	  if (m_rightStick->GetTrigger() || m_leftStick->GetTrigger() && canDrive) {
-      m_drive->TankDrive(m_leftStick, m_rightStick, false); // drives robot based on JoySticks
-    } else if (m_xbox->GetAButton()){
-      m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
-    } else {
-      m_drive->Stop();
-    }
+    if(canDrive) {
+      if (m_xbox->GetAButton()){
+        m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
+      } else if (m_rightStick->GetTrigger()){
+        m_drive->StopRight();
+      } else if (m_leftStick->GetTrigger()){
+        m_drive->StopLeft();
+      } else {
+        m_drive->TankDrive(m_leftStick, m_rightStick, false); //drives robot based on JoySticks
+      }
+    } 
 
     if(m_rightStick->GetRawButtonPressed(2)){
       canDrive = !canDrive; // flips ability to drive when second button is pressed on m_rightStick

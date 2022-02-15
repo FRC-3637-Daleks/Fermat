@@ -62,14 +62,20 @@ DalekDrive::DriveToFeet(double feet)
 }
 
 void
-DalekDrive::Stop(){
-	// send robot motors in the opposite direction to stop robot
+DalekDrive::StopLeft(){
+	// send robot left motors in the opposite direction to stop robot
 	m_left[FRONT]->Set(m_left[FRONT]->Get() * -.9);
 	m_left[REAR]->Set(m_left[REAR]->Get() * -.9);
-	m_right[FRONT]->Set(m_right[FRONT]->Get() * -.9);
-	m_right[REAR]->Set(m_right[REAR]->Get() * -.9);
+	
 	//Wait(0.1);
 	//TankDrive(0.0, 0.0, false);
+}
+
+void
+DalekDrive::StopRight() {
+	// send robot left motors in the opposite direction to stop robot
+	m_right[FRONT]->Set(m_right[FRONT]->Get() * -.9);
+	m_right[REAR]->Set(m_right[REAR]->Get() * -.9);
 }
 
 bool

@@ -31,7 +31,8 @@ class DalekDrive {
 		void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs);
 		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs);
 		void TankDrive(double l, double r, bool squaredInputs);
-		void Stop();
+		void StopLeft();
+		void StopRight();
 		bool DriveToFeet(double feet);
 		bool Turn(double degrees);
 	
