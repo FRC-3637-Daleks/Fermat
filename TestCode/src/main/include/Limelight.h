@@ -24,7 +24,7 @@ class Limelight {
         double CalcVelocity(double points, double xDistance);
         double CalcShootAngle(double velocty);
         double CalcTurnAngle(double xPos);
-        double distance, area, low_velocity, high_velocity;
+        double distance, low_velocity, high_velocity;
     private:
         DalekDrive *m_drive;
         double Area;

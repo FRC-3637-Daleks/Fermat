@@ -1,0 +1,29 @@
+See file:///C:/Users/19085/git/Fermat/LimelightCode/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramReleaseExecutableFrcUserProgramCpp.
+compiling DalekDrive.cpp successful.
+In file included from C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
+                 from C:\Users\19085\git\Fermat\LimelightCode\src\main\include/Fermat.h:29,
+                 from C:\Users\19085\git\Fermat\LimelightCode\src\main\cpp\DalekDrive.cpp:1:
+C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
+     enum class LimitSwitch { kForward, kReverse };
+                ^~~~~~~~~~~
+C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
+
+compiling Limelight.cpp successful.
+In file included from C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
+                 from C:\Users\19085\git\Fermat\LimelightCode\src\main\include/Fermat.h:29,
+                 from C:\Users\19085\git\Fermat\LimelightCode\src\main\cpp\Limelight.cpp:1:
+C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
+     enum class LimitSwitch { kForward, kReverse };
+                ^~~~~~~~~~~
+C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
+
+compiling Robot.cpp successful.
+In file included from C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANSparkMax.h:37:0,
+                 from C:\Users\19085\git\Fermat\LimelightCode\src\main\include/Fermat.h:29,
+                 from C:\Users\19085\git\Fermat\LimelightCode\src\main\cpp\Robot.cpp:1:
+C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: warning: attribute ignored in declaration of 'enum class rev::CANDigitalInput::LimitSwitch' [-Wattributes]
+     enum class LimitSwitch { kForward, kReverse };
+                ^~~~~~~~~~~
+C:\Users\19085\.gradle\caches\transforms-2\files-2.1\16a3b888d69d23330f7ecca34eff9395\SparkMax-cpp-1.5.4-headers/rev/CANDigitalInput.h:42:16: note: attribute for 'enum class rev::CANDigitalInput::LimitSwitch' must follow the 'enum class' keyword
+
+Finished compileFrcUserProgramReleaseExecutableFrcUserProgramCpp, see full log file:///C:/Users/19085/git/Fermat/LimelightCode/build/tmp/compileFrcUserProgramReleaseExecutableFrcUserProgramCpp/output.txt.

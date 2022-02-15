@@ -8,7 +8,7 @@ Limelight::Limelight(DalekDrive *drive) {
 void Limelight::Update() { 
 	
 	//Set Limelight area (ta) to a variable
-	area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
+	Area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
 
 	// set a variable distance using a linear regression of ax+b using tvert on desmos
 	distance = CalcDistance(Area);
