@@ -6,8 +6,8 @@
 #define HIGH_SHOOT 2.6416 //meters
 #define LOW_SHOOT 1.2192 //meters
 #define START_HEIGHT 0.058 //meters
-#define DIST_COEFFICIENT 33.2 //inches
-#define DIST_EXPONENT -0.468
+#define DIST_COEFFICIENT 42.3 //inches
+#define DIST_EXPONENT -0.45
 #define ANGLE_COEFFICIENT 0 //rad
 #define ANGLE_EXPONENT 0
 #define ANGLE_PRODUCT 1.59 
