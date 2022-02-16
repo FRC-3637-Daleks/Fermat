@@ -93,18 +93,26 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
     SmartDashboard::PutBoolean("Can Drive?", canDrive);
+    SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
+    SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
     if(canDrive) {
        //drives robot based on JoySticks
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
       }
-      if (m_leftStick->GetTrigger()){
+      if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
         m_drive->StopLeft();
-      }
-      if (m_leftStick->GetTrigger()){
+        m_drive->MoveRight(m_rightStick, false);
+      }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+        m_drive->StopRight();
+        m_drive->MoveLeft(m_leftStick, false);        
+      }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
         m_drive->StopLeft();
+        m_drive->StopRight();
       }
-      m_drive->TankDrive(m_leftStick, m_rightStick, false);
+      if (!(m_leftStick->GetTrigger()||m_leftStick->GetTrigger())){
+        m_drive->TankDrive(m_leftStick, m_rightStick, false);
+      }
     } 
 
     if(m_rightStick->GetRawButtonPressed(2)){
