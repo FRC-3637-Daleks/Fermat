@@ -117,23 +117,27 @@ DalekDrive::Turn(double degrees){
 
 void
 DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs) {
-	// send robot left motors in the opposite direction to stop robot
+	
+	//if inputs are doubled, double the inputs
 	double r = rightStick->GetY();
 	if(squaredInputs) {
 		r = squareInput(rightStick->GetY());
 	}
+	
+	// Move only the right motor without affecting the left
 	m_right[FRONT]->Set(-1.0*r*MAX_SPEED);
 	m_right[REAR]->Set(-1.0*r*MAX_SPEED);
-	//m_right[FRONT]->Set(r*MAX_SPEED);
-	//m_right[REAR]->Set(r*MAX_SPEED);
 }
 void
 DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs) {
-	// send robot left motors in the opposite direction to stop robot
+
+	//if inputs are doubled, double the inputs
 	double l = leftStick->GetY();
 	if(squaredInputs) {
 		l = squareInput(leftStick->GetY());
 	}
+	
+	// Move only the left motor without affecting the right
 	m_left[FRONT]->Set(l*MAX_SPEED);
 	m_left[REAR]->Set(l*MAX_SPEED);
 }
