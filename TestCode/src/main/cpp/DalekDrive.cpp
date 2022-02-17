@@ -137,3 +137,13 @@ DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs) {
 	m_left[FRONT]->Set(l*MAX_SPEED);
 	m_left[REAR]->Set(l*MAX_SPEED);
 }
+
+double
+DalekDrive::GetRight(){
+	return m_right[FRONT]->Get();
+}
+
+double
+DalekDrive::GetLeft(){
+	return m_left[FRONT]->Get();
+}

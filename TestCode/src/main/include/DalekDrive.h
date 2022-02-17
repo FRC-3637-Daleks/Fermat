@@ -35,6 +35,8 @@ class DalekDrive {
 		void MoveRight(Joystick* rightStick, bool squaredInputs);
 		void StopLeft();
 		void StopRight();
+		double GetRight();
+		double GetLeft();
 		bool DriveToFeet(double feet);
 		bool Turn(double degrees);
 	

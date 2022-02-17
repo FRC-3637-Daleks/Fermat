@@ -103,9 +103,11 @@ void Robot::TeleopPeriodic()
       if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
         m_drive->StopLeft();
         m_drive->MoveRight(m_rightStick, false);
+        SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
       }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
         m_drive->StopRight();
-        m_drive->MoveLeft(m_leftStick, false);        
+        m_drive->MoveLeft(m_leftStick, false);    
+        SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
       }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
         m_drive->StopLeft();
         m_drive->StopRight();
