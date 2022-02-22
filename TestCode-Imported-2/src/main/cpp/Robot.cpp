@@ -14,7 +14,7 @@ void Robot::RobotInit()
     m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
     m_drive       = new DalekDrive();
-    m_climb_solenoid = new frc::DoubleSolenoid(PCM, CLIMB_DEPLOY, CLIMB_EXHAUST);
+    //m_climb_solenoid = new frc::DoubleSolenoid(PCM, CLIMB_DEPLOY, CLIMB_EXHAUST);
     //m_ahrs        = new AHRS(SPI::Port::kMXP);
     //m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
@@ -23,7 +23,7 @@ void Robot::RobotInit()
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
     err_string += e.what();
-    DriverStation::ReportError(err_string.c_str());
+    //DriverStation::ReportError(err_string.c_str());
   }
 
   
@@ -100,14 +100,14 @@ void Robot::TeleopPeriodic()
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
       }
-      if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
-        m_drive->StopLeft();
-        m_drive->MoveRight(m_rightStick, false);
-        SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
-      }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+      if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
         m_drive->StopRight();
-        m_drive->MoveLeft(m_leftStick, false);    
-        SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
+        m_drive->MoveLeft(m_leftStick, false);
+        SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());
+      }else if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
+        m_drive->StopLeft();
+        m_drive->MoveRight(m_rightStick, false);    
+        SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());    
       }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
         m_drive->StopLeft();
         m_drive->StopRight();
