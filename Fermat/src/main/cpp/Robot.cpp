@@ -14,9 +14,11 @@ void Robot::RobotInit()
     m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
     m_drive       = new DalekDrive();
-    m_climb_solenoid = new frc::DoubleSolenoid(PCM, CLIMB_DEPLOY, CLIMB_EXHAUST);
+    m_climb_solenoid = new frc::Solenoid(CLIMB);
+    m_intake_solenoid = new frc::Solenoid(INTAKE);
+    m_shooter_solenoid = new frc::Solenoid(SHOOTER);
     m_ahrs        = new AHRS(SPI::Port::kMXP);
-    //m_compressor  = new frc::Compressor(PCM);
+    m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
     m_pi = new RaspberryPi(m_drive);
   }

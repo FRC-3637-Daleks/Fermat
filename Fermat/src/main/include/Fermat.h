@@ -70,7 +70,7 @@ enum SOLENOID_IDS {
   SHOOTER = 2
 };
 
-enum dio {
+enum DIO {
   upperLimit = 0, 
   lowerLimit = 1
 };
@@ -95,7 +95,9 @@ class Robot : public TimedRobot {
 	frc::Compressor *m_compressor;
 	DalekDrive *m_drive;
 	AHRS *m_ahrs;
-	frc::DoubleSolenoid *m_climb_solenoid;
+	frc::Solenoid *m_climb_solenoid;
+  frc::Solenoid *m_intake_solenoid;
+  frc::Solenoid *m_shooter_solenoid;
 	Limelight *m_limelight;
 	RaspberryPi *m_pi;
 	
