@@ -20,6 +20,7 @@
 #include <frc/drive/MecanumDrive.h>
 #include <frc/DigitalInput.h>
 #include <frc/Solenoid.h>
+#include <frc/Compressor.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/system/plant/DCMotor.h>
 #include <networktables/NetworkTableEntry.h>
@@ -66,7 +67,7 @@ enum DRIVER_STATION_IO {
 enum SOLENOID_IDS {
 	INTAKE = 0,
   CLIMB = 1,
-  SHOOTER = 3
+  SHOOTER = 2
 };
 
 enum dio {
@@ -91,7 +92,7 @@ class Robot : public TimedRobot {
 	frc::Joystick *m_leftStick;
 	frc::Joystick *m_rightStick;
 	frc::DigitalInput *m_cinput;
-	//frc::Compressor *m_compressor;
+	frc::Compressor *m_compressor;
 	DalekDrive *m_drive;
 	//AHRS *m_ahrs;
 	frc::DoubleSolenoid *m_climb_solenoid;
