@@ -46,16 +46,14 @@
 
 // CAN BUS devices
 enum CAN_IDS {
-	LEFT_FRONT_DRIVE = 1,
-	LEFT_REAR_DRIVE = 2, 
-	RIGHT_FRONT_DRIVE = 3, 
-	RIGHT_REAR_DRIVE = 4,
-	ROLLER_BAR = 5, 
-	CONVEYOR_BELT = 6, 
-	LIFT = 7, 
-	TROLLEY = 8, 
-	SPINNER = 9,
-	PCM = 10
+	LEFT_FRONT_DRIVE = 0,
+	LEFT_REAR_DRIVE = 1, 
+	RIGHT_FRONT_DRIVE = 2, 
+	RIGHT_REAR_DRIVE = 3,
+	CLIMB_MOTOR = 4,
+  INTAKE_MOTOR = 5,
+  SHOOTER_MOTOR = 6,
+  PCM = 7
  };
 
 // Devices connected to driverstation
@@ -65,21 +63,15 @@ enum DRIVER_STATION_IO {
 	RIGHT_JOY = 2
 };
 
-// Digitial Input
-enum DIGITAL_IO {
-	CONVEYOR_INPUT = 0,
-	CONVEYOR_STOP = 1
+enum SOLENOID_IDS {
+	INTAKE = 0,
+  CLIMB = 1,
+  SHOOTER = 3
 };
 
-enum SOLENOID_IDS {
-	CLIMB_DEPLOY = 0,
-	RATCHET_LOCK = 1,
-	INTAKE_DEPLOY = 2,
-	SPINNER_DEPLOY = 3,
-	SPINNER_EXHAUST = 4,
-	CLIMB_EXHAUST = 5,
-	INTAKE_EXHAUST = 6,
-	NUM_SOLENOIDS
+enum dio {
+  upperLimit = 0, 
+  lowerLimit = 1
 };
 
 class Robot : public TimedRobot {
