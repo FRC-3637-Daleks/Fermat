@@ -38,12 +38,8 @@ void Robot::RobotInit()
   frc::SmartDashboard::PutBoolean("Pickup Ball End", false);
   frc::SmartDashboard::PutBoolean("Pickup Ball Start", false);
   frc::SmartDashboard::PutBoolean("start button pressed", false);
-  //frc::SmartDashboard::PutNumber("Starting # of Balls", 3);
-
-  //m_ahrs->ZeroYaw();
-  //m_ahrs->Reset();
-  //m_ahrs->ResetDisplacement();
-  //m_compressor->Start();
+  
+  m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
 }
 
