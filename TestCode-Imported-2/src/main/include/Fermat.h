@@ -20,17 +20,19 @@
 #include <frc/drive/MecanumDrive.h>
 #include <frc/DigitalInput.h>
 #include <frc/Solenoid.h>
-#include <frc/Compressor.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/system/plant/DCMotor.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
+//#include <AHRS.h>
 #include <rev/CANSparkMax.h>
 #include <ctre/Phoenix.h>
 #include <DalekDrive.h>
 #include <Limelight.h>
 #include <RaspberryPi.h>
 #include <Climb.h>
+#include <Intake.h>
+#include <Shooter.h>
 
 #define PI	3.14159265358979323846
 
@@ -46,14 +48,16 @@
 
 // CAN BUS devices
 enum CAN_IDS {
-	LEFT_FRONT_DRIVE = 0,
-	LEFT_REAR_DRIVE = 1, 
-	RIGHT_FRONT_DRIVE = 2, 
-	RIGHT_REAR_DRIVE = 3,
-	CLIMB_MOTOR = 4,
-  INTAKE_MOTOR = 5,
-  SHOOTER_MOTOR = 6,
-  PCM = 7
+	LEFT_FRONT_DRIVE = 1,
+	LEFT_REAR_DRIVE = 2, 
+	RIGHT_FRONT_DRIVE = 3, 
+	RIGHT_REAR_DRIVE = 4,
+	ROLLER_BAR = 5, 
+	CONVEYOR_BELT = 6, 
+	LIFT = 7, 
+	TROLLEY = 8, 
+	SPINNER = 9,
+	PCM = 10
  };
 
 // Devices connected to driverstation
@@ -63,15 +67,21 @@ enum DRIVER_STATION_IO {
 	RIGHT_JOY = 2
 };
 
-enum SOLENOID_IDS {
-	INTAKE = 0,
-  CLIMB = 1,
-  SHOOTER = 2
+// Digitial Input
+enum DIGITAL_IO {
+	CONVEYOR_INPUT = 0,
+	CONVEYOR_STOP = 1
 };
 
-enum DIO {
-  upperLimit = 0, 
-  lowerLimit = 1
+enum SOLENOID_IDS {
+	CLIMB_DEPLOY = 0,
+	RATCHET_LOCK = 1,
+	INTAKE_DEPLOY = 2,
+	SPINNER_DEPLOY = 3,
+	SPINNER_EXHAUST = 4,
+	CLIMB_EXHAUST = 5,
+	INTAKE_EXHAUST = 6,
+	NUM_SOLENOIDS
 };
 
 class Robot : public TimedRobot {
@@ -91,11 +101,10 @@ class Robot : public TimedRobot {
 	frc::Joystick *m_leftStick;
 	frc::Joystick *m_rightStick;
 	frc::DigitalInput *m_cinput;
-	frc::Compressor *m_compressor;
+	//frc::Compressor *m_compressor;
 	DalekDrive *m_drive;
-	frc::Solenoid *m_climb_solenoid;
-  frc::Solenoid *m_intake_solenoid;
-  frc::Solenoid *m_shooter_solenoid;
+	//AHRS *m_ahrs;
+	frc::DoubleSolenoid *m_climb_solenoid;
 	Limelight *m_limelight;
 	RaspberryPi *m_pi;
 	
