@@ -1,5 +1,37 @@
 #include "Fermat.h"
 
-Climb::Climb(){
-    
+Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
+    m_climb_solenoid = climb_solenoid;
+    m_xbox = xbox;
+    m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
+    m_upperLimit = new DigitalInput(UPPERLIMIT);
+    m_lowerLimit = new DigitalInput(LOWERLIMIT);
+
+}
+
+bool
+Climb::MainArm(){
+    if(m_upperLimit->Get() || m_lowerLimit->Get()){
+        return true;
+    }
+    if(m_xbox->GetRawAxis(1)>0){
+        m_climb_motor->Set(MOTOR_SPEED);
+    }
+    if(m_xbox->GetRawAxis(1)<0){
+        m_climb_motor->Set(-MOTOR_SPEED);
+    }
+    return false;
+}
+
+bool
+Climb::SideArm(){
+    if(m_xbox->GetRawAxis(1)>0){
+        m_climb_solenoid->Set(true);
+        return true;
+    }
+    if(m_xbox->GetRawAxis(1)<0){
+        m_climb_solenoid->Set(false);
+        return true;
+    }
+    return false;
 }

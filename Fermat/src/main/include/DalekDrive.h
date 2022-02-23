@@ -28,11 +28,11 @@ class DalekDrive {
 	public:
 		DalekDrive();
 		double squareInput(double v);
-		void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs);
-		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs);
-		void TankDrive(double l, double r, bool squaredInputs);
-		void MoveLeft(Joystick* leftStick, bool squaredInputs);
-		void MoveRight(Joystick* rightStick, bool squaredInputs);
+		void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs, bool isSlow);
+		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs, bool isSlow);
+		void TankDrive(double l, double r, bool squaredInputs, bool isSlow);
+		void MoveLeft(Joystick* leftStick, bool squaredInputs, bool isSlow);
+		void MoveRight(Joystick* rightStick, bool squaredInputs, bool isSlow);
 		void StopLeft();
 		void StopRight();
 		double GetRight();

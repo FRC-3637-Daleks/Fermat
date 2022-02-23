@@ -21,17 +21,16 @@
 #include <frc/DigitalInput.h>
 #include <frc/Solenoid.h>
 #include <frc/Compressor.h>
-#include <frc/DoubleSolenoid.h>
 #include <frc/system/plant/DCMotor.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
-//#include <AHRS.h>
 #include <rev/CANSparkMax.h>
 #include <ctre/Phoenix.h>
 #include <DalekDrive.h>
 #include <Limelight.h>
 #include <RaspberryPi.h>
 #include <Climb.h>
+#include <Shooter.h>
 
 #define PI	3.14159265358979323846
 
@@ -52,9 +51,9 @@ enum CAN_IDS {
 	RIGHT_FRONT_DRIVE = 2, 
 	RIGHT_REAR_DRIVE = 3,
 	CLIMB_MOTOR = 4,
-  INTAKE_MOTOR = 5,
-  SHOOTER_MOTOR = 6,
-  PCM = 7
+  	INTAKE_MOTOR = 5,
+  	SHOOTER_MOTOR = 6,
+  	PCM = 7
  };
 
 // Devices connected to driverstation
@@ -66,13 +65,13 @@ enum DRIVER_STATION_IO {
 
 enum SOLENOID_IDS {
 	INTAKE = 0,
-  CLIMB = 1,
-  SHOOTER = 2
+  	CLIMB = 1,
+  	SHOOTER = 2
 };
 
-enum dio {
-  upperLimit = 0, 
-  lowerLimit = 1
+enum DIO {
+  UPPERLIMIT = 0, 
+  LOWERLIMIT = 1
 };
 
 class Robot : public TimedRobot {
@@ -94,10 +93,12 @@ class Robot : public TimedRobot {
 	frc::DigitalInput *m_cinput;
 	frc::Compressor *m_compressor;
 	DalekDrive *m_drive;
-	//AHRS *m_ahrs;
-	frc::DoubleSolenoid *m_climb_solenoid;
+	frc::Solenoid *m_climb_solenoid;
+  	frc::Solenoid *m_intake_solenoid;
+  	frc::Solenoid *m_shooter_solenoid;
 	Limelight *m_limelight;
 	RaspberryPi *m_pi;
+ 	Climb *m_climb;
 	
 	bool canDrive = true;
 	bool timeChanged = false;
