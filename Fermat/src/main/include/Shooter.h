@@ -10,10 +10,9 @@
 
 class Shooter {
 	public:
-		Shooter(XboxController *xbox, Solenoid *climb_solenoid);
-
+		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid);
 	private:
-		WPI_TalonSRX *m_shooter;
+		WPI_TalonSRX *m_shooter_moter;
 		XboxController *m_xbox;
-		Solenoid *m_shooterSolenoid;
+		Solenoid *m_shooter_solenoid;
 };

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Fermat.h"
 
 #define MAX_DEGREES 30 //Degrees
