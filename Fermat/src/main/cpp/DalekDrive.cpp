@@ -17,28 +17,39 @@ DalekDrive::squareInput(double v)
 }
 
 void
-DalekDrive::TankDrive(double l, double r, bool squaredInputs)
+DalekDrive::TankDrive(double l, double r, bool squaredInputs, bool isSlow)
 {
-	if(squaredInputs) {
-		l = squareInput(l);
-		r = squareInput(r);
+	if(isSlow){
+		if(squaredInputs) {
+			l = squareInput(l);
+			r = squareInput(r);
+		}
+		m_left[FRONT]->Set(l * MAX_SPEED * 0.3);
+		m_left[REAR]->Set(l * MAX_SPEED * 0.3);
+		m_right[FRONT]->Set(r * MAX_SPEED * -0.3);
+		m_right[REAR]->Set(r * MAX_SPEED * -0.3);
+	}else{
+		if(squaredInputs) {
+			l = squareInput(l);
+			r = squareInput(r);
+		}
+		m_left[FRONT]->Set(l * MAX_SPEED);
+		m_left[REAR]->Set(l * MAX_SPEED);
+		m_right[FRONT]->Set(r * MAX_SPEED * -1.0);
+		m_right[REAR]->Set(r * MAX_SPEED * -1.0);
 	}
-	m_left[FRONT]->Set(l * MAX_SPEED);
-	m_left[REAR]->Set(l * MAX_SPEED);
-	m_right[FRONT]->Set(r * MAX_SPEED * -1.0);
-	m_right[REAR]->Set(r * MAX_SPEED * -1.0);
 }
 
 void
-DalekDrive::TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs)
+DalekDrive::TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs, bool isSlow)
 {
-	TankDrive(leftStick->GetY(), rightStick->GetY(), squaredInputs);
+	TankDrive(leftStick->GetY(), rightStick->GetY(), squaredInputs, isSlow);
 }
 
 void
-DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs)
+DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs, bool isSlow)
 {
-		TankDrive(leftStick.GetY(), rightStick.GetY(), squaredInputs);
+		TankDrive(leftStick.GetY(), rightStick.GetY(), squaredInputs, isSlow);
 }
 
 bool
@@ -51,10 +62,10 @@ DalekDrive::DriveToFeet(double feet)
 	SmartDashboard::PutNumber("Speed", speed);
 
 	if(feet>0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= feet){
-		TankDrive(-1.0*speed, -1.0*speed, false);
+		TankDrive(-1.0*speed, -1.0*speed, false, false);
 		return false;
 	} else if(feet<0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= feet){
-		TankDrive(speed, speed, false);
+		TankDrive(speed, speed, false, false);
 		return false;
 	}else {
 		return true;
@@ -105,10 +116,10 @@ DalekDrive::Turn(double degrees){
 	double speed = ((MAX_SPEED*10*abs(totalDistance)-abs(distanceTraveled))/abs(totalDistance))*MAX_SPEED;
 	SmartDashboard::PutNumber("Speed", speed);
 	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance&&speed>.31){
-		TankDrive(-1.0*speed, speed, false);
+		TankDrive(-1.0*speed, speed, false, false);
 		return false;
 	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance&&speed>.31){
-		TankDrive(speed, -1.0*speed, false);
+		TankDrive(speed, -1.0*speed, false, false);
 		return false;
 	}else {
 		return true;
@@ -116,30 +127,52 @@ DalekDrive::Turn(double degrees){
 }
 
 void
-DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs) {
-	
-	//if inputs are doubled, double the inputs
-	double r = rightStick->GetY();
-	if(squaredInputs) {
-		r = squareInput(rightStick->GetY());
+DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs, bool isSlow) {
+	if(isSlow){
+		//if inputs are doubled, double the inputs
+		double r = rightStick->GetY();
+		if(squaredInputs) {
+			r = squareInput(rightStick->GetY());
+		}
+		
+		// Move only the right motor without affecting the left
+		m_right[FRONT]->Set(-0.3*r*MAX_SPEED);
+		m_right[REAR]->Set(-0.3*r*MAX_SPEED);
+	}else{
+		//if inputs are doubled, double the inputs
+		double r = rightStick->GetY();
+		if(squaredInputs) {
+			r = squareInput(rightStick->GetY());
+		}
+		
+		// Move only the right motor without affecting the left
+		m_right[FRONT]->Set(-1.0*r*MAX_SPEED);
+		m_right[REAR]->Set(-1.0*r*MAX_SPEED);
 	}
-	
-	// Move only the right motor without affecting the left
-	m_right[FRONT]->Set(-1.0*r*MAX_SPEED);
-	m_right[REAR]->Set(-1.0*r*MAX_SPEED);
 }
 void
-DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs) {
-
-	//if inputs are doubled, double the inputs
-	double l = leftStick->GetY();
-	if(squaredInputs) {
-		l = squareInput(leftStick->GetY());
+DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs, bool isSlow) {
+	if(isSlow){
+		//if inputs are doubled, double the inputs
+		double l = leftStick->GetY();
+		if(squaredInputs) {
+			l = squareInput(leftStick->GetY());
+		}
+		
+		// Move only the left motor without affecting the right
+		m_left[FRONT]->Set(l*MAX_SPEED*0.3);
+		m_left[REAR]->Set(l*MAX_SPEED*0.3);
+	}else{
+		//if inputs are doubled, double the inputs
+		double l = leftStick->GetY();
+		if(squaredInputs) {
+			l = squareInput(leftStick->GetY());
+		}
+		
+		// Move only the left motor without affecting the right
+		m_left[FRONT]->Set(l*MAX_SPEED);
+		m_left[REAR]->Set(l*MAX_SPEED);
 	}
-	
-	// Move only the left motor without affecting the right
-	m_left[FRONT]->Set(l*MAX_SPEED);
-	m_left[REAR]->Set(l*MAX_SPEED);
 }
 
 double

@@ -20,7 +20,7 @@ void Robot::RobotInit()
     m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
     m_pi = new RaspberryPi(m_drive);
-    m_climb = new Climb(m_climb_solenoid);
+    m_climb = new Climb(m_climb_solenoid, m_xbox);
   }
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
@@ -97,20 +97,38 @@ void Robot::TeleopPeriodic()
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
       }
-      if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
-        m_drive->StopLeft();
-        m_drive->MoveRight(m_rightStick, false);
-        SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
-      }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
-        m_drive->StopRight();
-        m_drive->MoveLeft(m_leftStick, false);    
-        SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
-      }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
-        m_drive->StopLeft();
-        m_drive->StopRight();
-      }
-      if (!(m_leftStick->GetTrigger()||m_leftStick->GetTrigger())){
-        m_drive->TankDrive(m_leftStick, m_rightStick, false);
+      if(m_rightStick->GetRawButtonPressed(2)){
+          if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
+            m_drive->StopLeft();
+            m_drive->MoveRight(m_rightStick, false, true);
+            SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
+          }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+            m_drive->StopRight();
+            m_drive->MoveLeft(m_leftStick, false, true);    
+            SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
+          }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
+            m_drive->StopLeft();
+            m_drive->StopRight();
+          }
+          if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+            m_drive->TankDrive(m_leftStick, m_rightStick, false, true);
+          }
+      }else{
+          if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
+            m_drive->StopLeft();
+            m_drive->MoveRight(m_rightStick, false, false);
+            SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
+          }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+            m_drive->StopRight();
+            m_drive->MoveLeft(m_leftStick, false, false);    
+            SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
+          }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
+            m_drive->StopLeft();
+            m_drive->StopRight();
+          }
+          if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+            m_drive->TankDrive(m_leftStick, m_rightStick, false, false);
+          }
       }
     } 
 
