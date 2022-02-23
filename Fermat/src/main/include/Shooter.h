@@ -11,8 +11,11 @@
 class Shooter {
 	public:
 		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid);
+		bool Spin();
+		bool TurnOnSolenoid();
+
 	private:
-		WPI_TalonSRX *m_shooter_moter;
+		WPI_TalonSRX *m_shooter_motor;
 		XboxController *m_xbox;
 		Solenoid *m_shooter_solenoid;
 };
