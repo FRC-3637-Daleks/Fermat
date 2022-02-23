@@ -31,6 +31,7 @@
 #include <RaspberryPi.h>
 #include <Climb.h>
 #include <Shooter.h>
+#include <Intake.h>
 
 #define PI	3.14159265358979323846
 
