@@ -9,6 +9,8 @@ Climb::Climb(frc::Solenoid *climb_solenoid){
 }
 
 bool MainArm(){
-    if(m_upperLimit->Get()){}
+    if(m_upperLimit->Get() || m_lowerLimit->Get()){
+        return true;
+    }
     return false;
 }

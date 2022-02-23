@@ -1,5 +1,6 @@
-#include "Fermat.h"
 #pragma once
+
+#include "Fermat.h"
 
 #define COLOR_WHEEL_RADIUS			16.0
 #define SPINNER_WHEEL_RADIUS		2.0
@@ -9,14 +10,10 @@
 
 class Shooter {
 	public:
-	void Shooter::Spinner(XboxController *xbox, Solenoid *climb_solenoid);
-    void Tick();
-	void Reinit();
+		Shooter(XboxController *xbox, Solenoid *climb_solenoid);
 
 	private:
-	WPI_TalonSRX *m_shooter;
-	XboxController *m_xbox;
-   	Solenoid *m_shooterSolenoid;
-
-	void init(XboxController *xbox, DoubleSolenoid *climb_solenoid);
+		WPI_TalonSRX *m_shooter;
+		XboxController *m_xbox;
+		Solenoid *m_shooterSolenoid;
 };

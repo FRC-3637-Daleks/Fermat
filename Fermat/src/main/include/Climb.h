@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Fermat.h"
 
 class Climb{
