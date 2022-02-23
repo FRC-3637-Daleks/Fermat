@@ -5,7 +5,8 @@ using namespace rev;
 
 class Intake{
     public:
-        Intake();
+    Intake();
+    
     private:
-        
+    DCMotor *m_intake;
 };
