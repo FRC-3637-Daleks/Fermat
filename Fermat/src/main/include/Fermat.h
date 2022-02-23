@@ -21,7 +21,6 @@
 #include <frc/DigitalInput.h>
 #include <frc/Solenoid.h>
 #include <frc/Compressor.h>
-#include <frc/DoubleSolenoid.h>
 #include <frc/system/plant/DCMotor.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
@@ -70,8 +69,8 @@ enum SOLENOID_IDS {
 };
 
 enum DIO {
-  upperLimit = 0, 
-  lowerLimit = 1
+  UPPERLIMIT = 0, 
+  LOWERLIMIT = 1
 };
 
 class Robot : public TimedRobot {
@@ -98,6 +97,7 @@ class Robot : public TimedRobot {
   frc::Solenoid *m_shooter_solenoid;
 	Limelight *m_limelight;
 	RaspberryPi *m_pi;
+  Climb *m_climb;
 	
 	bool canDrive = true;
 	bool timeChanged = false;

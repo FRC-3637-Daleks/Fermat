@@ -20,6 +20,7 @@ void Robot::RobotInit()
     m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
     m_pi = new RaspberryPi(m_drive);
+    m_climb = new Climb(m_climb_solenoid);
   }
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
@@ -27,7 +28,6 @@ void Robot::RobotInit()
     DriverStation::ReportError(err_string.c_str());
   }
 
-  
   m_leftFront = new WPI_TalonFX(0);
 
   frc::SmartDashboard::PutNumber("Start Auton", 2);
