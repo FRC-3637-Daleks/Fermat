@@ -14,11 +14,24 @@ Climb::MainArm(){
     if(m_upperLimit->Get() || m_lowerLimit->Get()){
         return true;
     }
-    if(m_xbox->GetTriggerAxis(frc::GenericHID::kLeftHand)>0){
+    if(m_xbox->GetRawAxis(1)>0){
         m_climb_motor->Set(MOTOR_SPEED);
     }
-    if(m_xbox->GetTriggerAxis(frc::GenericHID::kLeftHand)<0){
+    if(m_xbox->GetRawAxis(1)<0){
         m_climb_motor->Set(-MOTOR_SPEED);
+    }
+    return false;
+}
+
+bool
+Climb::SideArm(){
+    if(m_xbox->GetRawAxis(1)>0){
+        m_climb_solenoid->Set(true);
+        return true;
+    }
+    if(m_xbox->GetRawAxis(1)<0){
+        m_climb_solenoid->Set(false);
+        return true;
     }
     return false;
 }

@@ -8,6 +8,7 @@ class Climb{
     public:
         Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox);
         bool MainArm();
+        bool SideArm();
     private:
         frc::XboxController *m_xbox;
         frc::Solenoid *m_climb_solenoid;
