@@ -92,12 +92,14 @@ void Robot::TeleopPeriodic()
     SmartDashboard::PutBoolean("Can Drive?", canDrive);
     SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
     SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
+    SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
+
     if(canDrive) {
        //drives robot based on JoySticks
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
       }
-      if(m_rightStick->GetRawButtonPressed(2)){
+      if(m_rightStick->GetRawButton(2)){
           if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
             m_drive->StopLeft();
             m_drive->MoveRight(m_rightStick, false, true);
@@ -132,7 +134,7 @@ void Robot::TeleopPeriodic()
       }
     } 
 
-    if(m_rightStick->GetRawButtonPressed(2)){
+    if(m_xbox->GetBButton()){
       canDrive = !canDrive; // flips ability to drive when second button is pressed on m_rightStick
     }
 }

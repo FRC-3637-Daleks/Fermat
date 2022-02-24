@@ -3,12 +3,14 @@
 #include "Fermat.h"
 
 #define MOTOR_SPEED 0.25
+#define INTAKE_PHASE 0
 
 class Intake{
     public:
     Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox);
-    void StartIntake();
-    void StopIntake();
+    bool StartIntake();
+    bool StopIntake();
+    bool SuckBalls(bool phase);
     
     private:
     WPI_TalonSRX *m_intake_motor;
