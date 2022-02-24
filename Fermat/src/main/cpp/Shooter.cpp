@@ -1,9 +1,10 @@
 #include "Fermat.h"
 
-Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid)
+Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *limelight)
 {
     m_shooter_solenoid = shooter_solenoid;
     m_xbox = xbox;
+    m_limelight = limelight;
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
 }
 
@@ -15,14 +16,12 @@ Shooter::tick(){
     }
 }
 
-bool
+void
 Shooter::Spin(){
-    if(m_xbox->GetAButton()){
-        m_shooter_motor-> Set(FromMetersPerSecond(frc::SmartDashboard::GetNumber("Shoot Velocity", 0.0))); //Need to convert velocity to RPM for controlling motor speed
-    }
+    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2))); //Need to convert velocity to RPM for controlling motor speed
 }
 
-bool
+void
 Shooter::TurnOnSolenoid(){
     bool on = false;
     if(!(m_shooter_solenoid->Get())){
@@ -38,4 +37,14 @@ Shooter::FromMetersPerSecond(double speed){
     // 14.177169887609779606984986211852 meters per seconds per 1 speed point
     // 1 full speed
     return 1.0*speed/14.177169887609779606984986211852;
+}
+
+void
+Shooter::Tick(){
+    if (m_xbox->GetAButton()){
+        Spin();
+    }
+    if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))){
+        TurnOnSolenoid();
+    }
 }

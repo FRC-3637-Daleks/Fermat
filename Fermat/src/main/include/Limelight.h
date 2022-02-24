@@ -22,6 +22,7 @@ class Limelight {
 		void LightOn();
         double CalcDistance(double area);
         double CalcVelocity(double points, double xDistance);
+        double CalcVelocity(double points);
         double CalcShootAngle(double velocty);
         double CalcTurnAngle(double xPos);
         double distance, low_velocity, high_velocity;

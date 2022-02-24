@@ -10,14 +10,16 @@
 
 class Shooter {
 	public:
-		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid);
+		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *Limelight);
 		void tick();
-		bool Spin();
-		bool TurnOnSolenoid();
+		void Spin();
+		void TurnOnSolenoid();
 		double FromMetersPerSecond(double speed);
+		void Tick();
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;
 		XboxController *m_xbox;
 		Solenoid *m_shooter_solenoid;
+		Limelight *m_limelight;
 };
