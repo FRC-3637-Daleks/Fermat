@@ -54,9 +54,6 @@ void Robot::RobotPeriodic()
 // I think I have some errors here, I wanna test this
 void Robot::AutonomousInit()
 {
-  auton_start = 2;//(int)frc::SmartDashboard::GetData("Start Auton");
-  auton_end =   1;//(int)frc::SmartDashboard::GetData("End Auton");
-  waitSeconds = 0;//(int)frc::SmartDashboard::GetData("Delay");
   phase = 0;
   m_limelight->LightOn();
   driveSlow = false;
@@ -97,7 +94,7 @@ void Robot::TeleopPeriodic()
     SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
 
     if(canDrive) {
-       //drives robot based on JoySticks
+      //drives robot based on JoySticks
       
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
@@ -131,7 +128,7 @@ void Robot::TeleopPeriodic()
 
     m_intake->Tick();
     m_climb->Tick();
-    
+
 
 }
 

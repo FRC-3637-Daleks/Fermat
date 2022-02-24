@@ -13,6 +13,7 @@ class Shooter {
 		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid);
 		bool Spin();
 		bool TurnOnSolenoid();
+		int FromMetersPerSecond(int speed);
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;
