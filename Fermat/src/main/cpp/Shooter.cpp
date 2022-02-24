@@ -1,5 +1,4 @@
 #include "Fermat.h"
-#include "Euler"
 
 Shooter(frc::XboxController *xbox, frc::Solenoid *climb_solenoid)
 {
