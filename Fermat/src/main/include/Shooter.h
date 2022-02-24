@@ -11,9 +11,10 @@
 class Shooter {
 	public:
 		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *Limelight);
-		void tick();
-		void Spin();
+		void SpinHigh();
+		void SpinLow();
 		void TurnOnSolenoid();
+		void TurnOffSolenoid();
 		double FromMetersPerSecond(double speed);
 		void Tick();
 

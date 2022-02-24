@@ -9,20 +9,22 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Lim
 }
 
 void
-Shooter::tick(){
-    Spin();
-    if(m_xbox->GetBumper(frc::GenericHID::kRightHand)){
-        TurnOnSolenoid();
-    }
-}
-
-void
-Shooter::Spin(){
+Shooter::SpinHigh(){
     m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2))); //Need to convert velocity to RPM for controlling motor speed
 }
 
 void
+Shooter::SpinLow(){
+    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1))); //Need to convert velocity to RPM for controlling motor speed
+}
+
+void
 Shooter::TurnOnSolenoid(){
+    m_shooter_solenoid->Set(true);
+}
+
+void
+Shooter::TurnOffSolenoid(){
     m_shooter_solenoid->Set(true);
 }
 
@@ -38,10 +40,18 @@ Shooter::FromMetersPerSecond(double speed){
 
 void
 Shooter::Tick(){
-    if (m_xbox->GetAButton()){
-        Spin();
+    if (m_xbox->GetXButton()){
+        SpinHigh();
     }
-    if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
+    if (!m_xbox->GetRawButton(static_cast<int>(frc::XboxController::Button::kBumperLeft))){
+        if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
+            TurnOnSolenoid();
+        }else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
+            TurnOnSolenoid();
+        } else {
+            TurnOffSolenoid();
+        }
+    }else{ 
         TurnOnSolenoid();
     }
 }
