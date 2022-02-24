@@ -9,6 +9,14 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 
 }
 
+void
+Climb::tick(){
+    MainArm();
+    if(m_xbox->GetStickButton(XboxController::kLeftHand)){
+        SideArm();
+    }
+}
+
 bool
 Climb::MainArm(){
     if(m_upperLimit->Get() || m_lowerLimit->Get()){
@@ -25,13 +33,6 @@ Climb::MainArm(){
 
 bool
 Climb::SideArm(){
-    if(m_xbox->GetRawAxis(1)>0){
-        m_climb_solenoid->Set(true);
-        return true;
-    }
-    if(m_xbox->GetRawAxis(1)<0){
-        m_climb_solenoid->Set(false);
-        return true;
-    }
+    m_climb_solenoid->Toggle();
     return false;
 }

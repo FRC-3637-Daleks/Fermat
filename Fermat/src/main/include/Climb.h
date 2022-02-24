@@ -9,6 +9,7 @@ class Climb{
         Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox);
         bool MainArm();
         bool SideArm();
+        void tick();
     private:
         frc::XboxController *m_xbox;
         frc::Solenoid *m_climb_solenoid;
