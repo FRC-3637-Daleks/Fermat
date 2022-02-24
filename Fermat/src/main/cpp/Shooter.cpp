@@ -18,7 +18,7 @@ Shooter::tick(){
 bool
 Shooter::Spin(){
     if(m_xbox->GetAButton()){
-        m_shooter_motor-> Set(m_shooter_motor->FromMetersPerSecond(frc::SmartDashboard::GetNumber("Shoot Velocity", 0.0))); //Need to convert velocity to RPM for controlling motor speed
+        m_shooter_motor-> Set(FromMetersPerSecond(frc::SmartDashboard::GetNumber("Shoot Velocity", 0.0))); //Need to convert velocity to RPM for controlling motor speed
     }
 }
 
