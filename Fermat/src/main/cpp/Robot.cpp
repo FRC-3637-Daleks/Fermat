@@ -19,7 +19,7 @@ void Robot::RobotInit()
     m_shooter_solenoid = new frc::Solenoid(SHOOTER);
     m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
-    m_pi = new RaspberryPi(m_drive);
+    m_pi = new RaspberryPi(m_drive, m_xbox);
     m_climb = new Climb(m_climb_solenoid, m_xbox);
     m_intake = new Intake(m_intake_solenoid, m_xbox);
   }
@@ -128,9 +128,8 @@ void Robot::TeleopPeriodic()
       }
     } 
 
-    if(m_xbox->GetBButton()){
-      canDrive = !canDrive; // flips ability to drive when b button is pressed
-    }
+    //Not finished yet
+    //m_pi->Tick(); 
 
     m_intake->Tick();
     m_climb->Tick();
