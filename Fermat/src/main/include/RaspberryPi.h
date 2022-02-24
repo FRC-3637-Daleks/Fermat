@@ -6,8 +6,11 @@
 
 class RaspberryPi{
     public:
-        RaspberryPi(DalekDrive *drive);
+        RaspberryPi(DalekDrive *drive, XboxController *xbox);
         void SwerveTurn(double degree, double distance);
+        void SwerveTurn();
+        void Tick();
     private:
         DalekDrive *m_drive;
+        XboxController *m_xbox;
 };
