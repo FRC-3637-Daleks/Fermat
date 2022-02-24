@@ -8,12 +8,14 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
 }
 
 //Tick function doin tick function things
+//Left bumper hold = motor go brrrrrr
+//A button = pneumatics piston goes out and in (toggle)
 void
 Intake::Tick() {
     if (m_xbox->GetAButton())
-        SuckBalls();
-    if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
         ToggleIntakePneumatics();
+    if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
+        SuckBalls();
     }
 }
 
@@ -24,6 +26,7 @@ Intake::SuckBalls() {
     m_intake_motor->Set(MOTOR_SPEED);  
 }
 
+//Toggles the solenoid for the intake pneumatics
 bool
 Intake::ToggleIntakePneumatics() {
     m_intake_solenoid->Toggle();

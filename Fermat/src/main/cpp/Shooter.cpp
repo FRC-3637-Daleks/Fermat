@@ -7,14 +7,19 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid)
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
 }
 
+void
+Shooter::tick(){
+    Spin();
+    if(m_xbox->GetBumper(frc::GenericHID::kRightHand)){
+        TurnOnSolenoid();
+    }
+}
+
 bool
 Shooter::Spin(){
-
-
     if(m_xbox->GetAButton()){
         m_shooter_motor-> Set(m_shooter_motor->FromMetersPerSecond(frc::SmartDashboard::GetNumber("Shoot Velocity", 0.0))); //Need to convert velocity to RPM for controlling motor speed
     }
-    //m_shooter_solenoid->Set(true);
 }
 
 bool
