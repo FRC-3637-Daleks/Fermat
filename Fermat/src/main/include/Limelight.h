@@ -17,7 +17,7 @@
 class Limelight {
     public:
         Limelight(DalekDrive *drive);
-        void Update();
+        void Tick();
 		void LightOff();
 		void LightOn();
         double CalcDistance(double area);

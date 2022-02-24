@@ -5,7 +5,7 @@ Limelight::Limelight(DalekDrive *drive) {
     m_drive = drive;
 }
 
-void Limelight::Update() { 
+void Limelight::Tick() { 
 	
 	//Set Limelight area (ta) to a variable
 	area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
@@ -50,11 +50,13 @@ double Limelight::CalcVelocity(double points) // (m/s)
 	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
 }
 
-double Limelight::CalcShootAngle(double velocity) // maybe necessary depending on design
-{
-	SmartDashboard::PutNumber("ShootAngle", ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT));
-	return ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT);
-}
+
+// // obsolete
+// double Limelight::CalcShootAngle(double velocity)
+// {
+// 	SmartDashboard::PutNumber("ShootAngle", ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT));
+// 	return ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT);
+// }
 
 double Limelight::CalcTurnAngle(double xPos)
 {
