@@ -130,6 +130,8 @@ void Robot::TeleopPeriodic()
     }
 
     m_intake->Tick();
+    m_climb->Tick();
+    
 
 }
 
