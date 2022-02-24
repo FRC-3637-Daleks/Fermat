@@ -49,7 +49,7 @@ void Robot::RobotInit()
 
 void Robot::RobotPeriodic()
 {
-    m_limelight->Update();
+    m_limelight->Tick();
     SmartDashboard::PutNumber("Encoder", m_leftFront->GetSelectedSensorPosition());//6300
     SmartDashboard::PutNumber("Encoder Foot", m_leftFront->GetSelectedSensorPosition()/ENCODER_FEET);//6300
 }
@@ -64,7 +64,7 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic() 
 {
-  m_limelight->Update();
+  m_limelight->Tick();
   if(phase == 0)
   {
     m_leftFront->SetSelectedSensorPosition(0);
@@ -97,48 +97,50 @@ void Robot::TeleopPeriodic()
     https://docs.google.com/document/d/14A8HDa7gtJTFGJS2YYfce4O7fD7D9ZBCQrjSBS9ddE8/edit
 
   */
-    SmartDashboard::PutBoolean("Can Drive?", canDrive);
-    SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
-    SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
-    SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
 
-    if(canDrive) {
-      //drives robot based on JoySticks
-      
-      if (m_xbox->GetAButton()){
-        m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
-      }
+  //Not finished yet
+  //m_pi->Tick(); 
+  m_limelight->Tick();
+  m_intake->Tick();
+  m_climb->Tick();
 
-      if(m_rightStick->GetRawButton(2)){
-        driveSlow = true;
-      }else{
-        driveSlow = false;
-      }
+  SmartDashboard::PutBoolean("Can Drive?", canDrive);
+  SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
+  SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
+  SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
 
-      if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
-        m_drive->StopLeft();
-        m_drive->MoveRight(m_rightStick, false, driveSlow);
-        SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
-      }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
-        m_drive->StopRight();
-        m_drive->MoveLeft(m_leftStick, false, driveSlow);    
-        SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
-      }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
-        m_drive->StopLeft();
-        m_drive->StopRight();
-      }
-      if (!(m_leftStick->GetTrigger() || m_rightStick->GetTrigger())){
-        m_drive->TankDrive(m_leftStick, m_rightStick, false, driveSlow);
-      }
-    } 
+  if(canDrive) {
+    //drives robot based on JoySticks
+    
+    if (m_xbox->GetAButton()){
+      m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
+    }
 
-    //Not finished yet
-    //m_pi->Tick(); 
+    //Check to see if slowmo is active
+    if(m_rightStick->GetRawButton(2)){
+      driveSlow = true;
+    }else{
+      driveSlow = false;
+    }
 
-    m_intake->Tick();
-    m_climb->Tick();
+    //Check for the brakes and move accordingly
+    if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
+      m_drive->StopLeft();
+      m_drive->MoveRight(m_rightStick, false, driveSlow);
+      SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
+    }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+      m_drive->StopRight();
+      m_drive->MoveLeft(m_leftStick, false, driveSlow);    
+      SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
+    }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
+      m_drive->StopLeft();
+      m_drive->StopRight();
+    }
+    if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+      m_drive->TankDrive(m_leftStick, m_rightStick, false, driveSlow);
+    }
 
-
+  }    
 }
 
 void Robot::TestInit()
