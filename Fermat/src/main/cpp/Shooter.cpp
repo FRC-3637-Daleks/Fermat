@@ -23,10 +23,7 @@ Shooter::Spin(){
 
 void
 Shooter::TurnOnSolenoid(){
-    bool on = false;
-    if(!(m_shooter_solenoid->Get())){
-        m_shooter_solenoid->Set(!on);
-    }
+    m_shooter_solenoid->Set(true);
 }
 
 double 
@@ -44,7 +41,7 @@ Shooter::Tick(){
     if (m_xbox->GetAButton()){
         Spin();
     }
-    if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))){
+    if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
         TurnOnSolenoid();
     }
 }
