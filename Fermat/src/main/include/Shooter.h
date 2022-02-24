@@ -11,6 +11,7 @@
 class Shooter {
 	public:
 		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid);
+		void tick();
 		bool Spin();
 		bool TurnOnSolenoid();
 

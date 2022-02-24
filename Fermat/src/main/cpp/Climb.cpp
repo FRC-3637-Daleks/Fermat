@@ -10,7 +10,7 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 }
 
 void
-Climb::tick(){
+Climb::Tick(){
     MainArm();
     if(m_xbox->GetStickButton(XboxController::kLeftHand)){
         SideArm();
