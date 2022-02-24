@@ -59,6 +59,7 @@ void Robot::AutonomousInit()
   waitSeconds = 0;//(int)frc::SmartDashboard::GetData("Delay");
   phase = 0;
   m_limelight->LightOn();
+  driveSlow = false;
 }
 
 void Robot::AutonomousPeriodic() 
@@ -97,41 +98,30 @@ void Robot::TeleopPeriodic()
 
     if(canDrive) {
        //drives robot based on JoySticks
+      
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
       }
       if(m_rightStick->GetRawButton(2)){
-          if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
-            m_drive->StopLeft();
-            m_drive->MoveRight(m_rightStick, false, true);
-            SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
-          }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
-            m_drive->StopRight();
-            m_drive->MoveLeft(m_leftStick, false, true);    
-            SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
-          }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
-            m_drive->StopLeft();
-            m_drive->StopRight();
-          }
-          if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
-            m_drive->TankDrive(m_leftStick, m_rightStick, false, true);
-          }
+        driveSlow = true;
       }else{
-          if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
-            m_drive->StopLeft();
-            m_drive->MoveRight(m_rightStick, false, false);
-            SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
-          }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
-            m_drive->StopRight();
-            m_drive->MoveLeft(m_leftStick, false, false);    
-            SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
-          }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
-            m_drive->StopLeft();
-            m_drive->StopRight();
-          }
-          if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
-            m_drive->TankDrive(m_leftStick, m_rightStick, false, false);
-          }
+        driveSlow = false;
+      }
+
+      if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
+        m_drive->StopLeft();
+        m_drive->MoveRight(m_rightStick, false, driveSlow);
+        SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
+      }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+        m_drive->StopRight();
+        m_drive->MoveLeft(m_leftStick, false, driveSlow);    
+        SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
+      }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
+        m_drive->StopLeft();
+        m_drive->StopRight();
+      }
+      if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+        m_drive->TankDrive(m_leftStick, m_rightStick, false, driveSlow);
       }
     } 
 

@@ -102,8 +102,7 @@ class Robot : public TimedRobot {
  	Climb *m_climb;
 	Intake *m_intake;
 	
-	bool canDrive = true;
-	bool timeChanged = false;
+	bool canDrive = true, timeChanged = false, driveSlow = false;
 	double waitSeconds = 0.0, timeOffset = 0.0;
 	int auton_start, auton_end;
 
