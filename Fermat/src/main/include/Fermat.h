@@ -100,6 +100,7 @@ class Robot : public TimedRobot {
 	Limelight *m_limelight;
 	RaspberryPi *m_pi;
  	Climb *m_climb;
+	Intake *m_intake;
 	
 	bool canDrive = true;
 	bool timeChanged = false;

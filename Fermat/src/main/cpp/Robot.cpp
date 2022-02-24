@@ -21,6 +21,7 @@ void Robot::RobotInit()
     m_limelight   = new Limelight(m_drive);
     m_pi = new RaspberryPi(m_drive);
     m_climb = new Climb(m_climb_solenoid, m_xbox);
+    m_intake = new Intake(m_intake_solenoid, m_xbox);
   }
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
@@ -135,8 +136,11 @@ void Robot::TeleopPeriodic()
     } 
 
     if(m_xbox->GetBButton()){
-      canDrive = !canDrive; // flips ability to drive when second button is pressed on m_rightStick
+      canDrive = !canDrive; // flips ability to drive when b button is pressed
     }
+
+    m_intake->Tick();
+
 }
 
 void Robot::TestInit()
