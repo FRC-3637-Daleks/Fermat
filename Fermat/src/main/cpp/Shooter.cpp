@@ -30,12 +30,12 @@ Shooter::TurnOnSolenoid(){
     }
 }
 
-int 
-Shooter::FromMetersPerSecond(int speed){
+double 
+Shooter::FromMetersPerSecond(double speed){
     // 5330 rpm = 88.8333333 rps
     // 2 in radius = 0.0508 m radius
     // 0.1595929068023614965139022838706 circumferance
     // 14.177169887609779606984986211852 meters per seconds per 1 speed point
     // 1 full speed
-    return 1.0*speed*14.177169887609779606984986211852;
+    return 1.0*speed/14.177169887609779606984986211852;
 }

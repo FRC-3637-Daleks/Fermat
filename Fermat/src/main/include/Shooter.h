@@ -14,7 +14,7 @@ class Shooter {
 		void tick();
 		bool Spin();
 		bool TurnOnSolenoid();
-		int FromMetersPerSecond(int speed);
+		double FromMetersPerSecond(double speed);
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;
