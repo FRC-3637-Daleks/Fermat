@@ -2,9 +2,9 @@
 
 Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
     //m_this_is_stupid = new frc::Dumb(0); - Andrew Rodriguez
-    m_intake_motor = new WPI_TalonSRX(INTAKE_MOTOR_ID);
     m_intake_solenoid = intake_solenoid;
     m_xbox = xbox;
+    m_intake_motor = new WPI_TalonSRX(INTAKE_MOTOR);
 }
 
 //Tick function doin tick function things

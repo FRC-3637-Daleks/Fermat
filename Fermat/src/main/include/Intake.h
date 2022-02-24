@@ -2,9 +2,7 @@
 
 #include "Fermat.h"
 
-#define MOTOR_SPEED .25
-#define INTAKE_MOTOR_ID 5
-#define INTAKE_SOLENOID_ID 
+#define MOTOR_SPEED 0.25
 
 class Intake{
     public:

@@ -42,6 +42,9 @@ void Robot::RobotInit()
   
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
+  m_climb_solenoid->Set(true);
+  m_intake_solenoid->Set(true);
+  m_shooter_solenoid->Set(true);
 }
 
 void Robot::RobotPeriodic()
@@ -99,6 +102,7 @@ void Robot::TeleopPeriodic()
       if (m_xbox->GetAButton()){
         m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
       }
+
       if(m_rightStick->GetRawButton(2)){
         driveSlow = true;
       }else{
@@ -117,7 +121,7 @@ void Robot::TeleopPeriodic()
         m_drive->StopLeft();
         m_drive->StopRight();
       }
-      if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+      if (!(m_leftStick->GetTrigger() || m_rightStick->GetTrigger())){
         m_drive->TankDrive(m_leftStick, m_rightStick, false, driveSlow);
       }
     } 
