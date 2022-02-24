@@ -10,11 +10,11 @@ void RaspberryPi::SwerveTurn(double degrees, double distance) {
         if(degrees < 0) {
             //speed = (degrees-MAX_DEGREES)/10*MAX_SPEED; //the orginal value that works
             speed = fmod((distance / 48.0), 1) * (degrees/MAX_DEGREES) * MAX_SPEED; //me trying to make it better
-            m_drive->TankDrive(speed * 0.75, speed, false);// swerve left while tracking ball
+            m_drive->TankDrive(speed * 0.75, speed, false, false);// swerve left while tracking ball
         } else {
             //speed = (degrees+MAX_DEGREES)/10*MAX_SPEED; //the orginal value that works
             speed = fmod((distance / 48.0), 1) * (degrees/MAX_DEGREES) * MAX_SPEED; //me trying to make it better
-            m_drive->TankDrive(-1.0 * speed, -1.0 * speed * 0.75, false);// swerve right while tracking ball
+            m_drive->TankDrive(-1.0 * speed, -1.0 * speed * 0.75, false, false);// swerve right while tracking ball
         }
     }else{
         m_drive->StopLeft();
