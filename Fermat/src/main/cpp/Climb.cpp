@@ -9,6 +9,16 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 
 }
 
+void
+Climb::tick(){
+    if(MainArm()){
+        phase++;
+    }
+    if(phase == 1 && SideArm()){
+        phase++;
+    }
+}
+
 bool
 Climb::MainArm(){
     if(m_upperLimit->Get() || m_lowerLimit->Get()){
