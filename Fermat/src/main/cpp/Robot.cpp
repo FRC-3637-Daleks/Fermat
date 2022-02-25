@@ -94,7 +94,7 @@ void Robot::TeleopPeriodic()
     https://docs.google.com/document/d/14A8HDa7gtJTFGJS2YYfce4O7fD7D9ZBCQrjSBS9ddE8/edit
 
   */
-  if (m_xbox->GetAButton()){
+  if (m_xbox->GetYButton()){
 		m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
 	}
 
