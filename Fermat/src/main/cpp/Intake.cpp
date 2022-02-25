@@ -26,6 +26,12 @@ Intake::SuckBalls() {
     m_intake_motor->Set(MOTOR_SPEED);  
 }
 
+//Reverses the motor
+bool
+Intake::UnSuckBalls() {
+    m_intake_motor->Set(-MOTOR_SPEED);
+}
+
 //Toggles the solenoid for the intake pneumatics
 bool
 Intake::ToggleIntakePneumatics() {
