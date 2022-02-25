@@ -11,9 +11,7 @@ void Robot::RobotInit()
   // camera.SetFPS(15);
   try {
     m_xbox        = new frc::XboxController(XBOX);
-    m_leftStick   = new frc::Joystick(LEFT_JOY);
-    m_rightStick  = new frc::Joystick(RIGHT_JOY);
-    m_drive       = new DalekDrive();
+    m_drive       = new DalekDrive(m_xbox);
     m_climb_solenoid = new frc::Solenoid(CLIMB);
     m_intake_solenoid = new frc::Solenoid(INTAKE);
     m_shooter_solenoid = new frc::Solenoid(SHOOTER);
@@ -59,7 +57,6 @@ void Robot::AutonomousInit()
 {
   phase = 0;
   m_limelight->LightOn();
-  driveSlow = false;
 }
 
 void Robot::AutonomousPeriodic() 
@@ -97,50 +94,19 @@ void Robot::TeleopPeriodic()
     https://docs.google.com/document/d/14A8HDa7gtJTFGJS2YYfce4O7fD7D9ZBCQrjSBS9ddE8/edit
 
   */
+  if (m_xbox->GetAButton()){
+		m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
+	}
 
   //Not finished yet
   //m_pi->Tick(); 
   m_limelight->Tick();
   m_intake->Tick();
   m_climb->Tick();
+  m_drive->Tick();
+  
 
-  SmartDashboard::PutBoolean("Can Drive?", canDrive);
-  SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
-  SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
-  SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
-
-  if(canDrive) {
-    //drives robot based on JoySticks
-    
-    if (m_xbox->GetAButton()){
-      m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
-    }
-
-    //Check to see if slowmo is active
-    if(m_rightStick->GetRawButton(2)){
-      driveSlow = true;
-    }else{
-      driveSlow = false;
-    }
-
-    //Check for the brakes and move accordingly
-    if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
-      m_drive->StopLeft();
-      m_drive->MoveRight(m_rightStick, false, driveSlow);
-      SmartDashboard::PutNumber("LeftMotor Value", m_drive->GetLeft());
-    }else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
-      m_drive->StopRight();
-      m_drive->MoveLeft(m_leftStick, false, driveSlow);    
-      SmartDashboard::PutNumber("RightMotor Value", m_drive->GetRight());    
-    }else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
-      m_drive->StopLeft();
-      m_drive->StopRight();
-    }
-    if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
-      m_drive->TankDrive(m_leftStick, m_rightStick, false, driveSlow);
-    }
-
-  }    
+      
 }
 
 void Robot::TestInit()

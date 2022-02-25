@@ -1,10 +1,14 @@
 #include "Fermat.h"
 
-DalekDrive::DalekDrive() {
+DalekDrive::DalekDrive(XboxController *xbox) {
 	m_left[FRONT]  = new WPI_TalonFX(leftFront);
 	m_left[REAR]   = new WPI_TalonFX(leftRear);
 	m_right[FRONT] = new WPI_TalonFX(rightFront);
 	m_right[REAR]  = new WPI_TalonFX(rightRear);
+	m_leftStick   = new frc::Joystick(LEFT_JOY);
+    m_rightStick  = new frc::Joystick(RIGHT_JOY);
+	m_xbox = xbox;
+	canDrive = false;
 }
 
 double
@@ -106,7 +110,7 @@ DalekDrive::Turn(double degrees){
 	
 	//adjust the degrees to account for the motors overshooting
 	//degrees = degrees>0?(degrees - 20):(degrees+18); //one side is slightly faster than the other
-	double radAngle = degrees * (pi / 180);
+	double radAngle = degrees * (PI / 180);
 	double totalDistance = (13.5/12) * radAngle;
 	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
 	SmartDashboard::PutNumber("Total Distance", totalDistance);
@@ -183,4 +187,45 @@ DalekDrive::GetRight(){
 double
 DalekDrive::GetLeft(){
 	return m_left[FRONT]->Get();
+}
+
+void
+DalekDrive::SetCanDrive(bool drive){
+	canDrive = drive;
+}
+
+
+void 
+DalekDrive::Tick(){
+	if(canDrive) {
+		//drives robot based on JoySticks
+
+		//Check to see if slowmo is active
+		if(m_rightStick->GetRawButton(2)){
+			driveSlow = true;
+		}else{
+			driveSlow = false;
+		}
+
+		//Check for the brakes and move accordingly
+		if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
+			StopLeft();
+			MoveRight(m_rightStick, false, driveSlow);
+			SmartDashboard::PutNumber("LeftMotor Value", GetLeft());
+		}else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+			StopRight();
+			MoveLeft(m_leftStick, false, driveSlow);    
+			SmartDashboard::PutNumber("RightMotor Value",  GetRight());    
+		}else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
+			StopLeft();
+			StopRight();
+		}
+		if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
+		}
+	}
+	SmartDashboard::PutBoolean("Can Drive?", canDrive);
+	SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
+	SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
+	SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
 }
