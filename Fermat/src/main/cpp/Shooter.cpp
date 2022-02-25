@@ -54,11 +54,15 @@ Shooter::Tick(){
     }else{ 
         TurnOnSolenoid();
     }
+
+    if(m_xbox->GetXButton()){
+        m_limelight->LightOff();
+    }
 }
 
 void
 Shooter::ShootFromTarmac(){
-    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2, 84.6)));
+    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2.0, 84.6)));
 }
 
 void
