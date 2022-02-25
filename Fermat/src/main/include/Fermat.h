@@ -89,8 +89,6 @@ class Robot : public TimedRobot {
 
 	private:
 	frc::XboxController *m_xbox;
-	frc::Joystick *m_leftStick;
-	frc::Joystick *m_rightStick;
 	frc::DigitalInput *m_cinput;
 	frc::Compressor *m_compressor;
 	DalekDrive *m_drive;
@@ -102,7 +100,7 @@ class Robot : public TimedRobot {
  	Climb *m_climb;
 	Intake *m_intake;
 	
-	bool canDrive = true, timeChanged = false, driveSlow = false;
+	bool timeChanged = false;
 	double waitSeconds = 0.0, timeOffset = 0.0;
 	int auton_start, auton_end;
 

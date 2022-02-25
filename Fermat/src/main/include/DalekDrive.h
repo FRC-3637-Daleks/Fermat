@@ -26,7 +26,7 @@ using namespace rev;
 
 class DalekDrive {
 	public:
-		DalekDrive();
+		DalekDrive(XboxController *xbox);
 		double squareInput(double v);
 		void TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs, bool isSlow);
 		void TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs, bool isSlow);
@@ -37,8 +37,11 @@ class DalekDrive {
 		void StopRight();
 		double GetRight();
 		double GetLeft();
+		bool CanDrive();
 		bool DriveToFeet(double feet);
 		bool Turn(double degrees);
+		void Tick();
+		
 	
 	private:
 		enum MotorCount {
@@ -47,7 +50,11 @@ class DalekDrive {
 			rightFront = 2,
 			rightRear = 3
 		};
+		bool canDrive = false, driveSlow = false;
 
 		WPI_TalonFX *m_left[2];
 		WPI_TalonFX *m_right[2];
+		frc::Joystick *m_leftStick;
+		frc::Joystick *m_rightStick;
+		XboxController *m_xbox;
 };
