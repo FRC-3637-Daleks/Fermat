@@ -15,11 +15,11 @@
 #define FRONT						0
 #define REAR						1
 #define ENCODER_FEET                6300 //encoder values for 1 feet
-#define turningErrorThreshold	0.05
-#define pTurn					2 // this number depends on the speed of the robot (weight and handicap)
-#define iTurn					0 // probably unnecessary and won't be used
-#define dTurn					0 // probably unnecessary and won't be used
-#define pi 						3.14159265358979323846264338327 //pi
+#define turningErrorThreshold		0.05
+#define pTurn						2 // this number depends on the speed of the robot (weight and handicap)
+#define iTurn						0 // probably unnecessary and won't be used
+#define dTurn						0 // probably unnecessary and won't be used
+#define PI 							3.14159265358979323846264338327 //pi
 
 using namespace frc;
 using namespace rev;
