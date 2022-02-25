@@ -43,7 +43,7 @@ Shooter::Tick(){
     if (m_xbox->GetXButton()){
         SpinHigh();
     }
-    if (!m_xbox->GetRawButton(static_cast<int>(frc::XboxController::Button::kBumperLeft))){
+    if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
         if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
             TurnOnSolenoid();
         }else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
@@ -54,4 +54,14 @@ Shooter::Tick(){
     }else{ 
         TurnOnSolenoid();
     }
+}
+
+void
+Shooter::ShootFromTarmac(){
+    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2, 84.6)));
+}
+
+void
+Shooter::ShootFromHangarWall(){
+    //m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
 }
