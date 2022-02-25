@@ -189,9 +189,9 @@ DalekDrive::GetLeft(){
 	return m_left[FRONT]->Get();
 }
 
-bool
-DalekDrive::CanDrive(){
-	return canDrive;
+void
+DalekDrive::SetCanDrive(bool drive){
+	canDrive = drive;
 }
 
 
