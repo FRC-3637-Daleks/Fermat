@@ -11,10 +11,21 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 
 void
 Climb::Tick(){
-    MainArm();
+    MainArm(true);
     if(m_xbox->GetStickButton(XboxController::kLeftHand)){
         SideArm();
     }
+}
+
+bool
+Climb::MainArm(bool isTheFunctionWithoutTheThing){
+    if(m_xbox->GetRawAxis(1)>0){
+        m_climb_motor->Set(MOTOR_SPEED);
+    }
+    if(m_xbox->GetRawAxis(1)<0){
+        m_climb_motor->Set(-MOTOR_SPEED);
+    }
+    return false;
 }
 
 bool
