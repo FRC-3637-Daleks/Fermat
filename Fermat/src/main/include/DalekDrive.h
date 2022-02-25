@@ -37,7 +37,7 @@ class DalekDrive {
 		void StopRight();
 		double GetRight();
 		double GetLeft();
-		bool CanDrive();
+		void SetCanDrive(bool drive);
 		bool DriveToFeet(double feet);
 		bool Turn(double degrees);
 		void Tick();
