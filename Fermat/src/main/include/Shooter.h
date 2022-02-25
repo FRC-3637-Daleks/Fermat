@@ -19,6 +19,7 @@ class Shooter {
 		void Tick();
 		void ShootFromTarmac();
 		void ShootFromHangarWall();
+		void DisableLimelight();
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;
