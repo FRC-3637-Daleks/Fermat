@@ -12,10 +12,10 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
 //A button = pneumatics piston goes out and in (toggle)
 void
 Intake::Tick() {
-    if (m_xbox->GetAButton())
-        ToggleIntakePneumatics();
-    if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
+    if (m_xbox->GetYButton())
         SuckBalls();
+    if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
+        ToggleIntakePneumatics();
     }
 }
 

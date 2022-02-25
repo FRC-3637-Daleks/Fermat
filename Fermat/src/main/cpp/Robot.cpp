@@ -40,9 +40,9 @@ void Robot::RobotInit()
   
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
-  m_climb_solenoid->Set(true);
-  m_intake_solenoid->Set(true);
-  m_shooter_solenoid->Set(true);
+  m_climb_solenoid->Set(false);
+  m_intake_solenoid->Set(false);
+  m_shooter_solenoid->Set(false);
 }
 
 void Robot::RobotPeriodic()
