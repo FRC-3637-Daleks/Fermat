@@ -33,7 +33,7 @@ void RaspberryPi::SwerveTurn() {
 void
 RaspberryPi::Tick(){
     // Use network tables to get data
-    double degrees = 0; 
+    double degrees = SmartDashboard::GetNumber("Angle", 0.0); 
     SmartDashboard::PutNumber("Degrees",degrees-MAX_DEGREES); 
     if (m_xbox->GetBButton()){
         SwerveTurn();
