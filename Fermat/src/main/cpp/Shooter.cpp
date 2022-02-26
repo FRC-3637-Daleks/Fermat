@@ -92,15 +92,19 @@ Shooter::ShootFromHangarWall(){
 void
 Shooter::ManualShooting(){
     if(m_xbox->GetRawAxis(5) > 0.5){
-        m_shooter_motor-> Set(0.3);
-        
-
+        m_shooter_motor-> Set(0.25);
     }
-    else if(m_xbox->GetRawAxis(4) < -0.5){
+    else if(m_xbox->GetRawAxis(4) > 0.5){
         m_shooter_motor-> Set(0.5);
     }
+    else if(m_xbox->GetRawAxis(5)< -0.5){
+        m_shooter_motor-> Set(0.75);
+    }
+    else if(m_xbox->GetRawAxis(4) < -0.5){
+        m_shooter_motor-> Set(1.0);
+    }
     else{
-            m_shooter_motor->Set(0.0);
+            m_shooter_motor->Set(0);
         }
 
     if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)){
