@@ -26,7 +26,7 @@ Intake::Tick() {
         UnSuckBalls();
     else
         m_intake_motor->Set(0);
-    if(m_xbox->GetAButton()) {
+    if(m_xbox->GetAButtonPressed()) {
         ToggleIntakePneumatics();
     }
     /*

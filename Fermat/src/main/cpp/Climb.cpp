@@ -15,7 +15,7 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     MainArm(true);
-    if(m_xbox->GetBButton()){
+    if(m_xbox->GetBButtonPressed()){
         m_climb_solenoid->Toggle();
     }
 }
