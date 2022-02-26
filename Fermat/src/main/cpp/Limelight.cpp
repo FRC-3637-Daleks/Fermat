@@ -50,16 +50,7 @@ double Limelight::CalcVelocity(double points) // (m/s)
 	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
 }
 
-
-// // obsolete
-// double Limelight::CalcShootAngle(double velocity)
-// {
-// 	SmartDashboard::PutNumber("ShootAngle", ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT));
-// 	return ANGLE_EXPONENT*pow(velocity, ANGLE_EXPONENT);
-// }
-
-double Limelight::CalcTurnAngle(double xPos)
-{
+double Limelight::CalcTurnAngle(double xPos){
 	SmartDashboard::PutNumber("TurnAngle", ANGLE_PRODUCT*xPos + ANGLE_OFFSET);
 	return ANGLE_PRODUCT*xPos + ANGLE_OFFSET;
 }
