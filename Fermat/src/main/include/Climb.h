@@ -8,7 +8,6 @@ class Climb{
     public:
         Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox);
         bool MainArm();
-        bool MainArm(bool isTheFunctionWithoutTheThing);
         bool SideArm();
         void Tick();
         void AutoClimb();

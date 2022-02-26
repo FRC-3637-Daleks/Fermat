@@ -62,7 +62,6 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic() 
 {
-  m_limelight->Tick();
   if(phase == 0)
   {
     m_leftFront->SetSelectedSensorPosition(0);
@@ -96,13 +95,7 @@ void Robot::TeleopPeriodic()
 
   */
 
-  if (m_xbox->GetYButton()){
-		m_pi->SwerveTurn(SmartDashboard::GetNumber("Angle", 0), SmartDashboard::GetNumber("Distance", -1));
-	}
-
-  //Not finished yet
-  //m_pi->Tick(); 
-  m_limelight->Tick();
+  m_pi->Tick();
   m_intake->Tick();
   m_climb->Tick();
   m_drive->Tick();

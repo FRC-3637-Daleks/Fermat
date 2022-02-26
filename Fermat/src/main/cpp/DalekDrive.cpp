@@ -199,7 +199,7 @@ DalekDrive::SetCanDrive(bool drive){
 
 void 
 DalekDrive::Tick(){
-	canDrive = false;
+	SetCanDrive(false);
 	if(canDrive) {
 		//drives robot based on JoySticks
 

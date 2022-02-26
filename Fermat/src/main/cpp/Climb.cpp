@@ -19,6 +19,7 @@ Climb::Tick(){
         m_climb_solenoid->Toggle();
     }
 }
+
 // Move main arm with joystick and the IR back up
 bool
 Climb::MainArm(){
