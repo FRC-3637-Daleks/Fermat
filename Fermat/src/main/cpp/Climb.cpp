@@ -4,9 +4,9 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_solenoid = climb_solenoid;
     m_xbox = xbox;
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
-    m_upperLimit = new DigitalInput(UPPERLIMIT);
-    m_lowerLimit = new DigitalInput(LOWERLIMIT);
-    m_sideLimit = new DigitalInput(SIDELIMIT);
+    m_upperLimit = new DigitalInput(UPPER_IR);
+    m_lowerLimit = new DigitalInput(LOWER_IR);
+    m_sideLimit = new DigitalInput(SIDE_IR);
 
     m_climb_solenoid->Set(false);
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
@@ -25,10 +25,10 @@ Climb::Tick(){
 bool
 Climb::MainArm(bool isTheFunctionWithoutTheThing){
     if(m_xbox->GetRawAxis(1)>0.5){
-        m_climb_motor->Set(MOTOR_SPEED);
+        m_climb_motor->Set(CLIMB_SPEED);
     }
     else if(m_xbox->GetRawAxis(1)<-0.5){
-        m_climb_motor->Set(-MOTOR_SPEED);
+        m_climb_motor->Set(-CLIMB_SPEED);
     }
     else{
         m_climb_motor->Set(0);
@@ -44,10 +44,10 @@ Climb::MainArm(){
         return true;
     }
     if(m_xbox->GetRawAxis(1)>0.5){
-        m_climb_motor->Set(-MOTOR_SPEED);
+        m_climb_motor->Set(-CLIMB_SPEED);
     }
     if(m_xbox->GetRawAxis(1)<-0.5){
-        m_climb_motor->Set(MOTOR_SPEED);
+        m_climb_motor->Set(CLIMB_SPEED);
     }
     return false;
 }
@@ -58,13 +58,13 @@ Climb::AutoClimb(){
     for(int i = 0; i < 4; i++){
         m_climb_solenoid->Set(true);
         while(!(m_upperLimit->Get())){
-            m_climb_motor->Set(MOTOR_SPEED);
+            m_climb_motor->Set(CLIMB_SPEED);
         }
         while(!(m_lowerLimit->Get())){
-            m_climb_motor->Set(-MOTOR_SPEED);
+            m_climb_motor->Set(-CLIMB_SPEED);
         }
         while(!(m_upperLimit->Get())){
-            m_climb_motor->Set(MOTOR_SPEED);
+            m_climb_motor->Set(CLIMB_SPEED);
         }
         m_climb_motor->Set(0);
         m_climb_solenoid->Set(false);
