@@ -72,7 +72,8 @@ enum SOLENOID_IDS {
 
 enum DIO {
   UPPERLIMIT = 0, 
-  LOWERLIMIT = 1
+  LOWERLIMIT = 1,
+  SIDELIMIT = 2
 };
 
 class Robot : public TimedRobot {

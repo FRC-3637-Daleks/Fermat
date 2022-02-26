@@ -6,6 +6,7 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
     m_upperLimit = new DigitalInput(UPPERLIMIT);
     m_lowerLimit = new DigitalInput(LOWERLIMIT);
+    m_sideLimit = new DigitalInput(SIDELIMIT);
 
     m_climb_solenoid->Set(false);
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
@@ -15,9 +16,9 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     MainArm(true);
-    //(m_xbox->GetStickButton(XboxController::kLeftHand)){
-    SideArm();
-    //}
+    if(m_xbox->GetBButton()){
+        m_climb_solenoid->Set(true);
+    }
 }
 
 // Move main arm with joystick

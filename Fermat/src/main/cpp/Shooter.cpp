@@ -53,7 +53,7 @@ Shooter::FromMetersPerSecond(double speed){
 void
 Shooter::Tick(){
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
-    if (m_xbox->GetXButton()){
+    if (m_xbox->GetAButton()){
         YEETUSHigh();
     }
     else
