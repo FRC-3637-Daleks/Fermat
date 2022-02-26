@@ -80,7 +80,8 @@ Shooter::ShootFromTarmac(){
     m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2.0, 84.6)));
 }
 
+// shoot from 180 inches
 void
-Shooter::ShootFromHangarWall(){
-    //m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
+Shooter::ShootFromHangarWall(){ 
+    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
 }

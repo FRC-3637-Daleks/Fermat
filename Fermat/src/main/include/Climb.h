@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define MOTOR_SPEED 0.25
+#define MOTOR_SPEED 0.1
 
 class Climb{
     public:
@@ -11,6 +11,7 @@ class Climb{
         bool MainArm(bool isTheFunctionWithoutTheThing);
         bool SideArm();
         void Tick();
+        void AutoClimb();
     private:
         frc::XboxController *m_xbox;
         frc::Solenoid *m_climb_solenoid;
