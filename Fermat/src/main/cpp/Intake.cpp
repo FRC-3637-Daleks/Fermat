@@ -20,11 +20,13 @@ Intake::Tick() {
     SmartDashboard::PutBoolean("B Button", m_xbox->GetBButton());
     SmartDashboard::PutBoolean("X Button", m_xbox->GetXButton());
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
-    if (m_xbox->GetAButton())
+    if (m_xbox->GetBumper(frc::GenericHID::kLeftHand))
         SuckBalls();
+    else if (m_xbox->GetBumper(frc::GenericHID::kRightHand))
+        UnSuckBalls();
     else
         m_intake_motor->Set(0);
-    if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
+    if(m_xbox->GetAButton()) {
         ToggleIntakePneumatics();
     }
 }
@@ -48,3 +50,10 @@ bool
 Intake::ToggleIntakePneumatics() {
     m_intake_solenoid->Toggle();
 }
+
+/*
+bool
+Intake::AutoIntake() {
+    m_intake_solenoid->
+}
+*/
