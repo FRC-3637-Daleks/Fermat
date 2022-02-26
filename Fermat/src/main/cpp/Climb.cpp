@@ -25,10 +25,10 @@ Climb::Tick(){
 bool
 Climb::MainArm(bool isTheFunctionWithoutTheThing){
     if(m_xbox->GetRawAxis(1)>0.5){
-        m_climb_motor->Set(MOTOR_SPEED);
+        m_climb_motor->Set(CLIMB_SPEED);
     }
     else if(m_xbox->GetRawAxis(1)<-0.5){
-        m_climb_motor->Set(-MOTOR_SPEED);
+        m_climb_motor->Set(-CLIMB_SPEED);
     }
     else{
         m_climb_motor->Set(0);
@@ -44,10 +44,10 @@ Climb::MainArm(){
         return true;
     }
     if(m_xbox->GetRawAxis(1)>0.5){
-        m_climb_motor->Set(-MOTOR_SPEED);
+        m_climb_motor->Set(-CLIMB_SPEED);
     }
     if(m_xbox->GetRawAxis(1)<-0.5){
-        m_climb_motor->Set(MOTOR_SPEED);
+        m_climb_motor->Set(CLIMB_SPEED);
     }
     return false;
 }
@@ -58,13 +58,13 @@ Climb::AutoClimb(){
     for(int i = 0; i < 4; i++){
         m_climb_solenoid->Set(true);
         while(!(m_upperLimit->Get())){
-            m_climb_motor->Set(MOTOR_SPEED);
+            m_climb_motor->Set(CLIMB_SPEED);
         }
         while(!(m_lowerLimit->Get())){
-            m_climb_motor->Set(-MOTOR_SPEED);
+            m_climb_motor->Set(-CLIMB_SPEED);
         }
         while(!(m_upperLimit->Get())){
-            m_climb_motor->Set(MOTOR_SPEED);
+            m_climb_motor->Set(CLIMB_SPEED);
         }
         m_climb_motor->Set(0);
         m_climb_solenoid->Set(false);
