@@ -42,16 +42,35 @@ Climb::MainArm(){
     if(m_upperLimit->Get() || m_lowerLimit->Get()){
         return true;
     }
-    if(m_xbox->GetRawAxis(1)>0){
-        m_climb_motor->Set(MOTOR_SPEED);
-    }
-    if(m_xbox->GetRawAxis(1)<0){
+    if(m_xbox->GetRawAxis(1)>0.5){
         m_climb_motor->Set(-MOTOR_SPEED);
+    }
+    if(m_xbox->GetRawAxis(1)<-0.5){
+        m_climb_motor->Set(MOTOR_SPEED);
     }
     return false;
 }
 
 //switch the sidearm from out to in and vise versa
+void
+Climb::AutoClimb(){
+    for(int i = 0; i < 4; i++){
+        m_climb_solenoid->Set(true);
+        while(!(m_upperLimit->Get())){
+            m_climb_motor->Set(MOTOR_SPEED);
+        }
+        while(!(m_lowerLimit->Get())){
+            m_climb_motor->Set(-MOTOR_SPEED);
+        }
+        while(!(m_upperLimit->Get())){
+            m_climb_motor->Set(MOTOR_SPEED);
+        }
+        m_climb_motor->Set(0);
+        m_climb_solenoid->Set(false);
+        Wait(0.1); //Might be replaced if we get a limit switch
+    }
+}
+
 bool
 Climb::SideArm(){
     m_climb_solenoid->Set(true);
