@@ -51,9 +51,9 @@ Intake::ToggleIntakePneumatics() {
     m_intake_solenoid->Toggle();
 }
 
-/*
+//Toggles pneumatics and turns on motor at the same time
 bool
 Intake::AutoIntake() {
-    m_intake_solenoid->
+    m_intake_solenoid->Set(true);
+    m_intake_motor->Set(MOTOR_SPEED);
 }
-*/
