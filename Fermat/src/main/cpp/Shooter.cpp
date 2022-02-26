@@ -6,6 +6,9 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Lim
     m_xbox = xbox;
     m_limelight = limelight;
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
+
+    m_shooter_solenoid->Set(true);
+    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
 }
 
 void
@@ -47,6 +50,7 @@ Shooter::FromMetersPerSecond(double speed){
 
 void
 Shooter::Tick(){
+    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (m_xbox->GetXButton()){
         YEETUSHigh();
     }

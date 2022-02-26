@@ -99,6 +99,7 @@ class Robot : public TimedRobot {
 	RaspberryPi *m_pi;
  	Climb *m_climb;
 	Intake *m_intake;
+	Shooter *m_shooter;
 	
 	bool timeChanged = false;
 	double waitSeconds = 0.0, timeOffset = 0.0;

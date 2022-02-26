@@ -20,6 +20,7 @@ void Robot::RobotInit()
     m_pi = new RaspberryPi(m_drive, m_xbox);
     m_climb = new Climb(m_climb_solenoid, m_xbox);
     m_intake = new Intake(m_intake_solenoid, m_xbox);
+    m_shooter = new Shooter(m_xbox, m_shooter_solenoid, m_limelight);
   }
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
@@ -104,6 +105,7 @@ void Robot::TeleopPeriodic()
   m_intake->Tick();
   m_climb->Tick();
   m_drive->Tick();
+  
   
 
       

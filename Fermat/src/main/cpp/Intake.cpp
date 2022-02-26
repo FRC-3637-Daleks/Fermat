@@ -5,6 +5,9 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
     m_intake_solenoid = intake_solenoid;
     m_xbox = xbox;
     m_intake_motor = new WPI_TalonSRX(INTAKE_MOTOR);
+
+    m_intake_solenoid->Set(false);
+    frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
 }
 
 //Tick function doin tick function things
@@ -16,6 +19,7 @@ Intake::Tick() {
     SmartDashboard::PutBoolean("A Button", m_xbox->GetAButton());
     SmartDashboard::PutBoolean("B Button", m_xbox->GetBButton());
     SmartDashboard::PutBoolean("X Button", m_xbox->GetXButton());
+    frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
     if (m_xbox->GetAButton())
         SuckBalls();
     else
