@@ -101,7 +101,7 @@ Shooter::ManualShooting(){
         }
 
     }
-    if(m_xbox->GetRawAxis(4)){
+    if(m_xbox->GetRawAxis(4) < -0.5){
         m_shooter_motor-> Set(0.5);
         if(m_xbox->GetBumper(frc::GenericHID::kRightHand)){
             m_shooter_solenoid->Set(true);
