@@ -73,6 +73,7 @@ enum SOLENOID_IDS {
 enum DIO {
   UPPER_IR = 0, 
   LOWER_IR = 1,
+  SHOOTER_IR = 2
 };
 
 class Robot : public TimedRobot {
