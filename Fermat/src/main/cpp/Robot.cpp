@@ -12,9 +12,9 @@ void Robot::RobotInit()
   try {
     m_xbox        = new frc::XboxController(XBOX);
     m_drive       = new DalekDrive(m_xbox);
-    m_climb_solenoid = new frc::Solenoid(CLIMB);
-    m_intake_solenoid = new frc::Solenoid(INTAKE);
-    m_shooter_solenoid = new frc::Solenoid(SHOOTER);
+    m_climb_solenoid = new frc::Solenoid(PCM, CLIMB);
+    m_intake_solenoid = new frc::Solenoid(PCM, INTAKE);
+    m_shooter_solenoid = new frc::Solenoid(PCM, SHOOTER);
     m_compressor  = new frc::Compressor(PCM);
     m_limelight   = new Limelight(m_drive);
     m_pi = new RaspberryPi(m_drive, m_xbox);
