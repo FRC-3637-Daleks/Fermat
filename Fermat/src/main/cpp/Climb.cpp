@@ -6,7 +6,6 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
     m_upperLimit = new DigitalInput(UPPER_IR);
     m_lowerLimit = new DigitalInput(LOWER_IR);
-    m_sideLimit = new DigitalInput(SIDE_IR);
 
     m_climb_solenoid->Set(true);
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());

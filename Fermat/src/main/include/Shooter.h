@@ -21,10 +21,12 @@ class Shooter {
 		void ShootFromHangarWall();
 		void DisableLimelight();
 		void YEETUS();
+		void GetIRValue();
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;
 		XboxController *m_xbox;
 		Solenoid *m_shooter_solenoid;
+		DigitalInput *m_shooterIR;
 		Limelight *m_limelight;
 };
