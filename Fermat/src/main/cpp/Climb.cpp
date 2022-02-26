@@ -17,6 +17,7 @@ Climb::Tick(){
     }
 }
 
+// Move main arm with joystick
 bool
 Climb::MainArm(bool isTheFunctionWithoutTheThing){
     if(m_xbox->GetRawAxis(1)>0.5){
@@ -32,6 +33,7 @@ Climb::MainArm(bool isTheFunctionWithoutTheThing){
     return false;
 }
 
+// Move main arm with joystick and the limit switch back up
 bool
 Climb::MainArm(){
     if(m_upperLimit->Get() || m_lowerLimit->Get()){
@@ -46,6 +48,7 @@ Climb::MainArm(){
     return false;
 }
 
+//switch the sidearm from out to in and vise versa
 bool
 Climb::SideArm(){
     m_climb_solenoid->Toggle();
