@@ -88,3 +88,21 @@ void
 Shooter::ShootFromHangarWall(){ 
     m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
 }
+
+void
+Shooter::ManualShooting(){
+    if(m_xbox->GetRawAxis(5) > 0.5){
+        m_shooter_motor-> Set(0.3);
+        if (m_xbox->GetBumper(frc::GenericHID::kRightHand)){
+            m_shooter_solenoid->Set(true);
+        }
+
+    }
+    if(m_xbox->GetRawAxis(4)){
+        m_shooter_motor-> Set(0.5);
+        if(m_xbox->GetBumper(frc::GenericHID::kRightHand)){
+            m_shooter_solenoid->Set(true);
+        }
+    }
+
+}

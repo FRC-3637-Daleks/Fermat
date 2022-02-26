@@ -17,11 +17,11 @@ class Shooter {
 		void TurnOffSolenoid();
 		double FromMetersPerSecond(double speed);
 		void Tick();
+		void ManualShooting();
 		void ShootFromTarmac();
 		void ShootFromHangarWall();
 		void DisableLimelight();
 		void YEETUS();
-		void GetIRValue();
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;
