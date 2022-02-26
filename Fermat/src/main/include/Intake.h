@@ -12,6 +12,7 @@ class Intake{
         bool SuckBalls();
         bool UnSuckBalls();
         bool ToggleIntakePneumatics();
+        bool AutoIntake();
         void Tick();
     
     private:
