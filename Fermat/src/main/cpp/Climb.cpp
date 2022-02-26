@@ -57,6 +57,7 @@ void
 Climb::AutoClimb(){
     for(int i = 0; i < 4; i++){
         m_climb_solenoid->Set(true);
+        Wait(0.1);
         while(!(m_upperLimit->Get())){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
         }
