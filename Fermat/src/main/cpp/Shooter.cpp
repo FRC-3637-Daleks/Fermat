@@ -55,7 +55,7 @@ Shooter::Tick(){
         TurnOnSolenoid();
     }
 
-    if(m_xbox->GetXButton()){
+    if(m_xbox->GetBButton()){
         m_limelight->LightOff();
     }
 }
