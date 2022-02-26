@@ -7,14 +7,17 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_upperLimit = new DigitalInput(UPPERLIMIT);
     m_lowerLimit = new DigitalInput(LOWERLIMIT);
 
+    m_climb_solenoid->Set(false);
+    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
 }
 
 void
 Climb::Tick(){
+    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     MainArm(true);
-    if(m_xbox->GetStickButton(XboxController::kLeftHand)){
-        SideArm();
-    }
+    //(m_xbox->GetStickButton(XboxController::kLeftHand)){
+    SideArm();
+    //}
 }
 
 // Move main arm with joystick
@@ -51,6 +54,6 @@ Climb::MainArm(){
 //switch the sidearm from out to in and vise versa
 bool
 Climb::SideArm(){
-    m_climb_solenoid->Toggle();
+    m_climb_solenoid->Set(true);
     return false;
 }

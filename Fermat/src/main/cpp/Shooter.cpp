@@ -6,16 +6,21 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Lim
     m_xbox = xbox;
     m_limelight = limelight;
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
+
+    m_shooter_solenoid->Set(true);
+    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
 }
 
 void
 Shooter::YEETUSHigh(){
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2))); //Need to convert velocity to RPM for controlling motor speed
+    //m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2))); //Need to convert velocity to RPM for controlling motor speed
+    m_shooter_motor-> Set(-0.25);
 }
 
 void
 Shooter::YEETUSLow(){
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1))); //Need to convert velocity to RPM for controlling motor speed
+    //m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1))); //Need to convert velocity to RPM for controlling motor speed
+    m_shooter_motor-> Set(0.25);
 }
 
 void
@@ -47,9 +52,12 @@ Shooter::FromMetersPerSecond(double speed){
 
 void
 Shooter::Tick(){
+    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (m_xbox->GetXButton()){
         YEETUSHigh();
     }
+    else
+        m_shooter_motor->Set(0);
     if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
         if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
             TurnOnSolenoid();
