@@ -105,6 +105,7 @@ void Robot::TeleopPeriodic()
   m_intake->Tick();
   m_climb->Tick();
   m_drive->Tick();
+  m_shooter->Tick();
   
   
 
