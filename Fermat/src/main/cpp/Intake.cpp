@@ -5,7 +5,7 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
     m_xbox = xbox;
     m_intake_motor = new WPI_TalonSRX(INTAKE_MOTOR);
 
-    m_intake_solenoid->Set(false);
+    m_intake_solenoid->Set(true);
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
 }
 
@@ -29,13 +29,17 @@ Intake::Tick() {
     if(m_xbox->GetAButton()) {
         ToggleIntakePneumatics();
     }
+    /*
+    if(SmartDashboard::GetNumber("Distance", -1) != -1) {
+        AutoIntake();
+    }
+    */
 }
 
 //Starts and stops the intake depending on whether or not the button 
 //is being pressed
 bool
 Intake::SuckBalls() {
-    SmartDashboard::PutBoolean("Intake Work?", true);
     m_intake_motor->Set(INTAKE_MOTOR_SPEED);  
 }
 
