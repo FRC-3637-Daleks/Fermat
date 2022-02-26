@@ -4,8 +4,7 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
     m_intake_solenoid = intake_solenoid;
     m_xbox = xbox;
     m_intake_motor = new WPI_TalonSRX(INTAKE_MOTOR);
-
-    //m_intake_solenoid->Set(true);
+    
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
 }
 
