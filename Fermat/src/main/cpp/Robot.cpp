@@ -6,7 +6,7 @@ int phase;
 
 void Robot::RobotInit() 
 {
-  cs::AxisCamera camera = CameraServer::GetInstance()->AddAxisCamera(FORWARD_CAMERA);  // Initialize Camera
+  //cs::AxisCamera camera = CameraServer::GetInstance()->AddAxisCamera(FORWARD_CAMERA);  // Initialize Camera
   // camera.SetResolution(160, 90);    // Only use these two lines if needed
   // camera.SetFPS(15);
   try {
@@ -42,7 +42,7 @@ void Robot::RobotInit()
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
   m_climb_solenoid->Set(false);
-  m_intake_solenoid->Set(false);
+  m_intake_solenoid->Set(true);
   m_shooter_solenoid->Set(false);
 }
 
