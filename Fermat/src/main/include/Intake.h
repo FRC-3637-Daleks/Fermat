@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define MOTOR_SPEED 0.25
+#define MOTOR_SPEED -0.5
 
 class Intake{
     public:

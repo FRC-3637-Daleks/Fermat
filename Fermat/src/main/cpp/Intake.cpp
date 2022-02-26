@@ -18,6 +18,8 @@ Intake::Tick() {
     SmartDashboard::PutBoolean("X Button", m_xbox->GetXButton());
     if (m_xbox->GetAButton())
         SuckBalls();
+    else
+        m_intake_motor->Set(0);
     if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
         ToggleIntakePneumatics();
     }
@@ -27,6 +29,7 @@ Intake::Tick() {
 //is being pressed
 bool
 Intake::SuckBalls() {
+    SmartDashboard::PutBoolean("Intake Work?", true);
     m_intake_motor->Set(MOTOR_SPEED);  
 }
 
