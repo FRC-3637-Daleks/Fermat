@@ -14,29 +14,12 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
-    MainArm(true);
+    MainArm();
     if(m_xbox->GetBButton()){
         m_climb_solenoid->Toggle();
     }
 }
-
-// Move main arm with joystick
-bool
-Climb::MainArm(bool isTheFunctionWithoutTheThing){
-    if(m_xbox->GetRawAxis(1)>0.5){
-        m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-    }
-    else if(m_xbox->GetRawAxis(1)<-0.5){
-        m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-    }
-    else{
-        m_climb_motor->Set(0);
-    }
-    
-    return false;
-}
-
-// Move main arm with joystick and the limit switch back up
+// Move main arm with joystick and the IR back up
 bool
 Climb::MainArm(){
     if(m_upperLimit->Get() || m_lowerLimit->Get()){
