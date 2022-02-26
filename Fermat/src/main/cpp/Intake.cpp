@@ -12,6 +12,10 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
 //A button = pneumatics piston goes out and in (toggle)
 void
 Intake::Tick() {
+    SmartDashboard::PutBoolean("Y Button", m_xbox->GetYButton());
+    SmartDashboard::PutBoolean("A Button", m_xbox->GetAButton());
+    SmartDashboard::PutBoolean("B Button", m_xbox->GetBButton());
+    SmartDashboard::PutBoolean("X Button", m_xbox->GetXButton());
     if (m_xbox->GetAButton())
         SuckBalls();
     if(m_xbox->GetBumper(frc::GenericHID::kLeftHand)) {
