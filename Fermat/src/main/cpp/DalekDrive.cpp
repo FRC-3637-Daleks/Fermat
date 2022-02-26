@@ -28,10 +28,10 @@ DalekDrive::TankDrive(double l, double r, bool squaredInputs, bool isSlow)
 			l = squareInput(l);
 			r = squareInput(r);
 		}
-		m_left[FRONT]->Set(l * MAX_SPEED * 0.3);
-		m_left[REAR]->Set(l * MAX_SPEED * 0.3);
-		m_right[FRONT]->Set(r * MAX_SPEED * -0.3);
-		m_right[REAR]->Set(r * MAX_SPEED * -0.3);
+		m_left[FRONT]->Set(l * MAX_SPEED * SLOW_SPEED);
+		m_left[REAR]->Set(l * MAX_SPEED * SLOW_SPEED);
+		m_right[FRONT]->Set(r * MAX_SPEED * SLOW_SPEED * -1.0);
+		m_right[REAR]->Set(r * MAX_SPEED * SLOW_SPEED * -1.0);
 	}else{
 		if(squaredInputs) {
 			l = squareInput(l);
@@ -140,8 +140,8 @@ DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs, bool isSlow) {
 		}
 		
 		// Move only the right motor without affecting the left
-		m_right[FRONT]->Set(-0.3*r*MAX_SPEED);
-		m_right[REAR]->Set(-0.3*r*MAX_SPEED);
+		m_right[FRONT]->Set(-1.0 * SLOW_SPEED * r * MAX_SPEED);
+		m_right[REAR]->Set(-1.0 * SLOW_SPEED * r * MAX_SPEED);
 	}else{
 		//if inputs are doubled, double the inputs
 		double r = rightStick->GetY();
@@ -156,6 +156,8 @@ DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs, bool isSlow) {
 }
 void
 DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs, bool isSlow) {
+	
+	// If the motor is slow set the speed to the slow speed (percent of fast speed)
 	if(isSlow){
 		//if inputs are doubled, double the inputs
 		double l = leftStick->GetY();
@@ -164,8 +166,8 @@ DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs, bool isSlow) {
 		}
 		
 		// Move only the left motor without affecting the right
-		m_left[FRONT]->Set(l*MAX_SPEED*0.3);
-		m_left[REAR]->Set(l*MAX_SPEED*0.3);
+		m_left[FRONT]->Set(l * MAX_SPEED * SLOW_SPEED);
+		m_left[REAR]->Set(l * MAX_SPEED * SLOW_SPEED);
 	}else{
 		//if inputs are doubled, double the inputs
 		double l = leftStick->GetY();
