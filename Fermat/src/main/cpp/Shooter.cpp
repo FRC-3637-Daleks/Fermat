@@ -8,7 +8,7 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Lim
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
     m_shooterIR = new DigitalInput(SHOOTER_IR);
 
-    m_shooter_solenoid->Set(true);
+    //m_shooter_solenoid->Set(true);
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
 }
 
@@ -73,7 +73,7 @@ Shooter::Tick(){
         }
     }
 
-    if(m_xbox->GetBButton()){
+    if(m_xbox->GetBButtonPressed()){
         m_limelight->LightOff();
     }
 }
@@ -92,22 +92,22 @@ Shooter::ShootFromHangarWall(){
 void
 Shooter::ManualShooting(){
     if(m_xbox->GetRawAxis(5) > 0.5){
-        m_shooter_motor-> Set(0.3);
-        
-
+        m_shooter_motor-> Set(0.25);
+    }
+    else if(m_xbox->GetRawAxis(4) > 0.5){
+        m_shooter_motor-> Set(0.5);
+    }
+    else if(m_xbox->GetRawAxis(5)< -0.5){
+        m_shooter_motor-> Set(0.75);
     }
     else if(m_xbox->GetRawAxis(4) < -0.5){
-        m_shooter_motor-> Set(0.5);
-        if(m_xbox->GetBumper(frc::GenericHID::kRightHand)){
-            m_shooter_solenoid->Set(true);
-        }
-        else{
-            m_shooter_motor->Set(0.0);
-        }
-    }else{
-        m_shooter_motor->Set(0.0);
+        m_shooter_motor-> Set(1.0);
     }
-    if (m_xbox->GetBumper(frc::GenericHID::kRightHand)){
-        m_shooter_solenoid->Set(true);
+    else{
+            m_shooter_motor->Set(0);
+        }
+
+    if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)){
+        m_shooter_solenoid->Toggle();
     }
 }
