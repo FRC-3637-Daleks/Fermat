@@ -107,10 +107,6 @@ void Robot::TeleopPeriodic()
   m_climb->Tick();
   m_drive->Tick();
   m_shooter->Tick();
-  
-  
-
-      
 }
 
 void Robot::TestInit()
