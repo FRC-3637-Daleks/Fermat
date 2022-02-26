@@ -9,14 +9,21 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Lim
 }
 
 void
-Shooter::SpinHigh(){
+Shooter::YEETUSHigh(){
     m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2))); //Need to convert velocity to RPM for controlling motor speed
 }
 
 void
-Shooter::SpinLow(){
+Shooter::YEETUSLow(){
     m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1))); //Need to convert velocity to RPM for controlling motor speed
 }
+
+void
+Shooter::YEETUS(){
+     m_shooter_motor-> Set(1.0);
+}
+
+
 
 void
 Shooter::TurnOnSolenoid(){
@@ -41,7 +48,7 @@ Shooter::FromMetersPerSecond(double speed){
 void
 Shooter::Tick(){
     if (m_xbox->GetXButton()){
-        SpinHigh();
+        YEETUSHigh();
     }
     if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
         if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
