@@ -33,17 +33,16 @@
 #include <Shooter.h>
 #include <Intake.h>
 
-#define PI	3.14159265358979323846
-
 // Mostly for documentation of the ip addresses of the 
 // devices on the robot
-#define ROBORIO             "10.36.37.2"
-#define ACCESS_POINT        "10.36.37.1"
-#define FORWARD_CAMERA		"10.36.37.16"
-#define REAR_CAMERA			"10.36.37.??"
-#define RASPBERRY_PI_ADDR	"10.36.37.??"
-#define LIMELIGHT_ADDR		"10.36.37.11"
-#define LEVEL_SENSOR_ADDR   "10.36.37.??"
+#define ROBORIO         		"10.36.37.2"
+#define ACCESS_POINT     		"10.36.37.1"
+#define FORWARD_CAMERA			"10.36.37.16"
+#define REAR_CAMERA				"10.36.37.??"
+#define RASPBERRY_PI_ADDR		"10.36.37.??"
+#define LIMELIGHT_ADDR			"10.36.37.11"
+#define LEVEL_SENSOR_ADDR		"10.36.37.??"
+#define PI						3.14159265358979323846264338327 //pi
 
 // CAN BUS devices
 enum CAN_IDS {
@@ -78,33 +77,29 @@ enum DIO {
 
 class Robot : public TimedRobot {
 	public:
-	void RobotInit() override;
-	void RobotPeriodic() override;
-	void AutonomousInit() override;
-	void AutonomousPeriodic() override;
-	void TeleopInit() override;
-	void TeleopPeriodic() override;
-	void TestInit() override;
-	void TestPeriodic() override;
-	void DisabledInit() override;
+		void RobotInit() override;
+		void RobotPeriodic() override;
+		void AutonomousInit() override;
+		void AutonomousPeriodic() override;
+		void TeleopInit() override;
+		void TeleopPeriodic() override;
+		void TestInit() override;
+		void TestPeriodic() override;
+		void DisabledInit() override;
 
 	private:
-	frc::XboxController *m_xbox;
-	frc::DigitalInput *m_cinput;
-	frc::Compressor *m_compressor;
-	DalekDrive *m_drive;
-	frc::Solenoid *m_climb_solenoid;
-  	frc::Solenoid *m_intake_solenoid;
-  	frc::Solenoid *m_shooter_solenoid;
-	Limelight *m_limelight;
-	RaspberryPi *m_pi;
- 	Climb *m_climb;
-	Intake *m_intake;
-	Shooter *m_shooter;
-	
-	bool timeChanged = false;
-	double waitSeconds = 0.0, timeOffset = 0.0;
-	int auton_start, auton_end;
-
-	WPI_TalonFX *m_leftFront;
+		int phase = 0;
+		frc::XboxController *m_xbox;
+		frc::DigitalInput *m_cinput;
+		frc::Compressor *m_compressor;
+		DalekDrive *m_drive;
+		frc::Solenoid *m_climb_solenoid;
+		frc::Solenoid *m_intake_solenoid;
+		frc::Solenoid *m_shooter_solenoid;
+		Limelight *m_limelight;
+		RaspberryPi *m_pi;
+		Climb *m_climb;
+		Intake *m_intake;
+		Shooter *m_shooter;
+		WPI_TalonFX *m_leftFront;
 };

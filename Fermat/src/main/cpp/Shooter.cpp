@@ -8,25 +8,22 @@ Shooter::Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Lim
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
     m_shooterIR = new DigitalInput(SHOOTER_IR);
 
-    //m_shooter_solenoid->Set(true);
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
 }
 
 void
-Shooter::YEETUSHigh(){
-    //m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2))); //Need to convert velocity to RPM for controlling motor speed
-    m_shooter_motor-> Set(-1);
+Shooter::ShootHigh(){
+    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
 }
 
 void
-Shooter::YEETUSLow(){
-    //m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1))); //Need to convert velocity to RPM for controlling motor speed
-    m_shooter_motor-> Set(0.25);
+Shooter::ShootLow(){
+    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1)));
 }
 
 void
-Shooter::YEETUS(){
-     m_shooter_motor-> Set(1.0);
+Shooter::Shoot(){
+     m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
 }
 
 
@@ -56,19 +53,21 @@ Shooter::Tick(){
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (m_xbox->GetAButton()){
-                
-                    YEETUSHigh();
-                
+            if (m_xbox->GetAButton()){ // this or we make it Get ButtonPressed and a variable 
+                ShootHigh();
             } else {
                 m_shooter_motor->Set(0);
             }
             if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
-                if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
+
+                if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
                     TurnOnSolenoid();
-                }else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
-                    TurnOnSolenoid();
-                } else {
+                }
+                // // If we want to be able to shoot low
+                // else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
+                //     TurnOnSolenoid();
+                // } 
+                else {
                     TurnOffSolenoid();
                 }
             }else{ 
