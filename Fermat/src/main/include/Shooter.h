@@ -24,6 +24,7 @@ class Shooter {
 		void YEETUS();
 
 	private:
+		bool autoShoot = true;
 		WPI_TalonSRX *m_shooter_motor;
 		XboxController *m_xbox;
 		Solenoid *m_shooter_solenoid;

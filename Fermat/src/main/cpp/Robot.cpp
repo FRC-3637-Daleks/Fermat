@@ -41,16 +41,16 @@ void Robot::RobotInit()
   
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
-  m_climb_solenoid->Set(true);
+  m_climb_solenoid->Set(false);
   m_intake_solenoid->Set(false);
   m_shooter_solenoid->Set(false);
 }
 
 void Robot::RobotPeriodic()
 {
-    m_limelight->Tick();
-    SmartDashboard::PutNumber("Encoder", m_leftFront->GetSelectedSensorPosition());//6300
-    SmartDashboard::PutNumber("Encoder Foot", m_leftFront->GetSelectedSensorPosition()/ENCODER_FEET);//6300
+  m_limelight->Tick();
+  SmartDashboard::PutNumber("Encoder", m_leftFront->GetSelectedSensorPosition());//6300
+  SmartDashboard::PutNumber("Encoder Foot", m_leftFront->GetSelectedSensorPosition()/ENCODER_FEET);//6300
 }
 
 // I think I have some errors here, I wanna test this
@@ -92,17 +92,15 @@ void Robot::TeleopPeriodic()
   
     The buttons doc
     https://docs.google.com/document/d/14A8HDa7gtJTFGJS2YYfce4O7fD7D9ZBCQrjSBS9ddE8/edit
-
+    
+    Tick funtions can now switch from manual to automatic
   */
 
   m_pi->Tick();
   m_intake->Tick();
   m_climb->Tick();
   m_drive->Tick();
-  //m_shooter->Tick();
-  m_shooter->ManualShooting();
-
-
+  m_shooter->Tick();
 }
 
 void Robot::TestInit()

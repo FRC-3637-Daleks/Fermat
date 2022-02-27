@@ -54,27 +54,33 @@ Shooter::FromMetersPerSecond(double speed){
 void
 Shooter::Tick(){
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
-    if(m_shooterIR->Get()){
-        if (m_xbox->GetAButton()){
-            YEETUSHigh();
-        }
-        else
-            m_shooter_motor->Set(0);
-        if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
-            if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
-                TurnOnSolenoid();
-            }else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
-                TurnOnSolenoid();
+    if (autoShoot) {
+        if(m_shooterIR->Get()){
+            if (m_xbox->GetAButton()){
+                
+                    YEETUSHigh();
+                
             } else {
-                TurnOffSolenoid();
+                m_shooter_motor->Set(0);
             }
-        }else{ 
-            TurnOnSolenoid();
+            if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
+                if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
+                    TurnOnSolenoid();
+                }else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
+                    TurnOnSolenoid();
+                } else {
+                    TurnOffSolenoid();
+                }
+            }else{ 
+                TurnOnSolenoid();
+            }
         }
+    } else {
+        ManualShooting();
     }
 
     if(m_xbox->GetBButtonPressed()){
-        m_limelight->LightOff();
+        autoShoot = !autoShoot;
     }
 }
 
@@ -91,21 +97,20 @@ Shooter::ShootFromHangarWall(){
 
 void
 Shooter::ManualShooting(){
-    if(m_xbox->GetRawAxis(5) > 0.5){
+
+    // This should use some pre determinded values not just random motor speeds ^^^
+    
+    if (m_xbox->GetRawAxis(5) > 0.5){
         m_shooter_motor-> Set(0.25);
-    }
-    else if(m_xbox->GetRawAxis(4) > 0.5){
+    } else if (m_xbox->GetRawAxis(4) > 0.5){
         m_shooter_motor-> Set(0.5);
-    }
-    else if(m_xbox->GetRawAxis(5)< -0.5){
+    } else if (m_xbox->GetRawAxis(5)< -0.5){
         m_shooter_motor-> Set(0.75);
-    }
-    else if(m_xbox->GetRawAxis(4) < -0.5){
+    } else if (m_xbox->GetRawAxis(4) < -0.5){
         m_shooter_motor-> Set(1.0);
+    } else {
+        m_shooter_motor->Set(0);
     }
-    else{
-            m_shooter_motor->Set(0);
-        }
 
     if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)){
         m_shooter_solenoid->Toggle();
