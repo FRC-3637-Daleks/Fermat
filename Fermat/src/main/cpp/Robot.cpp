@@ -88,21 +88,44 @@ void Robot::TeleopPeriodic()
     The buttons doc
     https://docs.google.com/document/d/14A8HDa7gtJTFGJS2YYfce4O7fD7D9ZBCQrjSBS9ddE8/edit
     
-    Tick funtions can now switch from manual to automatic
   */
 
+  /*
+  B Button - Swerve turn (follow ball)  
+  */
   m_pi->Tick();
-
-  //Uses left bumper for motor and a button for intake
+  
+  /*
+  Left Bumper - Activate intake motor
+  A Buttton - Activate intake pneumatics
+  */
+  
   m_intake->Tick();
+  
+  /*
+  Y Button - Toggle auto climb
+  Left Joystick XBOX - Move main arm up and down
+  Left Joystick XBOX Click (L3) - Toggle climb pneumatics
+  */
 
-  //Uses Y button to toggle auto climb and left joystick on xbox for motor
   m_climb->Tick();
 
-  //Uses the joysticks
+  /*
+  Left Joystick - Move left motors
+  Right Joystick - Move right motors
+  Left Joystick Trigger - Brake left
+  Right Joystick Trigger - Brake right
+  Thumb Button Right Joystick - Slow mode (30% slower)
+  */
+
   m_drive->Tick();
 
-  // Uses A and Y buttons
+  /*
+  X Button - Toggle auto shoot
+  Right Bumper - Toggle shooter pneumatics
+  Right Joystick XBOX - Shooter speeds (4 speeds)
+  */
+ 
   m_shooter->Tick();
 }
 
