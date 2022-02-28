@@ -92,13 +92,6 @@ void Robot::TeleopPeriodic()
 
   m_pi->Tick();
   m_intake->Tick();
-  
-  /*
-  Y Button - Toggle auto climb
-  Left Joystick XBOX - Move main arm up and down
-  Left Joystick XBOX Click (L3) - Toggle climb pneumatics
-  */
-
   m_climb->Tick();
   m_drive->Tick(); 
   m_shooter->Tick();
