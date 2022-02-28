@@ -32,6 +32,7 @@
 #include <Climb.h>
 #include <Shooter.h>
 #include <Intake.h>
+#include "Autonomous.h"
 
 // Mostly for documentation of the ip addresses of the 
 // devices on the robot

@@ -4,7 +4,7 @@ RaspberryPi::RaspberryPi(DalekDrive *drive, XboxController *xbox){
     m_drive = drive;
     m_xbox = xbox;
 }
-void RaspberryPi::SwerveTurn(double degrees, double distance) {
+bool RaspberryPi::SwerveTurn(double degrees, double distance) {
     double speed = 0;
     if(distance > 24) {// track ball
         m_drive->SetCanDrive(false);
@@ -21,13 +21,15 @@ void RaspberryPi::SwerveTurn(double degrees, double distance) {
         m_drive->SetCanDrive(true);
         m_drive->StopLeft();
         m_drive->StopRight();
+        return true;
     }
+    return false;
 }
-void RaspberryPi::SwerveTurn() {
+bool RaspberryPi::SwerveTurn() {
     // Use network tables to get data
     double degrees = 0;
     double distance = 0; 
-    SwerveTurn(degrees, distance);
+    return SwerveTurn(degrees, distance);
 }
 
 /*
