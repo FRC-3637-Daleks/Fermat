@@ -30,6 +30,9 @@ void RaspberryPi::SwerveTurn() {
     SwerveTurn(degrees, distance);
 }
 
+/*
+  B Button - Swerve turn (follow ball)  
+*/
 void
 RaspberryPi::Tick(){
     // Use SmartDashboard tables to get data

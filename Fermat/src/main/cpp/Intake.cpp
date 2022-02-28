@@ -38,6 +38,11 @@ Intake::AutoIntake(bool toggle) {
 }
 
 //Tick function doin tick function things
+/*
+  Left Bumper - Activate intake motor
+  A Buttton - Activate intake pneumatics
+  Start Button - Activate auto intake
+*/
 void
 Intake::Tick() {
     //SmartDashboard::PutBoolean("Y Button", m_xbox->GetYButton());
@@ -58,7 +63,7 @@ Intake::Tick() {
     }
 
     
-    if (m_xbox->GetYButtonPressed()) {
+    if (m_xbox->GetRawButtonPressed(7)){
         autoIntake = !autoIntake;
     }
     

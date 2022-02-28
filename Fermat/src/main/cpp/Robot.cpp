@@ -90,16 +90,7 @@ void Robot::TeleopPeriodic()
     
   */
 
-  /*
-  B Button - Swerve turn (follow ball)  
-  */
   m_pi->Tick();
-  
-  /*
-  Left Bumper - Activate intake motor
-  A Buttton - Activate intake pneumatics
-  */
-  
   m_intake->Tick();
   
   /*
@@ -109,23 +100,7 @@ void Robot::TeleopPeriodic()
   */
 
   m_climb->Tick();
-
-  /*
-  Left Joystick - Move left motors
-  Right Joystick - Move right motors
-  Left Joystick Trigger - Brake left
-  Right Joystick Trigger - Brake right
-  Thumb Button Right Joystick - Slow mode (30% slower)
-  */
-
-  m_drive->Tick();
-
-  /*
-  X Button - Toggle auto shoot
-  Right Bumper - Toggle shooter pneumatics
-  Right Joystick XBOX - Shooter speeds (4 speeds)
-  */
- 
+  m_drive->Tick(); 
   m_shooter->Tick();
 }
 
