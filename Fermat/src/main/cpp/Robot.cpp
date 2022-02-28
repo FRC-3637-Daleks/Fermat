@@ -29,16 +29,6 @@ void Robot::RobotInit()
     err_string += e.what();
     DriverStation::ReportError(err_string.c_str());
   }
-
-  
-
-  frc::SmartDashboard::PutNumber("Start Auton", 2);
-  frc::SmartDashboard::PutNumber("End Auton", 2);
-  frc::SmartDashboard::PutNumber("Delay", 0);
-  frc::SmartDashboard::PutNumber("Delay Phase", 0);
-  frc::SmartDashboard::PutNumber("Auton Phase", 0);
-  frc::SmartDashboard::PutBoolean("Pickup Ball End", false);
-  frc::SmartDashboard::PutBoolean("Pickup Ball Start", false);
   frc::SmartDashboard::PutBoolean("start button pressed", false);
   
   m_compressor->Start();
@@ -56,6 +46,7 @@ void Robot::RobotPeriodic()
 }
 
 // I think I have some errors here, I wanna test this
+// We want to be able to test in general
 void Robot::AutonomousInit()
 {
   phase = 0;
@@ -103,7 +94,11 @@ void Robot::TeleopPeriodic()
   m_pi->Tick();
   m_intake->Tick();
   m_climb->Tick();
+
+  //Uses the joysticks
   m_drive->Tick();
+
+  // Uses A and Y buttons
   m_shooter->Tick();
 }
 
