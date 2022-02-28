@@ -99,7 +99,7 @@ Shooter::Tick(){
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (m_xbox->GetAButton()){ // this or we make it Get ButtonPressed and a variable 
+            if (m_xbox->GetYButton()){ // this or we make it Get ButtonPressed and a variable 
                 ShootHigh();
             } else {
                 m_shooter_motor->Set(0);

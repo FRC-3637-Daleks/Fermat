@@ -37,12 +37,7 @@ Intake::AutoIntake(bool toggle) {
     
 }
 
-/*
-    Tick function doin tick function things
-    Left bumper hold = motor go brrrrrr
-    Left bumper not hold = motor not go brrrrrr
-    A button = pneumatics piston goes out and in (toggle)
-*/
+//Tick function doin tick function things
 void
 Intake::Tick() {
     //SmartDashboard::PutBoolean("Y Button", m_xbox->GetYButton());
@@ -62,9 +57,11 @@ Intake::Tick() {
         m_intake_motor->Set(0);
     }
 
+    
     if (m_xbox->GetYButtonPressed()) {
         autoIntake = !autoIntake;
     }
+    
 
     if (m_xbox->GetAButtonPressed()) {
         ToggleIntakePneumatics();
