@@ -38,6 +38,11 @@ Intake::AutoIntake(bool toggle) {
 }
 
 //Tick function doin tick function things
+/*
+    Left Bumper - Intake Motor
+    A - Intake Pneumatics Toggle
+    B - Auto Intake Toggle
+*/
 void
 Intake::Tick() {
     //SmartDashboard::PutBoolean("Y Button", m_xbox->GetYButton());
@@ -49,7 +54,7 @@ Intake::Tick() {
 
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
     
-    if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
+    if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
         SuckBalls();
     }else if (false){
         UnSuckBalls();
@@ -58,7 +63,7 @@ Intake::Tick() {
     }
 
     
-    if (m_xbox->GetYButtonPressed()) {
+    if (m_xbox->GetBButtonPressed()) {
         autoIntake = !autoIntake;
     }
     
