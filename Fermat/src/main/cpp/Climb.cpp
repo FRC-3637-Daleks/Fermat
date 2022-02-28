@@ -10,31 +10,7 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
 }
 
-void
-Climb::Tick(){
-    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());\
-    MainArm();
-    if(m_xbox->GetBButton()){
-        m_climb_solenoid->Toggle();
-    }
-}
-
-// Move main arm with joystick and the IR back up
-bool
-Climb::MainArm(){
-    if(m_upperLimit->Get() || m_lowerLimit->Get()){
-        return true;
-    }
-    if(m_xbox->GetRawAxis(1)>0.5){
-        m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-    }
-    if(m_xbox->GetRawAxis(1)<-0.5){
-        m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-    }
-    return false;
-}
-
-//switch the sidearm from out to in and vise versa
+// Untested (Would be nice to have a limit switch for side arm but we probably wont get it)
 void
 Climb::AutoClimb(){
     for(int i = 0; i < 4; i++){
@@ -51,12 +27,23 @@ Climb::AutoClimb(){
         }
         m_climb_motor->Set(0);
         m_climb_solenoid->Set(false);
-        Wait(0.1); //Might be replaced if we get a limit switch
+        Wait(0.1);
     }
 }
 
-bool
-Climb::SideArm(){
-    m_climb_solenoid->Toggle();
-    return false;
+// Moving arm Tested but not solenoid (should easily work)
+void
+Climb::Tick(){
+    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());\
+    if(m_upperLimit->Get() || m_lowerLimit->Get()){
+        if(m_xbox->GetRawAxis(1)>0.5){
+            m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+        }
+        if(m_xbox->GetRawAxis(1)<-0.5){
+            m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+        }
+    }
+    if(m_xbox->GetBButtonPressed()){ //(needs to be GetButtonPressed or else the solenoid would constantly toggle while b is pressed)
+        m_climb_solenoid->Toggle();
+    }
 }

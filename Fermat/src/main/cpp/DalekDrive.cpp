@@ -20,6 +20,8 @@ DalekDrive::squareInput(double v)
 	return (v * v);
 }
 
+
+// TankDrive with slow speed and squaredInputs options (maybe take away squared inputs)
 void
 DalekDrive::TankDrive(double l, double r, bool squaredInputs, bool isSlow)
 {
@@ -44,18 +46,21 @@ DalekDrive::TankDrive(double l, double r, bool squaredInputs, bool isSlow)
 	}
 }
 
+//Another way to call the method but you just put in joysticks
 void
 DalekDrive::TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInputs, bool isSlow)
 {
 	TankDrive(leftStick->GetY(), rightStick->GetY(), squaredInputs, isSlow);
 }
 
+//Another way to call the method but you just put in joysticks (IDK what the difference is between & and *)
 void
 DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs, bool isSlow)
 {
-		TankDrive(leftStick.GetY(), rightStick.GetY(), squaredInputs, isSlow);
+	TankDrive(leftStick.GetY(), rightStick.GetY(), squaredInputs, isSlow);
 }
 
+// Drive to a spot but decrease speed as you go on
 bool
 DalekDrive::DriveToFeet(double feet)
 {
@@ -76,16 +81,15 @@ DalekDrive::DriveToFeet(double feet)
 	}
 }
 
+//Stop only the left 
 void
 DalekDrive::StopLeft(){
 	// send robot left motors in the opposite direction to stop robot
 	m_left[FRONT]->Set(m_left[FRONT]->Get() * -.9);
 	m_left[REAR]->Set(m_left[REAR]->Get() * -.9);
-	
-	//Wait(0.1);
-	//TankDrive(0.0, 0.0, false);
 }
 
+//Stop only the right
 void
 DalekDrive::StopRight() {
 	// send robot left motors in the opposite direction to stop robot
@@ -130,6 +134,7 @@ DalekDrive::Turn(double degrees){
 	}
 }
 
+//Move only the right side (uses Joysticks) (Might want a method without a joystick like TankDrive)
 void
 DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs, bool isSlow) {
 	if(isSlow){
@@ -154,6 +159,8 @@ DalekDrive::MoveRight(Joystick* rightStick, bool squaredInputs, bool isSlow) {
 		m_right[REAR]->Set(-1.0*r*MAX_SPEED);
 	}
 }
+
+//Move only the left side (uses Joysticks) (Might want a method without a joystick like TankDrive)
 void
 DalekDrive::MoveLeft(Joystick* leftStick, bool squaredInputs, bool isSlow) {
 	
@@ -191,13 +198,13 @@ DalekDrive::GetLeft(){
 	return m_left[FRONT]->Get();
 }
 
+//For other classes to access Set canDrive (maybe make canDrive public)
 void
 DalekDrive::SetCanDrive(bool drive){
 	canDrive = drive;
 }
 
-
-void 
+void
 DalekDrive::Tick(){
 	SetCanDrive(false);
 	if(canDrive) {
@@ -215,18 +222,22 @@ DalekDrive::Tick(){
 			StopLeft();
 			MoveRight(m_rightStick, false, driveSlow);
 			SmartDashboard::PutNumber("LeftMotor Value", GetLeft());
-		}else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
+		} else if (m_rightStick->GetTrigger()&&!m_leftStick->GetTrigger()){
 			StopRight();
 			MoveLeft(m_leftStick, false, driveSlow);    
 			SmartDashboard::PutNumber("RightMotor Value",  GetRight());    
-		}else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
+		} else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
 			StopLeft();
 			StopRight();
 		}
+
+		// I think this can just be an else in the above statment		
 		if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
 			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
 		}
 	}
+
+	// Put the variables on the board
 	SmartDashboard::PutBoolean("Can Drive?", canDrive);
 	SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
 	SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
