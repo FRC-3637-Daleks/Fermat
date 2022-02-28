@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define MAX_DEGREES 30 //Degrees
+#define PI_MAX_DEGREES 30 //Degrees
 
 class RaspberryPi{
     public:

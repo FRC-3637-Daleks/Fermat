@@ -2,6 +2,7 @@
 
 #include "Fermat.h"
 
+// Currently Not used but could be used (especially if motors dont work that well)
 #define COLOR_WHEEL_RADIUS				16.0
 #define SPINNER_WHEEL_RADIUS			2.0
 #define WHEEL_RATIO						((COLOR_WHEEL_RADIUS)/(SPINNER_WHEEL_RADIUS))
@@ -10,7 +11,7 @@
 
 class Shooter {
 	public:
-		Shooter(frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *Limelight);
+		Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *limelight);
 		void ShootHigh();
 		void ShootLow();
 		void TurnOnSolenoid();
@@ -30,4 +31,5 @@ class Shooter {
 		Solenoid *m_shooter_solenoid;
 		DigitalInput *m_shooterIR;
 		Limelight *m_limelight;
+		DalekDrive *m_drive;
 };
