@@ -204,6 +204,13 @@ DalekDrive::SetCanDrive(bool drive){
 	canDrive = drive;
 }
 
+/*
+  Left Joystick - Move left motors
+  Right Joystick - Move right motors
+  Left Joystick Trigger - Brake left
+  Right Joystick Trigger - Brake right
+  Thumb Button Right Joystick - Slow mode (30% slower)
+*/
 void
 DalekDrive::Tick(){
 	SetCanDrive(false);

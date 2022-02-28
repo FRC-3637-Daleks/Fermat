@@ -94,17 +94,27 @@ Shooter::ShootFromHangarWall(){
     m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
 }
 
+/*
+  X Button - Rev motor
+  Back Button - Toggle auto shoot
+  Right Bumper - Toggle shooter pneumatics
+  Right Joystick XBOX - Shooter speeds (4 speeds)
+    Up - 0.25
+    Left - 0.5
+    Down - 0.75
+    Right - 1
+*/
 void
 Shooter::Tick(){
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (m_xbox->GetAButton()){ // this or we make it Get ButtonPressed and a variable 
+            if (m_xbox->GetXButton()){ // this or we make it Get ButtonPressed and a variable 
                 ShootHigh();
             } else {
                 m_shooter_motor->Set(0);
             }
-            if (!m_xbox->GetBumper(frc::XboxController::kLeftHand)){
+            if (m_xbox->GetBumper(frc::XboxController::kRightHand)){
 
                 if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
                     TurnOnSolenoid();
@@ -124,7 +134,7 @@ Shooter::Tick(){
         ManualShooting();
     }
 
-    if(m_xbox->GetBButtonPressed()){
+    if(m_xbox->GetRawButtonPressed(6)){
         autoShoot = !autoShoot;
     }
 }

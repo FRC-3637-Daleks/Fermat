@@ -37,11 +37,11 @@ Intake::AutoIntake(bool toggle) {
     
 }
 
+//Tick function doin tick function things
 /*
-    Tick function doin tick function things
-    Left bumper hold = motor go brrrrrr
-    Left bumper not hold = motor not go brrrrrr
-    A button = pneumatics piston goes out and in (toggle)
+  Left Bumper - Activate intake motor
+  A Buttton - Activate intake pneumatics
+  Start Button - Activate auto intake
 */
 void
 Intake::Tick() {
@@ -54,7 +54,7 @@ Intake::Tick() {
 
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
     
-    if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
+    if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
         SuckBalls();
     }else if (false){
         UnSuckBalls();
@@ -62,9 +62,11 @@ Intake::Tick() {
         m_intake_motor->Set(0);
     }
 
-    if (m_xbox->GetYButtonPressed()) {
+    
+    if (m_xbox->GetRawButtonPressed(7)){
         autoIntake = !autoIntake;
     }
+    
 
     if (m_xbox->GetAButtonPressed()) {
         ToggleIntakePneumatics();
