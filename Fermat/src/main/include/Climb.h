@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define CLIMB_MOTOR_SPEED 0.1
+#define CLIMB_MOTOR_SPEED 0.2
 
 class Climb{
     public:

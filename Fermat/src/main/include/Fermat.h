@@ -65,9 +65,9 @@ enum DRIVER_STATION_IO {
 };
 
 enum SOLENOID_IDS {
-	INTAKE = 0,
+	SHOOTER = 0,
   	CLIMB = 1,
-  	SHOOTER = 2
+  	INTAKE = 2
 };
 
 enum DIO {

@@ -53,17 +53,24 @@ Intake::Tick() {
     // FALSE MEANS IT NEEDED A BUTTON
 
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
-    
-    if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
-        SuckBalls();
-    }else if (false){
-        UnSuckBalls();
-    }else{
-        m_intake_motor->Set(0);
+    if (autoIntake){
+        if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
+            AutoIntake(true);
+        } else {
+            AutoIntake(false);
+        }
+    } else {
+        if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
+            SuckBalls();
+        }else if (false){
+            UnSuckBalls();
+        }else{
+            m_intake_motor->Set(0);
+        }
     }
 
     
-    if (m_xbox->GetRawButtonPressed(7)){
+    if (m_xbox->GetStartButtonPressed()){
         autoIntake = !autoIntake;
     }
     

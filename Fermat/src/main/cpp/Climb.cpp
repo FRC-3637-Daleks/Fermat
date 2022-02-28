@@ -33,7 +33,7 @@ Climb::AutoClimb(){
 
 // Moving arm Tested but not solenoid (should easily work)
 /*
-    Left Stick - Climb Motor(Up and Down)
+    Left Stick - Climb Motor(Up and Down)   
     L3 - Climb Pneumatics(Toggle)
     Y - Auto Climb(Toggle)
 */
@@ -48,10 +48,11 @@ Climb::Tick(){
     }else {
         if(m_upperLimit->Get() || m_lowerLimit->Get()){
             if(m_xbox->GetRawAxis(1)>0.5){
-                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            }
-            if(m_xbox->GetRawAxis(1)<-0.5){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            } else if(m_xbox->GetRawAxis(1)<-0.5){
+                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            }else{
+                m_climb_motor->Set(0);
             }
         }
         if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){
