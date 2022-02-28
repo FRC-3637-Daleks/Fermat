@@ -32,6 +32,11 @@ Climb::AutoClimb(){
 }
 
 // Moving arm Tested but not solenoid (should easily work)
+/*
+    Left Stick - Climb Motor(Up and Down)
+    L3 - Climb Pneumatics(Toggle)
+    Y - Auto Climb(Toggle)
+*/
 void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
@@ -49,7 +54,7 @@ Climb::Tick(){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
             }
         }
-        if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){ //(needs to be GetButtonPressed or else the solenoid would constantly toggle while b is pressed)
+        if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){
             m_climb_solenoid->Toggle();
         }
     }

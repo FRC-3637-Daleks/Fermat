@@ -54,7 +54,7 @@ Intake::Tick() {
 
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
     
-    if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
+    if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
         SuckBalls();
     }else if (false){
         UnSuckBalls();
