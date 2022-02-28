@@ -88,17 +88,45 @@ void Robot::TeleopPeriodic()
     The buttons doc
     https://docs.google.com/document/d/14A8HDa7gtJTFGJS2YYfce4O7fD7D9ZBCQrjSBS9ddE8/edit
     
-    Tick funtions can now switch from manual to automatic
   */
 
+  /*
+  
+  
+  
+  */
   m_pi->Tick();
+  
+  /*
+  
+  
+  
+  */
+  
   m_intake->Tick();
+  
+  /*
+  
+  
+  
+  */
+
   m_climb->Tick();
 
-  //Uses the joysticks
+  /*
+  
+  
+  
+  */
+
   m_drive->Tick();
 
-  // Uses A and Y buttons
+  /*
+  
+  
+  
+  */
+ 
   m_shooter->Tick();
 }
 
