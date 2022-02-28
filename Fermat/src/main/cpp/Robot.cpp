@@ -92,7 +92,11 @@ void Robot::TeleopPeriodic()
   */
 
   m_pi->Tick();
+
+  //Uses left bumper for motor and a button for intake
   m_intake->Tick();
+
+  //Uses Y button to toggle auto climb and left joystick on xbox for motor
   m_climb->Tick();
 
   //Uses the joysticks
