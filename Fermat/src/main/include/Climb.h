@@ -15,5 +15,4 @@ class Climb{
         WPI_TalonFX *m_climb_motor;
         frc::DigitalInput *m_upperLimit;
         frc::DigitalInput *m_lowerLimit;
-        bool isAuto = false;
 };

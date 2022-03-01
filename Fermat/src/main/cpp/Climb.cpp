@@ -49,12 +49,9 @@ Climb::AutoClimb(){
 void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
-    if(m_xbox->GetYButtonPressed()){
-        isAuto = !isAuto;
-    }
-    if(isAuto){
+    if(m_xbox->GetYButton()){
         AutoClimb();
-    }else {
+    } else {
         if(m_upperLimit->Get() || m_lowerLimit->Get()){
             if(m_xbox->GetRawAxis(1)>0.5){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
