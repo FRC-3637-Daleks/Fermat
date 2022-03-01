@@ -20,7 +20,7 @@ void Robot::RobotInit()
     m_climb               = new Climb(m_climb_solenoid, m_xbox);
     m_intake              = new Intake(m_intake_solenoid, m_xbox);
     m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
-    // m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
+    m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
     
     //What is this used for (Someone tell me)
     m_leftFront           = new WPI_TalonFX(0);
