@@ -23,7 +23,7 @@ Climb::AutoClimb(){
         //Move arm up
         if(climbCase%STAGES==1){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            if (m_upperLimit->Get()){
+            if (!(m_upperLimit->Get())){
                 climbCase++;
             }
         }
@@ -31,7 +31,7 @@ Climb::AutoClimb(){
         //Move arm down
         if(climbCase%STAGES==2){
             m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            if (m_lowerLimit->Get()){
+            if (!(m_lowerLimit->Get())){
                 climbCase++;
             }
         }
@@ -39,7 +39,7 @@ Climb::AutoClimb(){
         //Move arm up
         if(climbCase%STAGES==3){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            if (m_upperLimit->Get()){
+            if (!(m_upperLimit->Get())){
                 climbCase++;
             }
         }
@@ -76,9 +76,9 @@ Climb::Tick(){
         // if(!(m_upperLimit->Get()) && !(m_lowerLimit->Get())){
             
         // } else {
-            if (m_upperLimit->Get()){
+            if (!(m_upperLimit->Get())){
                 m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            } else if (m_lowerLimit->Get()){
+            } else if (!(m_lowerLimit->Get())){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
             } else {
                 if(m_xbox->GetRawAxis(1)>0.5){

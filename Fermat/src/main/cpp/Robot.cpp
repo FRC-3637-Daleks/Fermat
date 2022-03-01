@@ -78,7 +78,7 @@ void Robot::TeleopPeriodic()
     Left Bumper - Activate Intake Motor (Will do auto intake if on)
     Right Bumper - Toggle Shooter Pneumatics
     Right Joystick XBOX - Shooter Speeds (4 speeds)
-      Up - 0.25     TOO SLOW 
+      Up - 0.25     T
       Left - 0.5
       Down - 0.75
       Right - 1
@@ -86,7 +86,7 @@ void Robot::TeleopPeriodic()
 
   m_pi->Tick();
   m_intake->Tick();
-  m_climb->Tick();
+  // m_climb->Tick();
   m_drive->Tick(); 
   m_shooter->Tick();
 }
