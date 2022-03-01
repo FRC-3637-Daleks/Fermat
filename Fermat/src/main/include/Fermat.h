@@ -32,7 +32,7 @@
 #include <Climb.h>
 #include <Shooter.h>
 #include <Intake.h>
-#include "Autonomous.h"
+#include <Auton.h>
 
 // Mostly for documentation of the ip addresses of the 
 // devices on the robot
@@ -104,5 +104,5 @@ class Robot : public TimedRobot {
 		Intake *m_intake;
 		Shooter *m_shooter;
 		WPI_TalonFX *m_leftFront;
-		// Auton *m_auton;
+		Auton *m_auton;
 };
