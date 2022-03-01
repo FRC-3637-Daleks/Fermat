@@ -13,27 +13,43 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 // Untested (Would be nice to have a limit switch for side arm but we probably wont get it)
 void
 Climb::AutoClimb(){
-    for(int i = 0; i < 4; i++){
+    if (climbCase<=STAGES*BARS){
         //Move the side arm out
         m_climb_solenoid->Set(true);
         Wait(2);
+
         //Move arm up
-        while(!(m_upperLimit->Get())){
+        if(climbCase%STAGES==1){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            if (m_upperLimit->Get()){
+                climbCase++;
+            }
         }
+
         //Move arm down
-        while(!(m_lowerLimit->Get())){
+        if(climbCase%STAGES==2){
             m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            if (m_lowerLimit->Get()){
+                climbCase++;
+            }
         }
+
         //Move arm up
-        while(!(m_upperLimit->Get())){
+        if(climbCase%STAGES==3){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            if (m_upperLimit->Get()){
+                climbCase++;
+            }
         }
-        //Stop the motor
-        while (abs(m_climb_motor->Get())>.1){
+        //Stop the motor (STAGES%STAGES = 0)
+        if (climbCase%STAGES==0){
             m_climb_motor->Set(m_climb_motor->Get()*-.9);
+            if (abs(m_climb_motor->Get())<.1){
+                climbCase++;
+                m_climb_motor->Set(0);
+            }
         }
-        m_climb_motor->Set(0);
+
         //Move the side arm in
         m_climb_solenoid->Set(false);
         Wait(2);
@@ -52,6 +68,7 @@ Climb::Tick(){
     if(m_xbox->GetYButton()){
         AutoClimb();
     } else {
+        climbCase = 0; // So Auto Climb Resets
         if(m_upperLimit->Get() || m_lowerLimit->Get()){
             if(m_xbox->GetRawAxis(1)>0.5){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);

@@ -25,9 +25,8 @@ using namespace frc;
 class Auton {
 	public:
 		Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter);
-		void AutonPerform(double period);	
-		void AutonCase(int begin, int end); // this must be called before AutonDrive()
-		void AutonDrive(double period);
+		void Tick();	
+		// void AutonCase(int begin, int end); // this must be called before AutonDrive()
 
 	private:
 		DalekDrive *m_drive;

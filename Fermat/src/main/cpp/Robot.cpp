@@ -56,25 +56,7 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic() 
 {
-  if(phase == 0) {
-    m_leftFront->SetSelectedSensorPosition(0);
-    phase++;
-  }
-  if(phase == 1) {
-    if(true){
-      //m_drive->DriveToFeet(m_limelight->CalcDistance(m_limelight->area))
-      phase++;
-    }
-  }
-  if (phase == 2) {
-    if (m_drive->Turn(90.0)) {
-      phase++;
-    }
-  } if (phase == 3) {
-    m_drive->StopLeft();
-    m_drive->StopRight();
-  }
-  SmartDashboard::PutNumber("phase", phase);
+  m_auton->Tick();
 }
 
 void Robot::TeleopInit()
@@ -85,18 +67,18 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
   /*
-    Start Button - Activate auto intake 
+    Start Button - Toggle auto intake 
     Back Button - Toggle auto shoot  
-    A Buttton - Activate intake pneumatics
+    A Buttton - Toggle intake pneumatics (Will do auto intake if on)
     B Button - Swerve turn (follow ball) 
     X Button - Rev motor
-    Y - Auto Climb(Toggle)
-    L3 - Climb Pneumatics(Toggle)
+    Y - Auto Climb (Hold)
+    L3 - Climb Pneumatics (Toggle)
     Left Stick - Climb Motor(Up and Down)
-    Left Bumper - Activate intake motor
-    Right Bumper - Toggle shooter pneumatics
-    Right Joystick XBOX - Shooter speeds (4 speeds)
-      Up - 0.25
+    Left Bumper - Activate Intake Motor (Will do auto intake if on)
+    Right Bumper - Toggle Shooter Pneumatics
+    Right Joystick XBOX - Shooter Speeds (4 speeds)
+      Up - 0.25     TOO SLOW 
       Left - 0.5
       Down - 0.75
       Right - 1
