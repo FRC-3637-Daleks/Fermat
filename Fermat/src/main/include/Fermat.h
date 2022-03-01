@@ -104,4 +104,5 @@ class Robot : public TimedRobot {
 		Intake *m_intake;
 		Shooter *m_shooter;
 		WPI_TalonFX *m_leftFront;
+		// Auton *m_auton;
 };

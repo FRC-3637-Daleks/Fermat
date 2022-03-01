@@ -9,13 +9,13 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
 //Starts the motor
 bool
 Intake::SuckBalls() {
-    m_intake_motor->Set(INTAKE_MOTOR_SPEED);  
+    m_intake_motor->Set(-INTAKE_MOTOR_SPEED);  
 }
 
 //Reverses the motor
 bool
 Intake::UnSuckBalls() {
-    m_intake_motor->Set(-INTAKE_MOTOR_SPEED);
+    m_intake_motor->Set(INTAKE_MOTOR_SPEED);
 }
 
 //Toggles the solenoid for the intake pneumatics

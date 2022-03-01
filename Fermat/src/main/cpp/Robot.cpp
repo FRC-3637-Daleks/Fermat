@@ -20,6 +20,7 @@ void Robot::RobotInit()
     m_climb               = new Climb(m_climb_solenoid, m_xbox);
     m_intake              = new Intake(m_intake_solenoid, m_xbox);
     m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
+    // m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
     
     //What is this used for (Someone tell me)
     m_leftFront           = new WPI_TalonFX(0);
@@ -84,7 +85,21 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
   /*
-  
+    Start Button - Activate auto intake 
+    Back Button - Toggle auto shoot  
+    A Buttton - Activate intake pneumatics
+    B Button - Swerve turn (follow ball) 
+    X Button - Rev motor
+    Y - Auto Climb(Toggle)
+    L3 - Climb Pneumatics(Toggle)
+    Left Stick - Climb Motor(Up and Down)
+    Left Bumper - Activate intake motor
+    Right Bumper - Toggle shooter pneumatics
+    Right Joystick XBOX - Shooter speeds (4 speeds)
+      Up - 0.25
+      Left - 0.5
+      Down - 0.75
+      Right - 1
   */
 
   m_pi->Tick();
