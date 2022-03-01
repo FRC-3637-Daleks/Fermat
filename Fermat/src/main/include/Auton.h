@@ -6,16 +6,11 @@
 // literally every single #define is a guess, so test one at a time
 #define START_DIST		        // dist from line to tip of triangle
 #define LINE_TO_WALL			//Fill in
-#define startDistanceFromWall   //Fill in
-#define pixelOffsetCoefficient	//Fill in
-#define angleOffsetCoefficient	//Fill in
-#define distanceCoefficient		//Fill in
-#define turningErrorThreshold	//Fill in
-#define distanceErrorThreshold	//Fill in
+#define START_DIST_FROM_WALL   	//Fill in
 #define pTurn					// this number depends on the speed of the robot (weight and handicap)
 #define iTurn					0 // probably unnecessary and won't be used
 #define dTurn					0 // probably unnecessary and won't be used
-#define maxTurnSpeed			0.5
+#define MAX_TURN_SPEED			0.5
 
 using namespace std;
 using namespace frc;
