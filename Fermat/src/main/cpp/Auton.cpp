@@ -34,7 +34,8 @@ Auton::Tick() {
             	auton_phase++;
             }
     		break;
-    	case 3: //Get ready to shoot the other collected bawlz 
+    	case 3:
+			break; //Get ready to shoot the other collected bawlz 
     }
 }
 

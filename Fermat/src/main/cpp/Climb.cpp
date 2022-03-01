@@ -8,6 +8,8 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_lowerLimit = new DigitalInput(LOWER_IR);
 
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
+    frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
+    frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
 }
 
 // Untested (Would be nice to have a limit switch for side arm but we probably wont get it)
@@ -64,27 +66,32 @@ Climb::AutoClimb(){
 */
 void
 Climb::Tick(){
+    frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
+    frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
     frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     if(m_xbox->GetYButton()){
         AutoClimb();
     } else {
         climbCase = 0; // So Auto Climb Resets
-        if(m_upperLimit->Get() || m_lowerLimit->Get()){
-            if(m_xbox->GetRawAxis(1)>0.5){
-                m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            } else if(m_xbox->GetRawAxis(1)<-0.5){
-                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            } else{
-                m_climb_motor->Set(m_climb_motor->Get()*-.9);
-            }
-        } else {
+        // if(!(m_upperLimit->Get()) && !(m_lowerLimit->Get())){
+            
+        // } else {
             if (m_upperLimit->Get()){
                 m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            } else {
+            } else if (m_lowerLimit->Get()){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            } else {
+                if(m_xbox->GetRawAxis(1)>0.5){
+                m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+                } else if(m_xbox->GetRawAxis(1)<-0.5){
+                    m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+                } else{
+                    m_climb_motor->Set(m_climb_motor->Get()*-.9);
+                    // m_climb_motor->Set(0.0);
+                }
             }
             
-        }
+        // }
 
         if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){
             m_climb_solenoid->Toggle();
