@@ -14,18 +14,27 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
 void
 Climb::AutoClimb(){
     for(int i = 0; i < 4; i++){
+        //Move the side arm out
         m_climb_solenoid->Set(true);
         Wait(2);
+        //Move arm up
         while(!(m_upperLimit->Get())){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
         }
+        //Move arm down
         while(!(m_lowerLimit->Get())){
             m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
         }
+        //Move arm up
         while(!(m_upperLimit->Get())){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
         }
+        //Stop the motor
+        while (abs(m_climb_motor->Get())>.1){
+            m_climb_motor->Set(m_climb_motor->Get()*-.9);
+        }
         m_climb_motor->Set(0);
+        //Move the side arm in
         m_climb_solenoid->Set(false);
         Wait(2);
     }
