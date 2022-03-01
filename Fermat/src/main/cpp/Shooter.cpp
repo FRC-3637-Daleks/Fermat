@@ -15,18 +15,13 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
 void
 Shooter::ShootHigh(){
     //Warm up the motor
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
-    while (abs(m_limelight->GetAngle())>2){
-        if (m_limelight->GetAngle()>0){
-            m_drive->TankDrive( -1.0 * MAX_SPEED , 1.0 * MAX_SPEED , false , true);
-        } else {  // m_limelight->GetAngle() < 0
-            m_drive->TankDrive( 1.0 * MAX_SPEED , -1.0 * MAX_SPEED , false , true);
-        }
-        
+    m_shooter_motor-> Set(-1.0 * FromMetersPerSecond(m_limelight->CalcVelocity(2)));
+    if (abs(m_limelight->GetAngle())>2){
+        m_drive->Turn(m_limelight->GetAngle());
+    } else {
+        TurnOnSolenoid();
     }
-    //adjust motor to right speed
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
-    TurnOnSolenoid();
+    
 }
 
 void

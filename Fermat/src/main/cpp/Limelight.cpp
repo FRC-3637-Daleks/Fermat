@@ -21,8 +21,7 @@ double Limelight::CalcVelocity(double points) // (m/s)
 {
 	double area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
 	double xDistance = CalcDistance(DIST_EXPONENT*pow(area, DIST_EXPONENT)*0.0254);
-	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
-	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
+	return CalcVelocity(points, xDistance);
 }
 
 double Limelight::CalcTurnAngle(double xPos){
