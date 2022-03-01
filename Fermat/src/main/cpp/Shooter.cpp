@@ -134,7 +134,7 @@ Shooter::Tick(){
         ManualShooting();
     }
 
-    if(m_xbox->GetRawButtonPressed(6)){
+    if(m_xbox->GetBackButtonPressed()){
         autoShoot = !autoShoot;
     }
 }
