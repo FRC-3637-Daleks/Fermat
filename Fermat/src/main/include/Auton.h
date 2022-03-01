@@ -7,7 +7,6 @@
 #define START_DIST		        // dist from line to tip of triangle
 #define LINE_TO_WALL			//Fill in
 #define START_DIST_FROM_WALL   	//Fill in
-#define pTurn					// this number depends on the speed of the robot (weight and handicap)
 #define iTurn					0 // probably unnecessary and won't be used
 #define dTurn					0 // probably unnecessary and won't be used
 #define MAX_TURN_SPEED			0.5
@@ -21,7 +20,6 @@ class Auton {
 	public:
 		Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter);
 		void Tick();	
-		// void AutonCase(int begin, int end); // this must be called before AutonDrive()
 
 	private:
 		DalekDrive *m_drive;
