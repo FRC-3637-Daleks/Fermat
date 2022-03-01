@@ -60,15 +60,18 @@ void
 Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
-    
+    SmartDashboard::PutNumber("SPPPPPPPEEEEED",FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
+    SmartDashboard::PutNumber("SPPPPPPPEEEEED1",m_limelight->CalcVelocity(2,2.15));
+    SmartDashboard::PutNumber("SPPPPPPPEEEEED2",FromMetersPerSecond(m_limelight->CalcVelocity(2,4.0)));
+    SmartDashboard::PutNumber("SPPPPPPPEEEEED3",FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     if (m_xbox->GetRawAxis(5) > 0.5){
-        m_shooter_motor-> Set(-0.25);
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
     } else if (m_xbox->GetRawAxis(4) > 0.5){
-        m_shooter_motor-> Set(-0.5);
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15)));
     } else if (m_xbox->GetRawAxis(5)< -0.5){
-        m_shooter_motor-> Set(-0.75);
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4.0)));
     } else if (m_xbox->GetRawAxis(4) < -0.5){
-        m_shooter_motor-> Set(-1.0);
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     } else {
         m_shooter_motor->Set(0);
     }
@@ -104,7 +107,7 @@ Shooter::Tick(){
     frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (m_xbox->GetXButton()){ // this or we make it Get ButtonPressed and a variable 
+            if (m_xbox->GetXButton()){ 
                 ShootHigh();
             } else {
                 m_shooter_motor->Set(0);
@@ -113,6 +116,7 @@ Shooter::Tick(){
 
                 if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
                     TurnOnSolenoid();
+                    Wait(2.0);
                 }
                 // // If we want to be able to shoot low
                 // else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
@@ -121,8 +125,6 @@ Shooter::Tick(){
                 else {
                     TurnOffSolenoid();
                 }
-            }else{ 
-                TurnOnSolenoid();
             }
         }
     } else {
