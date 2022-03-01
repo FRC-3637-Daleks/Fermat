@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define CLIMB_MOTOR_SPEED 0.2
+#define CLIMB_MOTOR_SPEED 0.4
 
 class Climb{
     public:
@@ -16,5 +16,4 @@ class Climb{
         frc::DigitalInput *m_upperLimit;
         frc::DigitalInput *m_lowerLimit;
         bool isAuto = false;
-        int phase = 0;
 };
