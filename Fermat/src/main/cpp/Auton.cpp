@@ -18,24 +18,26 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 void
 Auton::Tick() {
     switch(auton_phase) {
-      case 0: //Turn limelight on ;)
-          if(nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 1) != 3) {
-            m_limelight -> LightOn();
-          }
-          auton_phase++;
-    break;
-      case 1: //Align Launcher and Shoot Ball 
-           m_shooter -> ShootHigh(); //Wow the programmers are so smart and ingenuitive and hot ;) 🤤
-           auton_phase++;
-    break;
-      case 2: //Find more bawl(z)
-            if(m_pi->SwerveTurn(SmartDashboard::GetNumber("Degrees", 0), SmartDashboard::GetNumber("Distance", 0))) {
+    	case 0: //Turn limelight on ;)
+        	//	if(nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 1) != 3) {
+        	//		m_limelight -> LightOn();
+          	//	}
+			m_limelight -> LightOn();
+          	auton_phase++;
+   			break;
+    	case 1: //Align Launcher and Shoot Ball 
+        	m_shooter -> ShootHigh(); //Wow the programmers are so smart and ingenuitive and hot ;) 🤤
+        	auton_phase++;
+    		break;
+    	case 2: //Find more bawl(z)
+            if(m_pi->SwerveTurn()) {
             	auton_phase++;
             }
-    break;
-      case 3: //Get ready to shoot the other collected bawlz 
+    		break;
+    	case 3: //Get ready to shoot the other collected bawlz 
     }
 }
+
 // void
 // Auton::AutonCase(int begin, int end)
 // {
