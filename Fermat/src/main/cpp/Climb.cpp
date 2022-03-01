@@ -15,7 +15,7 @@ void
 Climb::AutoClimb(){
     for(int i = 0; i < 4; i++){
         m_climb_solenoid->Set(true);
-        Wait(0.1);
+        Wait(2);
         while(!(m_upperLimit->Get())){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
         }
@@ -27,7 +27,7 @@ Climb::AutoClimb(){
         }
         m_climb_motor->Set(0);
         m_climb_solenoid->Set(false);
-        Wait(0.1);
+        Wait(2);
     }
 }
 
@@ -51,10 +51,18 @@ Climb::Tick(){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
             } else if(m_xbox->GetRawAxis(1)<-0.5){
                 m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            }else{
-                m_climb_motor->Set(0);
+            } else{
+                m_climb_motor->Set(m_climb_motor->Get()*-.9);
             }
+        } else {
+            if (m_upperLimit->Get()){
+                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            } else {
+                m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            }
+            
         }
+
         if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){
             m_climb_solenoid->Toggle();
         }
