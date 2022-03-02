@@ -20,14 +20,15 @@ class Limelight {
         void Tick();
 		void LightOff();
 		void LightOn();
-        double CalcDistance(double area);
+        double CalcDistance();
         double CalcVelocity(double points, double xDistance);
         double CalcVelocity(double points);
         double CalcShootAngle(double velocty);
         double CalcTurnAngle(double xPos);
         double GetAngle();
+        double GetDistance();
 
     private:
         DalekDrive *m_drive;
-        double area, distance, low_velocity, high_velocity, angle = 0;
+        double area, distance, low_velocity, high_velocity, angle;
 };
