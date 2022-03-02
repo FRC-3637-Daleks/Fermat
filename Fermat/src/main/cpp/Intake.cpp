@@ -62,7 +62,7 @@ Intake::Tick() {
         // to test next
         
         
-        if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)||m_xbox->GetAButton()){
+        if (m_xbox->GetAButton()){
             AutoIntake(true);
         } else {
             AutoIntake(false);

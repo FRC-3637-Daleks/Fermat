@@ -61,13 +61,13 @@ Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
     if (m_xbox->GetRawAxis(5) > 0.5){
-        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
-    } else if (m_xbox->GetRawAxis(4) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15)));
+    } else if (m_xbox->GetRawAxis(4) > 0.5){
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4)));
     } else if (m_xbox->GetRawAxis(5)< -0.5){
-        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4.0)));
-    } else if (m_xbox->GetRawAxis(4) < -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
+    } else if (m_xbox->GetRawAxis(4) < -0.5){
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
     } else {
         m_shooter_motor->Set(0);
     }
