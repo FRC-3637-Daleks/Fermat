@@ -60,10 +60,6 @@ void
 Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED",FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED1",m_limelight->CalcVelocity(2,2.15));
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED2",FromMetersPerSecond(m_limelight->CalcVelocity(2,4.0)));
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED3",FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     if (m_xbox->GetRawAxis(5) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
     } else if (m_xbox->GetRawAxis(4) > 0.5){
