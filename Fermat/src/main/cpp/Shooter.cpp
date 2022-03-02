@@ -11,7 +11,7 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
 }
 
 void
-Shooter::ShootHigh(){
+Shooter::SetHigh(){
     //Warm up the motor
     m_shooter_motor-> Set(-1.0 * FromMetersPerSecond(m_limelight->CalcVelocity(2)));
     if (abs(m_limelight->GetAngle())>2){
@@ -24,15 +24,21 @@ Shooter::ShootHigh(){
 }
 
 void
-Shooter::ShootLow(){
+Shooter::SetLow(){
     m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1)));
 }
 
 void
-Shooter::ShootMiss(){
+Shooter::SetMiss(){
     m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
 }
 
+void
+Shooter::Shoot(){
+    TurnOnSolenoid();
+    Wait(0.5);
+    TurnOffSolenoid();
+}
 
 
 void
@@ -42,7 +48,7 @@ Shooter::TurnOnSolenoid(){
 
 void
 Shooter::TurnOffSolenoid(){
-    m_shooter_solenoid->Set(true);
+    m_shooter_solenoid->Set(false);
 }
 
 double 
@@ -59,11 +65,11 @@ void
 Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
-    if (m_xbox->GetRawAxis(2) > 0.5){
+    if (m_xbox->GetRawAxis(0) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15)));
     } else if (m_xbox->GetRawAxis(1) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4)));
-    } else if (m_xbox->GetRawAxis(2)< -0.5){
+    } else if (m_xbox->GetRawAxis(0)< -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     } else if (m_xbox->GetRawAxis(1) < -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
@@ -71,15 +77,12 @@ Shooter::ManualShooting(){
         m_shooter_motor->Set(0);
     }
 
-    if (m_xbox->GetBumper(frc::GenericHID::kRightHand)){
-        TurnOnSolenoid();
-    } else {
-        TurnOffSolenoid();
+    if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)){
+        Shoot();
     }
 }
 
 /*
-  X Button - Rev motor
   Back Button - Toggle auto shoot
   Right Bumper - Toggle shooter pneumatics
   Right Joystick XBOX - Shooter speeds (4 speeds)
@@ -98,8 +101,8 @@ Shooter::Tick(){
     // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (abs(m_xbox->GetRawAxis(2))+abs(m_xbox->GetRawAxis(1))>0.5){ 
-                ShootHigh();
+            if (abs(m_xbox->GetRawAxis(0))+abs(m_xbox->GetRawAxis(1))>0.5){ 
+                SetHigh();
             } else {
                 m_shooter_motor->Set(0);
             }

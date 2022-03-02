@@ -12,9 +12,10 @@
 class Shooter {
 	public:
 		Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *limelight);
-		void ShootHigh();
-		void ShootLow();
-		void ShootMiss();
+		void SetHigh();
+		void SetLow();
+		void SetMiss();
+		void Shoot();
 		void TurnOnSolenoid();
 		void TurnOffSolenoid();
 		double FromMetersPerSecond(double speed);

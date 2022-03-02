@@ -40,6 +40,7 @@ class DalekDrive {
 		bool DriveToFeet(double feet);
 		bool Turn(double degrees);
 		void Tick();
+		bool GetCanDrive();
 		
 	
 	private:

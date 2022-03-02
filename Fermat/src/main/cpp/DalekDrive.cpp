@@ -204,6 +204,11 @@ DalekDrive::SetCanDrive(bool drive){
 	canDrive = drive;
 }
 
+bool 
+DalekDrive::GetCanDrive(){
+	return canDrive;
+}
+
 /*
   Left Joystick - Move left motors
   Right Joystick - Move right motors

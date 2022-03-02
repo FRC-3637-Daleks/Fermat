@@ -25,8 +25,11 @@ Auton::Tick() {
           	auton_phase++;
    			break;
     	case 1: //Align Launcher and Shoot Ball 
-        	m_shooter -> ShootHigh(); //Wow the programmers are so smart and ingenuitive and hot ;) 🤤
-        	auton_phase++;
+        	m_shooter -> SetHigh();
+			if (m_drive->GetCanDrive()){ //Wow the programmers are so smart and ingenuitive and hot ;) 🤤
+        		m_shooter -> Shoot();
+			}
+			auton_phase++;
     		break;
     	case 2: //Find more bawl(z)
             if(m_pi->SwerveTurn()) {
