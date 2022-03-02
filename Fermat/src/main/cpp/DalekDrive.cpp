@@ -8,7 +8,7 @@ DalekDrive::DalekDrive(XboxController *xbox) {
 	m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
 	m_xbox = xbox;
-	canDrive = false;
+	canDrive = true;
 }
 
 double
@@ -218,8 +218,6 @@ DalekDrive::GetCanDrive(){
 */
 void
 DalekDrive::Tick(){
-
-	SetCanDrive(false);
 	if(canDrive) {
 
 		//Check to see if slowmo is active
