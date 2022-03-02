@@ -65,10 +65,10 @@ bool
 DalekDrive::DriveToFeet(double feet)
 {
 	double dis = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
-	SmartDashboard::PutNumber("Distance", dis);
+	// SmartDashboard::PutNumber("DriveToFeet Dist", dis);
 
 	double speed = ((MAX_SPEED*10*feet-dis)/feet)*MAX_SPEED;
-	SmartDashboard::PutNumber("Speed", speed);
+	// SmartDashboard::PutNumber("DriveToFeet Speed", speed);
 
 	if(feet>0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= feet){
 		TankDrive(-1.0*speed, -1.0*speed, false, false);
@@ -117,12 +117,12 @@ DalekDrive::Turn(double degrees){
 	double radAngle = degrees * (PI / 180);
 	double totalDistance = (13.5/12) * radAngle;
 	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
-	SmartDashboard::PutNumber("Total Distance", totalDistance);
+	// SmartDashboard::PutNumber("Turn TotalDist", totalDistance);
 	
 	//double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
 	
 	double speed = ((MAX_SPEED*10*abs(totalDistance)-abs(distanceTraveled))/abs(totalDistance))*MAX_SPEED;
-	SmartDashboard::PutNumber("Speed", speed);
+	// SmartDashboard::PutNumber("Turn Speed", speed);
 	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance&&speed>.31){
 		TankDrive(-1.0*speed, speed, false, false);
 		return false;
@@ -213,9 +213,9 @@ DalekDrive::SetCanDrive(bool drive){
 */
 void
 DalekDrive::Tick(){
-	SetCanDrive(false);
+
+	// SetCanDrive(false);
 	if(canDrive) {
-		//drives robot based on JoySticks
 
 		//Check to see if slowmo is active
 		if(m_rightStick->GetRawButton(2)){
@@ -244,9 +244,11 @@ DalekDrive::Tick(){
 		}
 	}
 
+	
+	// SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
+	// SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
+	
 	// Put the variables on the board
-	SmartDashboard::PutBoolean("Can Drive?", canDrive);
-	SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
-	SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
-	SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));
+	SmartDashboard::PutBoolean("Drive Active", canDrive);
+	SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));	
 }

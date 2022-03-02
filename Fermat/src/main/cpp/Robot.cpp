@@ -32,7 +32,6 @@ void Robot::RobotInit()
     err_string += e.what();
     DriverStation::ReportError(err_string.c_str());
   }
-  frc::SmartDashboard::PutBoolean("start button pressed", false);
   
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);

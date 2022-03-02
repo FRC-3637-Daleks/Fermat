@@ -46,7 +46,9 @@ Intake::AutoIntake(bool toggle) {
 void
 Intake::Tick() {
 
-    frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
+    // frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
+    
+    SmartDashboard::PutBoolean("Auto Intake", autoIntake);
 
     if (m_xbox->GetStartButtonPressed()){
         autoIntake = !autoIntake;
