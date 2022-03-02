@@ -59,13 +59,13 @@ void
 Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
-    if (m_xbox->GetRawAxis(5) > 0.5){
+    if (m_xbox->GetRawAxis(2) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15)));
-    } else if (m_xbox->GetRawAxis(4) > 0.5){
+    } else if (m_xbox->GetRawAxis(1) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4)));
-    } else if (m_xbox->GetRawAxis(5)< -0.5){
+    } else if (m_xbox->GetRawAxis(2)< -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
-    } else if (m_xbox->GetRawAxis(4) < -0.5){
+    } else if (m_xbox->GetRawAxis(1) < -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
     } else {
         m_shooter_motor->Set(0);
@@ -90,6 +90,11 @@ Shooter::ManualShooting(){
 */
 void
 Shooter::Tick(){
+
+    if(m_xbox->GetBackButtonPressed()){
+        autoShoot = !autoShoot;
+    }
+
     // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
@@ -102,7 +107,7 @@ Shooter::Tick(){
 
                 if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
                     TurnOnSolenoid();
-                    Wait(2.0);
+                    Wait(0.5);
                 }
                 // // If we want to be able to shoot low
                 // else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
@@ -115,9 +120,5 @@ Shooter::Tick(){
         }
     } else {
         ManualShooting();
-    }
-
-    if(m_xbox->GetBackButtonPressed()){
-        autoShoot = !autoShoot;
     }
 }

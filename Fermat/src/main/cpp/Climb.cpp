@@ -70,6 +70,7 @@ Climb::Tick(){
     if(m_xbox->GetYButton()){
         AutoClimb();
     } else {
+        
         climbCase = 0; // So Auto Climb Resets
 
         if (CLIMB_SENSOR_TESING == 0){
@@ -79,15 +80,13 @@ Climb::Tick(){
             } else if (!(m_lowerLimit->Get())){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
                 m_climb_solenoid->Set(true);
-            } 
-            else {
-                if(m_xbox->GetRawAxis(1)>0.5){
+            } else {
+                if(m_xbox->GetRawAxis(4)>0.5){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-                } else if(m_xbox->GetRawAxis(1)<-0.5){
+                } else if(m_xbox->GetRawAxis(4)<-0.5){
                     m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
                 } else{
                     m_climb_motor->Set(m_climb_motor->Get()*-.9);
-                    //m_climb_motor->Set(0.0);
                 }
             }
         }
