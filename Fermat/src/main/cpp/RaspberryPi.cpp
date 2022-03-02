@@ -27,8 +27,8 @@ bool RaspberryPi::SwerveTurn(double degrees, double distance) {
 }
 bool RaspberryPi::SwerveTurn() {
     // Use network tables to get data
-    double degrees = 0;
-    double distance = 0; 
+    double degrees = SmartDashboard::GetNumber("Degrees", 0);
+    double distance = SmartDashboard::GetNumber("Distance", 0); 
     return SwerveTurn(degrees, distance);
 }
 
@@ -39,7 +39,7 @@ void
 RaspberryPi::Tick(){
     // Use SmartDashboard tables to get data
     double degrees = SmartDashboard::GetNumber("Angle", 0.0); 
-    SmartDashboard::PutNumber("Degrees",degrees-PI_MAX_DEGREES); //Don't know if we need to subtract MAX_DEGREES
+    // SmartDashboard::PutNumber("Ball Degrees",degrees-PI_MAX_DEGREES); //Don't know if we need to subtract MAX_DEGREES
     if (m_xbox->GetBButton()){
         SwerveTurn();
     }

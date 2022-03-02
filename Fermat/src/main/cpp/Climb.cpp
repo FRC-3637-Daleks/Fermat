@@ -6,28 +6,52 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
     m_upperLimit = new DigitalInput(UPPER_IR);
     m_lowerLimit = new DigitalInput(LOWER_IR);
-
-    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
+    climbCase=0;
 }
 
 // Untested (Would be nice to have a limit switch for side arm but we probably wont get it)
 void
 Climb::AutoClimb(){
-    for(int i = 0; i < 4; i++){
+    if (climbCase<=STAGES*BARS){
+        //Move the side arm out
         m_climb_solenoid->Set(true);
-        Wait(0.1);
-        while(!(m_upperLimit->Get())){
+        Wait(2);
+
+        //Move arm up
+        if(climbCase%STAGES==1){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            if (!(m_upperLimit->Get())){
+                climbCase++;
+            }
         }
-        while(!(m_lowerLimit->Get())){
+
+        //Move arm down
+        if(climbCase%STAGES==2){
             m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            if (!(m_lowerLimit->Get())){
+                climbCase++;
+            }
         }
-        while(!(m_upperLimit->Get())){
+
+        //Move arm up
+        if(climbCase%STAGES==3){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            if (!(m_upperLimit->Get())){
+                climbCase++;
+            }
         }
-        m_climb_motor->Set(0);
+        //Stop the motor (STAGES%STAGES = 0)
+        if (climbCase%STAGES==0){
+            m_climb_motor->Set(m_climb_motor->Get()*-.9);
+            if (abs(m_climb_motor->Get())<.1){
+                climbCase++;
+                m_climb_motor->Set(0);
+            }
+        }
+
+        //Move the side arm in
         m_climb_solenoid->Set(false);
-        Wait(0.1);
+        Wait(2);
     }
 }
 
@@ -39,26 +63,36 @@ Climb::AutoClimb(){
 */
 void
 Climb::Tick(){
-    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
-    if(m_xbox->GetYButtonPressed()){
-        isAuto = !isAuto;
-    }
-    if(isAuto){
+    frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
+    frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
+    // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
+    
+    if(m_xbox->GetYButton()){
         AutoClimb();
-    }else {
-        if(m_upperLimit->Get() || m_lowerLimit->Get()){
-            if(m_xbox->GetRawAxis(1)>0.5){
+    } else {
+        
+        climbCase = 0; // So Auto Climb Resets
+
+        if (CLIMB_SENSOR_TESING == 0){
+            if (!(m_upperLimit->Get())){
                 m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            } else if(m_xbox->GetRawAxis(1)<-0.5){
+
+            } else if (!(m_lowerLimit->Get())){
                 m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            }else{
-                m_climb_motor->Set(0);
+                m_climb_solenoid->Set(true);
+            } else {
+                if(m_xbox->GetRawAxis(5)>0.5){
+                m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+                } else if(m_xbox->GetRawAxis(5)<-0.5){
+                    m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+                } else{
+                    m_climb_motor->Set(m_climb_motor->Get()*-.9);
+                }
             }
         }
-        if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){
+
+        if(m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
             m_climb_solenoid->Toggle();
         }
-    }
-   
-    
+    } 
 }

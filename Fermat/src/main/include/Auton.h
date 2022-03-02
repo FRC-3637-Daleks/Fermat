@@ -6,16 +6,10 @@
 // literally every single #define is a guess, so test one at a time
 #define START_DIST		        // dist from line to tip of triangle
 #define LINE_TO_WALL			//Fill in
-#define startDistanceFromWall   //Fill in
-#define pixelOffsetCoefficient	//Fill in
-#define angleOffsetCoefficient	//Fill in
-#define distanceCoefficient		//Fill in
-#define turningErrorThreshold	//Fill in
-#define distanceErrorThreshold	//Fill in
-#define pTurn					// this number depends on the speed of the robot (weight and handicap)
+#define START_DIST_FROM_WALL   	//Fill in
 #define iTurn					0 // probably unnecessary and won't be used
 #define dTurn					0 // probably unnecessary and won't be used
-#define maxTurnSpeed			0.5
+#define MAX_TURN_SPEED			0.5
 
 using namespace std;
 using namespace frc;
@@ -25,9 +19,7 @@ using namespace frc;
 class Auton {
 	public:
 		Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter);
-		void AutonPerform(double period);	
-		void AutonCase(int begin, int end); // this must be called before AutonDrive()
-		void AutonDrive(double period);
+		void Tick();	
 
 	private:
 		DalekDrive *m_drive;

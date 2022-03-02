@@ -5,7 +5,7 @@ Limelight::Limelight(DalekDrive *drive) {
     m_drive = drive;
 }
 
-double Limelight::CalcDistance(double area) // (m)
+double Limelight::CalcDistance() // (m)
 {
   return (DIST_EXPONENT*pow(area, DIST_EXPONENT))*0.0254;
 }
@@ -13,16 +13,12 @@ double Limelight::CalcDistance(double area) // (m)
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
 {
 	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
-	SmartDashboard::PutNumber("Shoot Velocity",sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) ));
-	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
+	return sqrt( (-4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
 }
 
 double Limelight::CalcVelocity(double points) // (m/s)
 {
-	double area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
-	double xDistance = CalcDistance(DIST_EXPONENT*pow(area, DIST_EXPONENT)*0.0254);
-	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
-	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
+	return CalcVelocity(points, CalcDistance());
 }
 
 double Limelight::CalcTurnAngle(double xPos){
@@ -32,6 +28,10 @@ double Limelight::CalcTurnAngle(double xPos){
 
 double Limelight::GetAngle(){
 	return angle;
+}
+
+double Limelight::GetDistance(){
+	return distance;
 }
 
 void Limelight::LightOff() {
@@ -47,15 +47,15 @@ void Limelight::Tick() {
 	//Set Limelight area (ta) to a variable
 	area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
 
-	//ANGLE NEEDS TO BE ACCOUNTED FOR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (degrees please)
-	angle = 0; // it would be something like this: nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
-
 	// set a variable distance using a linear regression of ax+b using tvert on desmos
-	distance = CalcDistance(area);
+	distance = CalcDistance();
+
+	//angle?
+	angle = asin (nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0)/distance)*180/PI; 
 
 	//display the hypothetical velocity for the wheel
-	low_velocity = CalcVelocity(1, distance);
-	high_velocity = CalcVelocity(2, distance);
+	// low_velocity = CalcVelocity(1);
+	high_velocity = CalcVelocity(2);
 
 	//Put the X-Distance the robot is from the target on the dashboard 
 	SmartDashboard::PutNumber("Horizontal Distance from the Target", distance);
@@ -64,8 +64,13 @@ void Limelight::Tick() {
 	SmartDashboard::PutNumber("Flywheel Speed for Low Shot", low_velocity);
 	SmartDashboard::PutNumber("Flywheel Speed for High Shot", high_velocity);
 
-	//Display all the Limelight Varibles on the Smart Dashboard
-	SmartDashboard::PutNumber("ta", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0));
-	SmartDashboard::PutNumber("tx", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0));
-	SmartDashboard::PutNumber("ty", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0));
+	// // Display all the Limelight Varibles on the Smart Dashboard
+	// SmartDashboard::PutNumber("ta", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0));
+	// SmartDashboard::PutNumber("tx", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0));
+	// SmartDashboard::PutNumber("ty", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0));
+
+	// Display all Useful data on the Shuffleboard
+	SmartDashboard::PutNumber("Lime Dist", distance);
+	SmartDashboard::PutNumber("Lime Angle", angle);
+	SmartDashboard::PutNumber("Lime Shoot", high_velocity);
 }

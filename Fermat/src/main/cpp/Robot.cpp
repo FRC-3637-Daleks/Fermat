@@ -5,9 +5,11 @@ using namespace frc;
 
 void Robot::RobotInit() 
 {
-  //cs::AxisCamera camera = CameraServer::GetInstance()->AddAxisCamera(FORWARD_CAMERA);  // Initialize Camera
-  // camera.SetResolution(160, 90);    // Only use these two lines if needed
+  cs::AxisCamera camera = CameraServer::GetInstance()->AddAxisCamera(CAMERA);  // Initialize Camera
+  // // Only use these two lines if there is problems with the camera
+  // camera.SetResolution(160, 90);   
   // camera.SetFPS(15);
+
   try {
     m_xbox                = new frc::XboxController(XBOX);
     m_drive               = new DalekDrive(m_xbox);
@@ -21,8 +23,6 @@ void Robot::RobotInit()
     m_intake              = new Intake(m_intake_solenoid, m_xbox);
     m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
     m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
-    
-    //What is this used for (Someone tell me)
     m_leftFront           = new WPI_TalonFX(0);
   }
   catch (std::exception& e) {
@@ -30,7 +30,6 @@ void Robot::RobotInit()
     err_string += e.what();
     DriverStation::ReportError(err_string.c_str());
   }
-  frc::SmartDashboard::PutBoolean("start button pressed", false);
   
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);
@@ -50,31 +49,12 @@ void Robot::RobotPeriodic()
 // We want to be able to test in general
 void Robot::AutonomousInit()
 {
-  phase = 0;
-  m_limelight->LightOn();
+
 }
 
 void Robot::AutonomousPeriodic() 
 {
-  if(phase == 0) {
-    m_leftFront->SetSelectedSensorPosition(0);
-    phase++;
-  }
-  if(phase == 1) {
-    if(true){
-      //m_drive->DriveToFeet(m_limelight->CalcDistance(m_limelight->area))
-      phase++;
-    }
-  }
-  if (phase == 2) {
-    if (m_drive->Turn(90.0)) {
-      phase++;
-    }
-  } if (phase == 3) {
-    m_drive->StopLeft();
-    m_drive->StopRight();
-  }
-  SmartDashboard::PutNumber("phase", phase);
+  m_auton->Tick();
 }
 
 void Robot::TeleopInit()
@@ -85,21 +65,25 @@ void Robot::TeleopInit()
 void Robot::TeleopPeriodic()
 {
   /*
-    Start Button - Activate auto intake 
-    Back Button - Toggle auto shoot  
-    A Buttton - Activate intake pneumatics
-    B Button - Swerve turn (follow ball) 
-    X Button - Rev motor
-    Y - Auto Climb(Toggle)
-    L3 - Climb Pneumatics(Toggle)
-    Left Stick - Climb Motor(Up and Down)
-    Left Bumper - Activate intake motor
-    Right Bumper - Toggle shooter pneumatics
-    Right Joystick XBOX - Shooter speeds (4 speeds)
-      Up - 0.25
-      Left - 0.5
-      Down - 0.75
-      Right - 1
+
+    INTAKE:
+      Start Button - Toggle auto intake (no buttons needed after)
+      A Buttton - Activate intake (HOLD)
+      B Button - Swerve turn (follow ball) (HOLD)
+    
+    SHOOTER:
+      Back Button - Toggle auto shoot   
+      Right Bumper - Toggle Shooter Pneumatics (HOLD)
+      left Stick - Shooter Speeds (4 speeds)
+        Up - slowest (From start in auton)     
+        Left - slower (From tarmac)
+        Down - faster (Somewhere in the middle 4m)
+        Right - Fastest (From Safe Zome)
+
+    CLIMB:
+      Y - Auto Climb (Hold)
+      Left Bumper - Climb Pneumatics (Toggle)
+      Right Stick - Climb Motor(Up and Down)
   */
 
   m_pi->Tick();

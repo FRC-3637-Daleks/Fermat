@@ -38,43 +38,45 @@
 // devices on the robot
 #define ROBORIO         		"10.36.37.2"
 #define ACCESS_POINT     		"10.36.37.1"
-#define FORWARD_CAMERA			"10.36.37.16"
-#define REAR_CAMERA				"10.36.37.??"
+#define CAMERA					"10.36.37.16"
 #define RASPBERRY_PI_ADDR		"10.36.37.??"
 #define LIMELIGHT_ADDR			"10.36.37.11"
 #define LEVEL_SENSOR_ADDR		"10.36.37.??"
 #define PI						3.14159265358979323846264338327 //pi
+#define CLIMB_SENSOR_TESING		0 //1 for true 0 for false
 
 
 // CAN BUS devices
 enum CAN_IDS {
-	LEFT_FRONT_DRIVE = 0,
-	LEFT_REAR_DRIVE = 1, 
-	RIGHT_FRONT_DRIVE = 2, 
-	RIGHT_REAR_DRIVE = 3,
-	PCM = 4,
-	INTAKE_MOTOR = 5,
-  	SHOOTER_MOTOR = 6,
-  	CLIMB_MOTOR = 7
+	LEFT_FRONT_DRIVE,
+	LEFT_REAR_DRIVE, 
+	RIGHT_FRONT_DRIVE, 
+	RIGHT_REAR_DRIVE,
+	PCM,
+	INTAKE_MOTOR,
+  	SHOOTER_MOTOR,
+  	CLIMB_MOTOR
  };
 
 // Devices connected to driverstation
 enum DRIVER_STATION_IO {
-	XBOX = 0, 
-	LEFT_JOY = 1, 
-	RIGHT_JOY = 2
+	XBOX, 
+	LEFT_JOY, 
+	RIGHT_JOY
 };
 
 enum SOLENOID_IDS {
-	SHOOTER = 0,
-  	CLIMB = 1,
-  	INTAKE = 2
+	SHOOTER,
+  	CLIMB,
+  	INTAKE 
 };
 
 enum DIO {
-  UPPER_IR = 0, 
-  LOWER_IR = 1,
-  SHOOTER_IR = 2
+  UPPER_IR, 
+  EMPTY,
+  LOWER_IR,
+  NOTHING,
+  SHOOTER_IR
 };
 
 class Robot : public TimedRobot {
@@ -90,7 +92,6 @@ class Robot : public TimedRobot {
 		void DisabledInit() override;
 
 	private:
-		int phase = 0;
 		frc::XboxController *m_xbox;
 		frc::DigitalInput *m_cinput;
 		frc::Compressor *m_compressor;

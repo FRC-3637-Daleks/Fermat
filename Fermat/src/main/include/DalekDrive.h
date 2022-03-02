@@ -8,7 +8,7 @@
 #define STALL_LIMIT					60
 #define FREE_LIMIT					20
 #define RAMP_RATE					0.5
-#define MAX_SPEED					0.25 // Percent of Full Speed (1)
+#define MAX_SPEED					0.45 // Percent of Full Speed (1)
 #define SLOW_SPEED					0.3 // Percent of MAX_SPEED
 #define NUM_MOTORS_PER_SIDE			2
 #define LEFT						0
@@ -40,14 +40,15 @@ class DalekDrive {
 		bool DriveToFeet(double feet);
 		bool Turn(double degrees);
 		void Tick();
+		bool GetCanDrive();
 		
 	
 	private:
 		enum MotorCount {
-			leftFront = 0,
-			leftRear = 1,
-			rightFront = 2,
-			rightRear = 3
+			leftFront,
+			leftRear,
+			rightFront,
+			rightRear
 		};
 		bool canDrive = false, driveSlow = false;
 

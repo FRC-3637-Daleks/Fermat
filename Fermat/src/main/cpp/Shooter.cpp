@@ -8,37 +8,37 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
     m_drive = drive;
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
     m_shooterIR = new DigitalInput(SHOOTER_IR);
-
-    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
 }
 
 void
-Shooter::ShootHigh(){
+Shooter::SetHigh(){
     //Warm up the motor
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
-    while (abs(m_limelight->GetAngle())>2){
-        if (m_limelight->GetAngle()>0){
-            m_drive->TankDrive( -1.0 * MAX_SPEED , 1.0 * MAX_SPEED , false , true);
-        } else {  // m_limelight->GetAngle() < 0
-            m_drive->TankDrive( 1.0 * MAX_SPEED , -1.0 * MAX_SPEED , false , true);
-        }
-        
+    m_shooter_motor-> Set(-1.0 * FromMetersPerSecond(m_limelight->CalcVelocity(2)));
+    if (abs(m_limelight->GetAngle())>2){
+        m_drive->SetCanDrive(false);
+        m_drive->Turn(m_limelight->GetAngle());
+    } else {
+        m_drive->SetCanDrive(true);
     }
-    //adjust motor to right speed
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
-    TurnOnSolenoid();
+    
 }
 
 void
-Shooter::ShootLow(){
+Shooter::SetLow(){
     m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1)));
 }
 
 void
-Shooter::Shoot(){
-     m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
+Shooter::SetMiss(){
+    m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
 }
 
+void
+Shooter::Shoot(){
+    TurnOnSolenoid();
+    Wait(0.5);
+    TurnOffSolenoid();
+}
 
 
 void
@@ -48,7 +48,7 @@ Shooter::TurnOnSolenoid(){
 
 void
 Shooter::TurnOffSolenoid(){
-    m_shooter_solenoid->Set(true);
+    m_shooter_solenoid->Set(false);
 }
 
 double 
@@ -65,37 +65,24 @@ void
 Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
-    
-    if (m_xbox->GetRawAxis(5) > 0.5){
-        m_shooter_motor-> Set(-0.25);
-    } else if (m_xbox->GetRawAxis(4) > 0.5){
-        m_shooter_motor-> Set(-0.5);
-    } else if (m_xbox->GetRawAxis(5)< -0.5){
-        m_shooter_motor-> Set(-0.75);
-    } else if (m_xbox->GetRawAxis(4) < -0.5){
-        m_shooter_motor-> Set(-1.0);
+    if (m_xbox->GetRawAxis(0) > 0.5){
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15)));
+    } else if (m_xbox->GetRawAxis(1) > 0.5){
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4)));
+    } else if (m_xbox->GetRawAxis(0)< -0.5){
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
+    } else if (m_xbox->GetRawAxis(1) < -0.5){
+        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
     } else {
         m_shooter_motor->Set(0);
     }
 
     if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)){
-        m_shooter_solenoid->Toggle();
+        Shoot();
     }
 }
 
-void
-Shooter::ShootFromTarmac(){
-    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2.0, 84.6)));
-}
-
-// shoot from 180 inches
-void
-Shooter::ShootFromHangarWall(){ 
-    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
-}
-
 /*
-  X Button - Rev motor
   Back Button - Toggle auto shoot
   Right Bumper - Toggle shooter pneumatics
   Right Joystick XBOX - Shooter speeds (4 speeds)
@@ -106,11 +93,16 @@ Shooter::ShootFromHangarWall(){
 */
 void
 Shooter::Tick(){
-    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
+
+    if(m_xbox->GetBackButtonPressed()){
+        autoShoot = !autoShoot;
+    }
+
+    // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (m_xbox->GetXButton()){ // this or we make it Get ButtonPressed and a variable 
-                ShootHigh();
+            if (abs(m_xbox->GetRawAxis(0))+abs(m_xbox->GetRawAxis(1))>0.5){ 
+                SetHigh();
             } else {
                 m_shooter_motor->Set(0);
             }
@@ -118,6 +110,7 @@ Shooter::Tick(){
 
                 if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
                     TurnOnSolenoid();
+                    Wait(0.5);
                 }
                 // // If we want to be able to shoot low
                 // else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
@@ -126,15 +119,9 @@ Shooter::Tick(){
                 else {
                     TurnOffSolenoid();
                 }
-            }else{ 
-                TurnOnSolenoid();
             }
         }
     } else {
         ManualShooting();
-    }
-
-    if(m_xbox->GetRawButtonPressed(6)){
-        autoShoot = !autoShoot;
     }
 }
