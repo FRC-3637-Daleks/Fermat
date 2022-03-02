@@ -6,8 +6,10 @@ using namespace frc;
 void Robot::RobotInit() 
 {
   cs::AxisCamera camera = CameraServer::GetInstance()->AddAxisCamera(CAMERA);  // Initialize Camera
-  // camera.SetResolution(160, 90);    // Only use these two lines if needed
+  // // Only use these two lines if there is problems with the camera
+  // camera.SetResolution(160, 90);   
   // camera.SetFPS(15);
+
   try {
     m_xbox                = new frc::XboxController(XBOX);
     m_drive               = new DalekDrive(m_xbox);
@@ -30,7 +32,6 @@ void Robot::RobotInit()
     err_string += e.what();
     DriverStation::ReportError(err_string.c_str());
   }
-  frc::SmartDashboard::PutBoolean("start button pressed", false);
   
   m_compressor->Start();
   m_leftFront->SetSelectedSensorPosition(0);

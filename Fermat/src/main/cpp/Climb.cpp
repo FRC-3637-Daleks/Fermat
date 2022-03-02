@@ -6,10 +6,7 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
     m_upperLimit = new DigitalInput(UPPER_IR);
     m_lowerLimit = new DigitalInput(LOWER_IR);
-
-    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
-    frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
-    frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
+    climbCase=0;
 }
 
 // Untested (Would be nice to have a limit switch for side arm but we probably wont get it)
@@ -68,7 +65,8 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
-    frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
+    // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
+    
     if(m_xbox->GetYButton()){
         AutoClimb();
     } else {

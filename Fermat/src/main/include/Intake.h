@@ -20,4 +20,5 @@ class Intake{
         WPI_TalonSRX *m_intake_motor;
         frc::Solenoid *m_intake_solenoid;
         frc::XboxController *m_xbox;
+        Limelight *m_limelight;
 };

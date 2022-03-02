@@ -8,8 +8,6 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
     m_drive = drive;
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
     m_shooterIR = new DigitalInput(SHOOTER_IR);
-
-    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
 }
 
 void
@@ -17,8 +15,10 @@ Shooter::ShootHigh(){
     //Warm up the motor
     m_shooter_motor-> Set(-1.0 * FromMetersPerSecond(m_limelight->CalcVelocity(2)));
     if (abs(m_limelight->GetAngle())>2){
+        m_drive->SetCanDrive(false);
         m_drive->Turn(m_limelight->GetAngle());
     } else {
+        m_drive->SetCanDrive(true);
         TurnOnSolenoid();
     }
     
@@ -30,8 +30,8 @@ Shooter::ShootLow(){
 }
 
 void
-Shooter::Shoot(){
-     m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
+Shooter::ShootMiss(){
+    m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
 }
 
 
@@ -60,10 +60,6 @@ void
 Shooter::ManualShooting(){
 
     // This should use some pre determinded values not just random motor speeds ^^^
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED",FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED1",m_limelight->CalcVelocity(2,2.15));
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED2",FromMetersPerSecond(m_limelight->CalcVelocity(2,4.0)));
-    SmartDashboard::PutNumber("SPPPPPPPEEEEED3",FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     if (m_xbox->GetRawAxis(5) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15/2)));
     } else if (m_xbox->GetRawAxis(4) > 0.5){
@@ -81,17 +77,6 @@ Shooter::ManualShooting(){
     }
 }
 
-void
-Shooter::ShootFromTarmac(){
-    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2.0, 84.6)));
-}
-
-// shoot from 180 inches
-void
-Shooter::ShootFromHangarWall(){ 
-    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(1, 180)));
-}
-
 /*
   X Button - Rev motor
   Back Button - Toggle auto shoot
@@ -104,7 +89,7 @@ Shooter::ShootFromHangarWall(){
 */
 void
 Shooter::Tick(){
-    frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
+    // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
             if (m_xbox->GetXButton()){ 

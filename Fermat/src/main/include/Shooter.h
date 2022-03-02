@@ -14,15 +14,14 @@ class Shooter {
 		Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *shooter_solenoid, Limelight *limelight);
 		void ShootHigh();
 		void ShootLow();
+		void ShootMiss();
 		void TurnOnSolenoid();
 		void TurnOffSolenoid();
 		double FromMetersPerSecond(double speed);
 		void Tick();
 		void ManualShooting();
-		void ShootFromTarmac();
-		void ShootFromHangarWall();
 		void DisableLimelight();
-		void Shoot();
+
 
 	private:
 		bool autoShoot = true;

@@ -1,7 +1,6 @@
 #include "Fermat.h"
 
-Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter)
-{
+Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter) {
 	m_drive			= drive;
 	m_pi            = pi; 
 	m_intake		= intake;
@@ -34,46 +33,7 @@ Auton::Tick() {
             	auton_phase++;
             }
     		break;
-    	case 3:
-			break; //Get ready to shoot the other collected bawlz 
+    	case 3: //Get ready to shoot the other collected bawlz 
+			break;
     }
 }
-
-// void
-// Auton::AutonCase(int begin, int end)
-// {
-// 	switch (begin) {
-// 		case 1: //right sensor
-// 		    enter_target_x = -2; //need sensor
-// 		    break;
-// 		case 2: //straight on
-//             enter_target_x = 0;
-//             break;
-// 		case 3: //left sensor
-//             enter_target_x = 5; //need sensor
-//             break;
-// 	}
-
-// 	// enter_target_y = LINE_TO_WALL;
-	
-// 	switch (end) {
-// 		case 1: //Our trench
-// 			exit_target_x = 0 /*Our Trench x*/;
-// 			exit_target_y =  0/*Our Trench y*/;
-// 			break;
-// 		case 2: //Shield Generator
-// 			exit_target_x = 0 /*Shield Generator x*/;
-// 			exit_target_y =0 /*Shield Generator*/;
-// 			break;
-// 		case 3: //Enemy trench
-// 			exit_target_x = 0/*Enemy Trench x*/;
-// 			exit_target_y = 0/*Enemy Trench y*/;
-// 			break;
-// 	}
-
-// 	enter_target_ang = atan2(enter_target_y, enter_target_x);
-// 	exit_target_ang  = atan2(exit_target_y, exit_target_x);
-// 	enter_target_dist = sqrt(enter_target_x * enter_target_x + enter_target_y * enter_target_y);
-// 	exit_target_dist = sqrt(exit_target_x * exit_target_x + exit_target_y * exit_target_y);
-// 	//here set up what happens at the end (after delivery)
-// }
