@@ -91,7 +91,6 @@ class Robot : public TimedRobot {
 		void DisabledInit() override;
 
 	private:
-		int phase = 0;
 		frc::XboxController *m_xbox;
 		frc::DigitalInput *m_cinput;
 		frc::Compressor *m_compressor;

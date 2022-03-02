@@ -23,8 +23,6 @@ void Robot::RobotInit()
     m_intake              = new Intake(m_intake_solenoid, m_xbox);
     m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
     m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
-    
-    //What is this used for (Someone tell me)
     m_leftFront           = new WPI_TalonFX(0);
   }
   catch (std::exception& e) {
@@ -51,8 +49,7 @@ void Robot::RobotPeriodic()
 // We want to be able to test in general
 void Robot::AutonomousInit()
 {
-  phase = 0;
-  m_limelight->LightOn();
+
 }
 
 void Robot::AutonomousPeriodic() 
