@@ -214,7 +214,7 @@ DalekDrive::SetCanDrive(bool drive){
 void
 DalekDrive::Tick(){
 
-	// SetCanDrive(false);
+	SetCanDrive(false);
 	if(canDrive) {
 
 		//Check to see if slowmo is active

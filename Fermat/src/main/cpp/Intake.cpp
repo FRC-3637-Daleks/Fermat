@@ -9,13 +9,13 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
 //Starts the motor
 bool
 Intake::SuckBalls() {
-    m_intake_motor->Set(-INTAKE_MOTOR_SPEED);  
+    m_intake_motor->Set(INTAKE_MOTOR_SPEED);  
 }
 
 //Reverses the motor
 bool
 Intake::UnSuckBalls() {
-    m_intake_motor->Set(INTAKE_MOTOR_SPEED);
+    m_intake_motor->Set(-INTAKE_MOTOR_SPEED);
 }
 
 //Toggles the solenoid for the intake pneumatics
@@ -61,13 +61,15 @@ Intake::Tick() {
     } else {
         // to test next
         
-        if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)||m_xbox->GetAButtonPressed()){
+        
+        if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)||m_xbox->GetAButton()){
             AutoIntake(true);
         } else {
             AutoIntake(false);
         }
+        
 
-        // if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
+        // if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
         //     SuckBalls();
         // }else if (false){
         //     UnSuckBalls();
