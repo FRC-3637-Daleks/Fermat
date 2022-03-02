@@ -70,6 +70,12 @@ Shooter::ManualShooting(){
     } else {
         m_shooter_motor->Set(0);
     }
+
+    if (m_xbox->GetBumper(frc::GenericHID::kRightHand)){
+        TurnOnSolenoid();
+    } else {
+        TurnOffSolenoid();
+    }
 }
 
 /*
@@ -109,12 +115,6 @@ Shooter::Tick(){
         }
     } else {
         ManualShooting();
-    }
-    
-    if (m_xbox->GetBumper(frc::GenericHID::kRightHand)){
-        TurnOnSolenoid();
-    } else {
-        TurnOffSolenoid();
     }
 
     if(m_xbox->GetBackButtonPressed()){
