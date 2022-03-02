@@ -87,7 +87,7 @@ Climb::Tick(){
                     m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
                 } else{
                     m_climb_motor->Set(m_climb_motor->Get()*-.9);
-                    // m_climb_motor->Set(0.0);
+                    //m_climb_motor->Set(0.0);
                 }
             }
             
