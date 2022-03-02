@@ -98,7 +98,7 @@ Shooter::Tick(){
     // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (autoShoot) {
         if(m_shooterIR->Get()){
-            if (m_xbox->GetXButton()){ 
+            if (abs(m_xbox->GetRawAxis(2))+abs(m_xbox->GetRawAxis(1))>0.5){ 
                 ShootHigh();
             } else {
                 m_shooter_motor->Set(0);

@@ -73,7 +73,6 @@ void Robot::TeleopPeriodic()
     
     SHOOTER:
       Back Button - Toggle auto shoot   
-      X Button - shoot
       Right Bumper - Toggle Shooter Pneumatics
       Right Joystick XBOX - Shooter Speeds (4 speeds)
         Up - slowest (From start in auton)     
