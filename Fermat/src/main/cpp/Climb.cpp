@@ -91,10 +91,8 @@ Climb::Tick(){
             
         // }
 
-        if(m_xbox->GetStickButtonPressed(frc::GenericHID::kLeftHand)){
+        if(m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
             m_climb_solenoid->Toggle();
         }
-    }
-   
-    
+    } 
 }
