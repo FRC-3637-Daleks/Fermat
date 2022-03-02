@@ -45,42 +45,37 @@ Intake::AutoIntake(bool toggle) {
 */
 void
 Intake::Tick() {
-    //SmartDashboard::PutBoolean("Y Button", m_xbox->GetYButton());
-    //SmartDashboard::PutBoolean("A Button", m_xbox->GetAButton());
-    //SmartDashboard::PutBoolean("B Button", m_xbox->GetBButton());
-    //SmartDashboard::PutBoolean("X Button", m_xbox->GetXButton());
-
-    // FALSE MEANS IT NEEDED A BUTTON
 
     frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
+
+    if (m_xbox->GetStartButtonPressed()){
+        autoIntake = !autoIntake;
+    }
+
     if (autoIntake){
-        if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
+        if((SmartDashboard::GetNumber("Distance", -1) <= 24)&&autoIntake) {
+            AutoIntake(true);
+        }
+    } else {
+        // to test next
+        
+        if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)||m_xbox->GetAButtonPressed()){
             AutoIntake(true);
         } else {
             AutoIntake(false);
         }
-    } else {
-        if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
-            SuckBalls();
-        }else if (false){
-            UnSuckBalls();
-        }else{
-            m_intake_motor->Set(0);
-        }
-    }
 
-    
-    if (m_xbox->GetStartButtonPressed()){
-        autoIntake = !autoIntake;
-    }
-    
+        // if (m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
+        //     SuckBalls();
+        // }else if (false){
+        //     UnSuckBalls();
+        // }else{
+        //     m_intake_motor->Set(0);
+        // }
 
-    if (m_xbox->GetAButtonPressed()) {
-        ToggleIntakePneumatics();
-    }
-    
-    if((SmartDashboard::GetNumber("Distance", -1) <= 24)&&autoIntake) {
-        AutoIntake(true);
+        // if (m_xbox->GetAButtonPressed()) {
+        //     ToggleIntakePneumatics();
+        // }
     }
     
 }
