@@ -14,7 +14,7 @@ double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
 {
 	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
 	SmartDashboard::PutNumber("Shoot Velocity",sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) ));
-	return sqrt( (4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
+	return sqrt( (-4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
 }
 
 double Limelight::CalcVelocity(double points) // (m/s)
