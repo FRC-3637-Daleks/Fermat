@@ -71,9 +71,8 @@ Climb::Tick(){
         AutoClimb();
     } else {
         climbCase = 0; // So Auto Climb Resets
-        // if(!(m_upperLimit->Get()) && !(m_lowerLimit->Get())){
-            
-        // } else {
+        
+        if (false){
             if (!(m_upperLimit->Get())){
                 m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
             } else if (!(m_lowerLimit->Get())){
@@ -88,8 +87,7 @@ Climb::Tick(){
                     //m_climb_motor->Set(0.0);
                 }
             }
-            
-        // }
+        }
 
         if(m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand)){
             m_climb_solenoid->Toggle();
