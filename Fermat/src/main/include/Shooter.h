@@ -23,7 +23,8 @@ class Shooter {
 		void Tick();
 		void ManualShooting();
 		void DisableLimelight();
-
+		void SetSpeed(double dist);
+		double GetSpeed();
 
 	private:
 		bool autoShoot = true;

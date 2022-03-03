@@ -14,29 +14,67 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	p_temp = 0; i_temp = 0; d_temp = 0;
 }
 
+			// if (LIMELIGHT_GOOD==1){
+				
+			// } else{
+
+			// }
+			// if (PI_GOOD == 1){
+
+			// } else {
+
+			// }
+
 void
 Auton::Tick() {
     switch(auton_phase) {
     	case 0: //Turn limelight on ;)
-        	//	if(nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 1) != 3) {
-        	//		m_limelight -> LightOn();
-          	//	}
-			m_limelight -> LightOn();
+        	if (LIMELIGHT_GOOD==1){
+				m_limelight -> LightOn();	
+			}
           	auton_phase++;
    			break;
     	case 1: //Align Launcher and Shoot Ball 
-        	m_shooter -> SetHigh();
-			if (m_drive->GetCanDrive()){ //Wow the programmers are so smart and ingenuitive and hot ;) 🤤
-        		m_shooter -> Shoot();
+        	if (LIMELIGHT_GOOD==1){
+				m_shooter -> SetHigh();
+				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2)){
+        			m_shooter -> Shoot();
+					auton_phase++;
+				}	
+			} else{
+				m_shooter -> SetSpeed(10.0);
+				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2, 10.0)){
+        			m_shooter -> Shoot();
+					auton_phase++;
+				}
 			}
-			auton_phase++;
     		break;
     	case 2: //Find more bawl(z)
-            if(m_pi->SwerveTurn()) {
-            	auton_phase++;
-            }
+            if (PI_GOOD == 1){
+				if(m_pi->SwerveTurn()) {
+            		auton_phase++;
+            	}
+			} else {
+				if (m_drive->DriveToFeet(10)){
+					auton_phase++;
+				}
+			}
     		break;
     	case 3: //Get ready to shoot the other collected bawlz 
 			break;
+			if (LIMELIGHT_GOOD==1){
+				m_shooter -> SetHigh();
+				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2)){
+        			m_shooter -> Shoot();
+					auton_phase++;
+				}	
+			} else{
+				m_shooter -> SetSpeed(10.0);
+				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2, 10.0)){
+        			m_shooter -> Shoot();
+					auton_phase++;
+				}
+			}
+    		break;
     }
 }

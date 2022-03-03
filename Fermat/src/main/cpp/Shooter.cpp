@@ -33,6 +33,15 @@ Shooter::SetMiss(){
     m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
 }
 
+void 
+Shooter::SetSpeed(double dist){ // inputs in (m)
+    m_shooter_motor->Set(m_limelight->CalcVelocity(2, dist));
+}
+
+double
+Shooter::GetSpeed(){
+    return m_shooter_motor -> Get();
+}
 void
 Shooter::Shoot(){
     TurnOnSolenoid();
