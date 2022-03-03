@@ -30,7 +30,7 @@ Shooter::SetLow(){
 
 void
 Shooter::SetMiss(){
-    m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
+    m_shooter_motor-> Set(-0.6); //lowest it can go to output the ball (can't go out of ring)
 }
 
 void 
@@ -119,13 +119,14 @@ Shooter::Tick(){
     }
 
     // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
-    if (m_xbox->GetXButton()){
-        SetMiss();
-    }
+    
 
     if (autoShoot) {
         AutomaticShooting();
     } else {
         ManualShooting();
+    }
+    if (m_xbox->GetXButton()){
+        SetMiss();
     }
 }
