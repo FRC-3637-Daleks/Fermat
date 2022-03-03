@@ -58,7 +58,7 @@ Shooter::FromMetersPerSecond(double speed){
     // 0.1595929068023614965139022838706 circumferance
     // 1 speed point
     // 14.177169887609779606984986211852 meters per seconds per 1 speed point
-    return -1.0*(speed/14.177169887609779606984986211852+SHOOT_MOTOR_BOOST);
+    return speed/14.177169887609779606984986211852+SHOOT_MOTOR_BOOST;
 }
 
 void
