@@ -9,6 +9,7 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	auton_phase		= 0;
 }
 
+// // Some Auton C+V
 // if (LIMELIGHT_GOOD==1){
 	
 // } else{
@@ -28,7 +29,7 @@ Auton::Tick() {
 				m_limelight -> LightOn();	
 			}
           	auton_phase++;
-   			break;
+		break;
     	case 1: //Align Launcher and Shoot Ball 
         	if (LIMELIGHT_GOOD==1){
 				m_shooter -> SetHigh();
@@ -45,7 +46,7 @@ Auton::Tick() {
 					auton_phase++;
 				}
 			}
-    		break;
+		break;
     	case 2: //Find more bawl(z)
             if (PI_GOOD == 1){
 				if(m_pi->SwerveTurn()) {
@@ -58,9 +59,8 @@ Auton::Tick() {
 					auton_phase++;
 				}
 			}
-    		break;
+		break;
     	case 3: //Get ready to shoot the other collected bawlz 
-			break;
 			if (LIMELIGHT_GOOD==1){
 				m_shooter -> SetHigh();
 				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2)){
@@ -74,6 +74,6 @@ Auton::Tick() {
 					auton_phase++;
 				}
 			}
-    		break;
+		break;
     }
 }
