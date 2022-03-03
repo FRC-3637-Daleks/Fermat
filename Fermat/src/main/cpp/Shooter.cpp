@@ -7,7 +7,7 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
     m_limelight = limelight;
     m_drive = drive;
     m_shooter_motor = new WPI_TalonSRX(SHOOTER_MOTOR);
-    m_shooterIR = new DigitalInput(SHOOTER_IR);
+    //m_shooterIR = new DigitalInput(SHOOTER_IR);
 }
 
 void
@@ -113,6 +113,8 @@ Shooter::AutomaticShooting(){
 */
 void
 Shooter::Tick(){
+
+    SmartDashboard::PutBoolean("Auto Shoot", autoShoot);
 
     if(m_xbox->GetBackButtonPressed()){
         autoShoot = !autoShoot;
