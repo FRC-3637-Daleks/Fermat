@@ -28,9 +28,26 @@ Auton::Tick() {
         	if (LIMELIGHT_GOOD==1){
 				m_limelight -> LightOn();	
 			}
-          	auton_phase++;
+			if (m_drive->DriveToFeet(7)){
+				auton_phase++;
+			}
 		break;
-    	case 1: //Align Launcher and Shoot Ball 
+		
+		case 1: //Find more bawl(z)
+            if (PI_GOOD == 1){
+				if(m_pi->SwerveTurn()) {
+            		m_intake -> AutoIntake(false);
+					auton_phase++;
+            	}
+			} else {
+				if (m_drive->DriveToFeet(10)){
+					m_intake -> AutoIntake(false);
+					auton_phase++;
+				}
+			}
+		break;
+
+    	case 2: //Align Launcher and Shoot Ball 
         	if (LIMELIGHT_GOOD==1){
 				m_shooter -> SetHigh();
 				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2)){
@@ -47,19 +64,7 @@ Auton::Tick() {
 				}
 			}
 		break;
-    	case 2: //Find more bawl(z)
-            if (PI_GOOD == 1){
-				if(m_pi->SwerveTurn()) {
-            		m_intake -> AutoIntake(false);
-					auton_phase++;
-            	}
-			} else {
-				if (m_drive->DriveToFeet(10)){
-					m_intake -> AutoIntake(false);
-					auton_phase++;
-				}
-			}
-		break;
+    	
     	case 3: //Get ready to shoot the other collected bawlz 
 			if (LIMELIGHT_GOOD==1){
 				m_shooter -> SetHigh();

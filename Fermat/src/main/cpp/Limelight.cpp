@@ -7,7 +7,7 @@ Limelight::Limelight(DalekDrive *drive) {
 
 double Limelight::CalcDistance() // (m)
 {
-  return (DIST_EXPONENT*pow(area, DIST_EXPONENT))*0.0254;
+  return (DIST_EXPONENT*pow(area, DIST_EXPONENT));
 }
 
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s)

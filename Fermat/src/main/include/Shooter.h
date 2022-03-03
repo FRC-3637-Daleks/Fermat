@@ -4,7 +4,7 @@
 
 // Currently Not used but could be used (especially if motors dont work that well)
 #define COLOR_WHEEL_RADIUS				16.0
-#define SHOOT_MOTOR_BOOST				0.2 // Add to shooter speed
+#define SHOOT_MOTOR_BOOST				0.0 // Add to shooter speed
 #define SPINNER_WHEEL_RADIUS			2.0
 #define WHEEL_RATIO						((COLOR_WHEEL_RADIUS)/(SPINNER_WHEEL_RADIUS))
 #define ENCODER_TICKS_PER_REV			4096
@@ -22,6 +22,7 @@ class Shooter {
 		double FromMetersPerSecond(double speed);
 		void Tick();
 		void ManualShooting();
+		void AutomaticShooting();
 		void DisableLimelight();
 		void SetSpeed(double dist);
 		double GetSpeed();

@@ -72,7 +72,6 @@ Shooter::FromMetersPerSecond(double speed){
 
 void
 Shooter::ManualShooting(){
-
     // This should use some pre determinded values not just random motor speeds ^^^
     if (m_xbox->GetRawAxis(0) > 0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,2.15)));
@@ -82,13 +81,23 @@ Shooter::ManualShooting(){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     } else if (m_xbox->GetRawAxis(1) < -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
-    } else if (m_xbox->GetXButton()){
-        SetMiss();
     } else {
         m_shooter_motor->Set(0);
     }
 
     if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)){
+        Shoot();
+    }
+}
+
+void
+Shooter::AutomaticShooting(){
+    if (abs(m_xbox->GetRawAxis(0))+abs(m_xbox->GetRawAxis(1))>0.5){ 
+        SetHigh();
+    } else {
+        m_shooter_motor->Set(0);
+    }
+    if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
         Shoot();
     }
 }
@@ -110,28 +119,12 @@ Shooter::Tick(){
     }
 
     // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
-    if (autoShoot) {
-        if(m_shooterIR->Get()){
-            if (abs(m_xbox->GetRawAxis(0))+abs(m_xbox->GetRawAxis(1))>0.5){ 
-                SetHigh();
-            } else {
-                m_shooter_motor->Set(0);
-            }
-            if (m_xbox->GetBumper(frc::XboxController::kRightHand)){
+    if (m_xbox->GetXButton()){
+        SetMiss();
+    }
 
-                if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
-                    TurnOnSolenoid();
-                    Wait(0.5);
-                }
-                // // If we want to be able to shoot low
-                // else if(abs(m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(1))<=.02){
-                //     TurnOnSolenoid();
-                // } 
-                else {
-                    TurnOffSolenoid();
-                }
-            }
-        }
+    if (autoShoot) {
+        AutomaticShooting();
     } else {
         ManualShooting();
     }
