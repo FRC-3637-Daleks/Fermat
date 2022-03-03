@@ -74,6 +74,7 @@ void Robot::TeleopPeriodic()
     SHOOTER:
       Back Button - Toggle auto shoot   
       Right Bumper - Toggle Shooter Pneumatics (HOLD)
+      X Button - Miss
       left Stick - Shooter Speeds (4 speeds)
         Up - slowest (From start in auton)     
         Left - slower (From tarmac)

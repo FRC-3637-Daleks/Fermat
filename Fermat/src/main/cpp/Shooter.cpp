@@ -73,6 +73,8 @@ Shooter::ManualShooting(){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
     } else if (m_xbox->GetRawAxis(1) < -0.5){
         m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
+    } else if (m_xbox->GetXButton()){
+        SetMiss();
     } else {
         m_shooter_motor->Set(0);
     }
