@@ -14,11 +14,13 @@ void
 Climb::AutoClimb(){
     if (climbCase<=STAGES*BARS){
         //Move the side arm out
-        m_climb_solenoid->Set(true);
-        Wait(2);
+        if (climbCase%STAGES==1){
+            m_climb_solenoid->Set(true);
+            Wait(2);
+        }
 
         //Move arm up
-        if(climbCase%STAGES==1){
+        if(climbCase%STAGES==2){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
             if (!(m_upperLimit->Get())){
                 climbCase++;
@@ -26,7 +28,7 @@ Climb::AutoClimb(){
         }
 
         //Move arm down
-        if(climbCase%STAGES==2){
+        if(climbCase%STAGES==3){
             m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
             if (!(m_lowerLimit->Get())){
                 climbCase++;
@@ -34,14 +36,14 @@ Climb::AutoClimb(){
         }
 
         //Move arm up
-        if(climbCase%STAGES==3){
+        if(climbCase%STAGES==4){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
             if (!(m_upperLimit->Get())){
                 climbCase++;
             }
         }
         //Stop the motor (STAGES%STAGES = 0)
-        if (climbCase%STAGES==0){
+        if (climbCase%STAGES==5){
             m_climb_motor->Set(m_climb_motor->Get()*-.9);
             if (abs(m_climb_motor->Get())<.1){
                 climbCase++;
@@ -50,8 +52,11 @@ Climb::AutoClimb(){
         }
 
         //Move the side arm in
-        m_climb_solenoid->Set(false);
-        Wait(2);
+        if (climbCase%STAGES==0){
+            m_climb_solenoid->Set(false);
+            Wait(2);
+        }
+        
     }
 }
 

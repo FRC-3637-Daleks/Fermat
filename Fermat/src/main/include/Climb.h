@@ -3,8 +3,8 @@
 #include "Fermat.h"
 
 #define CLIMB_MOTOR_SPEED 0.35
-#define BARS 4
-#define STAGES 4
+#define BARS 3
+#define STAGES 6
 
 
 class Climb{
