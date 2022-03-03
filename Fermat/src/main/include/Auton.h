@@ -29,15 +29,5 @@ class Auton {
 		Intake *m_intake;
 		Limelight *m_limelight;
 		Shooter *m_shooter;
-
-		double p_temp, i_temp, d_temp, target_x, target_y, target_ang;
-		// eventually will need delivery mechanism
-
 		int auton_phase;
-		double exit_target_x, exit_target_y, exit_target_ang, exit_target_dist, enter_target_x, enter_target_y, enter_target_ang, enter_target_dist, travelled_dist;
-		bool pickupBallEnd, pickupBallStart;
-
-		bool driveToCoordinates(double x, double y, double angle, double period);
-		bool turnToFace(double angle);
-		double angleOffset(double angle);
 };
