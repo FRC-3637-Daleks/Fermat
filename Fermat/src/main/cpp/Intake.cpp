@@ -29,7 +29,7 @@ bool
 Intake::AutoIntake(bool toggle) {
     if(toggle) {
         m_intake_solenoid->Set(true);
-        m_intake_motor->Set(INTAKE_MOTOR_SPEED);
+        SuckBalls();
     } else {
         m_intake_solenoid->Set(false);
         m_intake_motor->Set(0);
@@ -61,13 +61,11 @@ Intake::Tick() {
     } else {
         // to test next
         
-        
         if (m_xbox->GetAButton()){
             AutoIntake(true);
         } else {
             AutoIntake(false);
         }
-        
 
         // if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
         //     SuckBalls();
