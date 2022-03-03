@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define CLIMB_MOTOR_SPEED 0.25
+#define CLIMB_MOTOR_SPEED 0.3
 #define BARS 4
 #define STAGES 4
 
