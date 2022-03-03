@@ -79,6 +79,9 @@ DalekDrive::DriveToFeet(double feet)
 	}else {
 		return true;
 	}
+	SmartDashboard::PutNumber("Encoder", m_left[FRONT]->GetSelectedSensorPosition());//6300
+  	SmartDashboard::PutNumber("Encoder Foot", m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET);//6300
+
 }
 
 //Stop only the left 

@@ -23,7 +23,6 @@ void Robot::RobotInit()
     m_intake              = new Intake(m_intake_solenoid, m_xbox);
     m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
     m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
-    m_leftFront           = new WPI_TalonFX(0);
   }
   catch (std::exception& e) {
     std::string err_string = "Error instantiating components:  ";
@@ -32,7 +31,6 @@ void Robot::RobotInit()
   }
   
   m_compressor->Start();
-  m_leftFront->SetSelectedSensorPosition(0);
   m_climb_solenoid->Set(false);
   m_intake_solenoid->Set(false);
   m_shooter_solenoid->Set(false);
@@ -41,8 +39,6 @@ void Robot::RobotInit()
 void Robot::RobotPeriodic()
 {
   m_limelight->Tick();
-  SmartDashboard::PutNumber("Encoder", m_leftFront->GetSelectedSensorPosition());//6300
-  SmartDashboard::PutNumber("Encoder Foot", m_leftFront->GetSelectedSensorPosition()/ENCODER_FEET);//6300
 }
 
 // I think I have some errors here, I wanna test this
