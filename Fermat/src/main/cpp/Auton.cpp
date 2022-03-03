@@ -6,24 +6,19 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	m_intake		= intake;
     m_limelight     = limelight;
 	m_shooter		= shooter;
-
 	auton_phase		= 0;
-	pickupBallStart = frc::SmartDashboard::GetData("Pickup Ball Start");
-	pickupBallEnd   = frc::SmartDashboard::GetData("Pickup Ball End");
-
-	p_temp = 0; i_temp = 0; d_temp = 0;
 }
 
-			// if (LIMELIGHT_GOOD==1){
-				
-			// } else{
+// if (LIMELIGHT_GOOD==1){
+	
+// } else{
 
-			// }
-			// if (PI_GOOD == 1){
+// }
+// if (PI_GOOD == 1){
 
-			// } else {
+// } else {
 
-			// }
+// }
 
 void
 Auton::Tick() {
