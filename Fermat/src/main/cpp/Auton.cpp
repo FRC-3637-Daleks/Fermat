@@ -34,12 +34,14 @@ Auton::Tick() {
 				m_shooter -> SetHigh();
 				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2)){
         			m_shooter -> Shoot();
+					m_intake -> AutoIntake(true);
 					auton_phase++;
 				}	
 			} else{
-				m_shooter -> SetSpeed(10.0);
-				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2, 10.0)){
+				m_shooter -> SetSpeed(2.15);
+				if (m_shooter-> GetSpeed()==m_limelight->CalcVelocity(2, 2.15)){
         			m_shooter -> Shoot();
+					m_intake -> AutoIntake(true);
 					auton_phase++;
 				}
 			}
@@ -47,10 +49,12 @@ Auton::Tick() {
     	case 2: //Find more bawl(z)
             if (PI_GOOD == 1){
 				if(m_pi->SwerveTurn()) {
-            		auton_phase++;
+            		m_intake -> AutoIntake(false);
+					auton_phase++;
             	}
 			} else {
 				if (m_drive->DriveToFeet(10)){
+					m_intake -> AutoIntake(false);
 					auton_phase++;
 				}
 			}
@@ -64,8 +68,8 @@ Auton::Tick() {
 					auton_phase++;
 				}	
 			} else{
-				m_shooter -> SetSpeed(10.0);
-				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2, 10.0)){
+				m_shooter -> SetSpeed(4.0);
+				if (m_shooter->GetSpeed()==m_limelight->CalcVelocity(2, 4.0)){
         			m_shooter -> Shoot();
 					auton_phase++;
 				}
