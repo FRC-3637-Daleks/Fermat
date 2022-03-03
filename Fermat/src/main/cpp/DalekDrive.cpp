@@ -60,10 +60,16 @@ DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInp
 	TankDrive(leftStick.GetY(), rightStick.GetY(), squaredInputs, isSlow);
 }
 
+void 
+DalekDrive::ResetEncoder(){
+	// m_left[FRONT]->();
+}
+
 // Drive to a spot but decrease speed as you go on
 bool
 DalekDrive::DriveToFeet(double feet)
 {
+
 	double dis = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
 	SmartDashboard::PutNumber("DriveToFeet Dist", dis);
 
