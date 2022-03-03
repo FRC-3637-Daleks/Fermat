@@ -72,7 +72,7 @@ Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     
-    if(m_xbox->GetYButton()){
+    if(false){//m_xbox->GetYButtonPressed();
         AutoClimb();
     } else {
         

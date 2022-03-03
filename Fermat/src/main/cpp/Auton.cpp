@@ -65,6 +65,10 @@ Auton::Tick() {
 			}
 		break;
     	
+		//Arnav was here
+		//arnav is the goat
+		//Goat is for greatest of all time
+		//je suis d'accord - visvam
     	case 3: //Get ready to shoot the other collected bawlz 
 			if (LIMELIGHT_GOOD==1){
 				m_shooter -> SetHigh();
