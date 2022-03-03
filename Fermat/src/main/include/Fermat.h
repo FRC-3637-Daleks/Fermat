@@ -43,7 +43,7 @@
 #define LIMELIGHT_ADDR			"10.36.37.11"
 #define LEVEL_SENSOR_ADDR		"10.36.37.??"
 #define PI						3.14159265358979323846264338327 //pi
-#define CLIMB_SENSOR_TESING		0 //1 for true 0 for false
+
 
 
 // CAN BUS devices
@@ -75,8 +75,7 @@ enum DIO {
   UPPER_IR, 
   EMPTY,
   LOWER_IR,
-  NOTHING,
-  SHOOTER_IR
+  NOTHING
 };
 
 class Robot : public TimedRobot {
