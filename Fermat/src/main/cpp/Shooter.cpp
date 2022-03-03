@@ -13,7 +13,7 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
 void
 Shooter::SetHigh(){
     //Warm up the motor
-    m_shooter_motor-> Set(-1.0 * FromMetersPerSecond(m_limelight->CalcVelocity(2)));
+    m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2)));
     if (abs(m_limelight->GetAngle())>2){
         m_drive->SetCanDrive(false);
         m_drive->Turn(m_limelight->GetAngle());
@@ -58,7 +58,7 @@ Shooter::FromMetersPerSecond(double speed){
     // 0.1595929068023614965139022838706 circumferance
     // 1 speed point
     // 14.177169887609779606984986211852 meters per seconds per 1 speed point
-    return 1.0*speed/14.177169887609779606984986211852;
+    return -1.0*(speed/14.177169887609779606984986211852+SHOOT_MOTOR_BOOST);
 }
 
 void
