@@ -26,6 +26,7 @@ Auton::Tick() {
     switch(auton_phase) {
     	case 0: //Turn limelight on ;)
         	if (LIMELIGHT_GOOD==1){
+				m_drive->ResetEncoder();
 				m_limelight -> LightOn();	
 			}
 			if (m_drive->DriveToFeet(7)){
@@ -65,10 +66,6 @@ Auton::Tick() {
 			}
 		break;
     	
-		//Arnav was here
-		//arnav is the goat
-		//Goat is for greatest of all time
-		//je suis d'accord - visvam
     	case 3: //Get ready to shoot the other collected bawlz 
 			if (LIMELIGHT_GOOD==1){
 				m_shooter -> SetHigh();
