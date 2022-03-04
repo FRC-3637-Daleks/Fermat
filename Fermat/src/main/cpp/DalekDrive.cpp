@@ -62,7 +62,7 @@ DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInp
 
 void 
 DalekDrive::ResetEncoder(){
-	// m_left[FRONT]->();
+	m_left[FRONT]->SetSelectedSensorPosition(0);
 }
 
 // Drive to a spot but decrease speed as you go on

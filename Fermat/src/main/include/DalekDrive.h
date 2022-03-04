@@ -41,6 +41,7 @@ class DalekDrive {
 		bool Turn(double degrees);
 		void Tick();
 		bool GetCanDrive();
+		void ResetEncoder();
 		
 	
 	private:
