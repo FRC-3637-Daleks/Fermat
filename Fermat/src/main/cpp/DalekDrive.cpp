@@ -71,23 +71,22 @@ DalekDrive::DriveToFeet(double feet)
 {
 
 	double dis = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
-	// SmartDashboard::PutNumber("DriveToFeet Dist", dis);
+	SmartDashboard::PutNumber("DriveToFeet Dist", dis);
 
 	double speed = ((MAX_SPEED*10*feet-dis)/feet)*MAX_SPEED;
-	// SmartDashboard::PutNumber("DriveToFeet Speed", speed);
+	SmartDashboard::PutNumber("DriveToFeet Speed", speed);
 
 	if(feet>0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= feet){
 		TankDrive(-1.0*speed, -1.0*speed, false, false);
-		return false;
+		return true;
 	} else if(feet<0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= feet){
 		TankDrive(speed, speed, false, false);
-		return false;
-	}else {
 		return true;
+	}else {
+		return false;
 	}
-	SmartDashboard::PutNumber("Encoder", m_left[FRONT]->GetSelectedSensorPosition());//6300
-  	SmartDashboard::PutNumber("Encoder Foot", m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET);//6300
-
+	// SmartDashboard::PutNumber("Encoder", m_left[FRONT]->GetSelectedSensorPosition());//6300
+  	// SmartDashboard::PutNumber("Encoder Foot", m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET);//6300
 }
 
 //Stop only the left 
