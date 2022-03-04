@@ -22,19 +22,19 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 // }
 void 
 Auton::REALLYBAD(){
-	m_drive->TankDrive(1.0, 1.0, false, false);
+	m_drive->TankDrive(0.6, 0.6, false, false);
 	m_intake->AutoIntake(true);
-	Wait(4.0);
+	Wait(2.0);
 	m_drive->StopLeft();
 	m_drive->StopRight();
 	while (!m_shooter->CheckSpeed(3.3)){
-		m_shooter->SetSpeed(3);
+		m_shooter->SetSpeed(3.3);
 	}
 	m_shooter->Shoot();
-	while (!m_shooter->CheckSpeed(3.3)){
-		m_shooter->SetSpeed(3);
-	}
-	m_shooter->Shoot();
+	// while (!m_shooter->CheckSpeed(3.3)){
+	// 	m_shooter->SetSpeed(3.3);
+	// }
+	// m_shooter->Shoot();
 }
 
 void
