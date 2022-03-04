@@ -12,6 +12,8 @@ double Limelight::CalcDistance() // (m)
 
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
 {
+	//Closest you can shoot only after 3.2 meters
+	//https://www.desmos.com/calculator/sasmcknalu
 	double height = (points==1)?LOW_SHOOT:HIGH_SHOOT - START_HEIGHT;
 	return sqrt( (-4.9*pow(xDistance, 2)) / ( pow(cos(SHOOT_ANGLE), 2) * (height - (xDistance * (tan(SHOOT_ANGLE)))) ) );
 }

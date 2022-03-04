@@ -20,15 +20,31 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 // } else {
 
 // }
+void 
+Auton::REALLYBAD(){
+	m_drive->TankDrive(1.0,1.0,false,false);
+	m_intake->AutoIntake(true);
+	Wait(4.0);
+	m_drive->StopLeft();
+	m_drive->StopRight();
+	while (m_limelight->CalcVelocity(2, 3.3)){
+		m_shooter->SetSpeed(3);
+	}
+	m_shooter->Shoot();
+	while (m_limelight->CalcVelocity(2, 3.3)){
+		m_shooter->SetSpeed(3);
+	}
+	m_shooter->Shoot();
+}
 
 void
 Auton::Tick() {
     switch(auton_phase) {
     	case 0: //Turn limelight on ;)
         	if (LIMELIGHT_GOOD==1){
-				m_drive->ResetEncoder();
 				m_limelight -> LightOn();	
 			}
+			m_drive->ResetEncoder();
 			auton_phase++;
 		break;
 		
