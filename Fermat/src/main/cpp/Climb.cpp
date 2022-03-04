@@ -35,15 +35,27 @@ Climb::AutoClimb(){
             }
         }
 
+        //Move the side arm in
+        if (climbCase%STAGES==4){
+            m_climb_solenoid->Set(false);
+            Wait(2);
+        }
+
         //Move arm up
-        if(climbCase%STAGES==4){
+        if(climbCase%STAGES==5){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
             if (!(m_upperLimit->Get())){
+                Wait(.2);
+                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
                 climbCase++;
             }
         }
-        //Stop the motor (STAGES%STAGES = 0)
-        if (climbCase%STAGES==5){
+
+        //back down to be under the limit
+
+
+        //Stop the motor
+        if (climbCase%STAGES==6){
             m_climb_motor->Set(m_climb_motor->Get()*-.9);
             if (abs(m_climb_motor->Get())<.1){
                 climbCase++;
@@ -56,6 +68,8 @@ Climb::AutoClimb(){
             m_climb_solenoid->Set(false);
             Wait(2);
         }
+
+        // (STAGES%STAGES = 0)
         
     }
 }
@@ -72,7 +86,7 @@ Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     
-    if(false){//m_xbox->GetYButtonPressed();
+    if(false){// m_xbox->GetYButton()
         AutoClimb();
     } else {
         
