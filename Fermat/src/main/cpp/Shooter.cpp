@@ -30,7 +30,7 @@ Shooter::SetLow(){
 
 void
 Shooter::SetMiss(){
-    m_shooter_motor-> Set(-0.6); //lowest it can go to output the ball (can't go out of ring)
+    m_shooter_motor-> Set(-0.7); //lowest it can go to output the ball (can't go out of ring)
 }
 
 void 
