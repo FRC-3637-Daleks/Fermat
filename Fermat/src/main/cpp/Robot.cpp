@@ -45,7 +45,7 @@ void Robot::RobotPeriodic()
 // We want to be able to test in general
 void Robot::AutonomousInit()
 {
-
+  // m_auton->REALLYBAD();
 }
 
 void Robot::AutonomousPeriodic() 
