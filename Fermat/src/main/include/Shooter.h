@@ -9,6 +9,7 @@
 #define WHEEL_RATIO						((COLOR_WHEEL_RADIUS)/(SPINNER_WHEEL_RADIUS))
 #define ENCODER_TICKS_PER_REV			4096
 #define NUM_TICKS_PER_COLOR_WHEEL_REV	((WHEEL_RATIO)*(ENCODER_TICKS_PER_REV))
+#define SHOOT_SPEED_ERROR				0.2
 
 class Shooter {
 	public:
@@ -26,9 +27,10 @@ class Shooter {
 		void DisableLimelight();
 		void SetSpeed(double dist);
 		double GetSpeed();
+		bool CheckSpeed(double dist);
 
 	private:
-		bool autoShoot = true;
+		bool autoShoot = false;
 		WPI_TalonSRX *m_shooter_motor;
 		XboxController *m_xbox;
 		Solenoid *m_shooter_solenoid;

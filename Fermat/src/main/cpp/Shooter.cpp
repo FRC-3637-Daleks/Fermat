@@ -13,7 +13,7 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
 void
 Shooter::SetHigh(){
     //Warm up the motor
-    m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2)));
+    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
     if (abs(m_limelight->GetAngle())>2){
         m_drive->SetCanDrive(false);
         m_drive->Turn(m_limelight->GetAngle());
@@ -35,13 +35,19 @@ Shooter::SetMiss(){
 
 void 
 Shooter::SetSpeed(double dist){ // inputs in (m)
-    m_shooter_motor->Set(m_limelight->CalcVelocity(2, dist));
+    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2, dist)));
 }
 
 double
 Shooter::GetSpeed(){
     return m_shooter_motor -> Get();
 }
+
+bool
+Shooter::CheckSpeed(double dist){
+    return (abs(GetSpeed()-m_limelight->CalcVelocity(2, dist))<SHOOT_SPEED_ERROR);
+}
+
 void
 Shooter::Shoot(){
     TurnOnSolenoid();
@@ -67,20 +73,20 @@ Shooter::FromMetersPerSecond(double speed){
     // 0.1595929068023614965139022838706 circumferance
     // 1 speed point
     // 14.177169887609779606984986211852 meters per seconds per 1 speed point
-    return speed/14.177169887609779606984986211852+SHOOT_MOTOR_BOOST;
+    return -1.0*speed/14.177169887609779606984986211852;
 }
 
 void
 Shooter::ManualShooting(){
     // This should use some pre determinded values not just random motor speeds ^^^
     if (m_xbox->GetRawAxis(0) > 0.5){
-        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,3.3)));
+        SetSpeed(3.3);
     } else if (m_xbox->GetRawAxis(1) > 0.5){
-        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,4)));
+        SetSpeed(4.0);
     } else if (m_xbox->GetRawAxis(0)< -0.5){
-        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,6.0)));
+        SetSpeed(6.0);
     } else if (m_xbox->GetRawAxis(1) < -0.5){
-        m_shooter_motor-> Set(-FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0)));
+        SetSpeed(10.0);
     } else {
         m_shooter_motor->Set(0);
     }
@@ -97,7 +103,7 @@ Shooter::AutomaticShooting(){
     } else {
         m_shooter_motor->Set(0);
     }
-    if((m_shooter_motor->GetSelectedSensorVelocity()-m_limelight->CalcVelocity(2))<=.02){
+    if (CheckSpeed(m_limelight->GetDistance())) {
         Shoot();
     }
 }
@@ -119,9 +125,6 @@ Shooter::Tick(){
     if(m_xbox->GetBackButtonPressed()){
         autoShoot = !autoShoot;
     }
-
-    // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
-    
 
     if (autoShoot) {
         AutomaticShooting();
