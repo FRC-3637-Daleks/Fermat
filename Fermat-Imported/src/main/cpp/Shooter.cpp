@@ -10,17 +10,10 @@ Shooter::Shooter(DalekDrive *drive, frc::XboxController *xbox, frc::Solenoid *sh
     //m_shooterIR = new DigitalInput(SHOOTER_IR);
 }
 
-void
+double
 Shooter::SetHigh(){
     //Warm up the motor
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(2)));
-    if (abs(m_limelight->GetAngle())>2){
-        m_drive->SetCanDrive(false);
-        m_drive->Turn(m_limelight->GetAngle());
-    } else {
-        m_drive->SetCanDrive(true);
-    }
-    
+    return FromMetersPerSecond(m_limelight->CalcVelocity(2));
 }
 
 void
@@ -45,7 +38,7 @@ Shooter::GetSpeed(){
 void
 Shooter::Shoot(){
     TurnOnSolenoid();
-    Wait(0.5);
+    Wait(0.5_s);
     TurnOffSolenoid();
 }
 
@@ -67,12 +60,12 @@ Shooter::FromMetersPerSecond(double speed){
     // 0.1595929068023614965139022838706 circumferance
     // 1 speed point
     // 14.177169887609779606984986211852 meters per seconds per 1 speed point
-    return -1.0*speed/14.177169887609779606984986211852+SHOOT_MOTOR_BOOST;
+    return -1.0*speed/14.177169887609779606984986211852-SHOOT_MOTOR_BOOST;
 }
 
 bool
 Shooter::CheckSpeed(double dist){
-    return abs(abs(GetSpeed())-abs(FromMetersPerSecond(m_limelight->CalcVelocity(dist))))<0.05;
+    return abs( abs(GetSpeed()) - abs( FromMetersPerSecond( m_limelight->CalcVelocity(dist) ) ) ) < 0.1;
 }
 
 void
@@ -81,23 +74,24 @@ Shooter::ManualShooting(){
     bool isFullSpeed = false;
     if (m_xbox->GetRawAxis(0) > 0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.3));
-        isFullSpeed = CheckSpeed(3.3);
+        // isFullSpeed = CheckSpeed(3.3);
     } else if (m_xbox->GetRawAxis(1) > 0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,4.3688));
-        isFullSpeed = CheckSpeed(4.3688);
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,4.5));
+        // isFullSpeed = CheckSpeed(4.3688);
     } else if (m_xbox->GetRawAxis(0)< -0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.1844));
-        isFullSpeed = CheckSpeed(7.1844);
+        // isFullSpeed = CheckSpeed(7.1844);
     } else if (m_xbox->GetRawAxis(1) < -0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,10.0));
-        isFullSpeed = CheckSpeed(10.0);
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,10));
+        // isFullSpeed = CheckSpeed(m_limelight->GetDistance());
     }
 
     m_shooter_motor-> Set(speed);
     SmartDashboard::PutNumber("SHOOTER SPEED", speed);
     SmartDashboard::PutBoolean("FULL SPEED", isFullSpeed);
+    SmartDashboard::PutNumber("T", isFullSpeed);
 
-    if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)||isFullSpeed){
+    if (m_xbox->GetRightBumperPressed()||isFullSpeed){
         Shoot();
     }
 }

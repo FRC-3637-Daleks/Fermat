@@ -5,30 +5,30 @@ using namespace frc;
 
 void Robot::RobotInit() 
 {
-  cs::AxisCamera camera = CameraServer::GetInstance()->AddAxisCamera(CAMERA);  // Initialize Camera
-  // // Only use these two lines if there is problems with the camera
-  // camera.SetResolution(160, 90);   
-  // camera.SetFPS(15);
+  cs::AxisCamera camera = CameraServer::GetInstance()-> AddAxisCamera(CAMERA);  // Initialize Camera
+  // Only use these two lines if there is problems with the camera
+  camera.SetResolution(160, 90);   
+  camera.SetFPS(15);
 
-  try {
+  // try {
     m_xbox                = new frc::XboxController(XBOX);
     m_drive               = new DalekDrive(m_xbox);
-    m_climb_solenoid      = new frc::Solenoid(PCM, CLIMB);
-    m_intake_solenoid     = new frc::Solenoid(PCM, INTAKE);
-    m_shooter_solenoid    = new frc::Solenoid(PCM, SHOOTER);
-    m_compressor          = new frc::Compressor(PCM);
+    m_climb_solenoid      = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, CLIMB);
+    m_intake_solenoid     = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, INTAKE);
+    m_shooter_solenoid    = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, SHOOTER);
+    m_compressor          = new frc::Compressor(PCM, PneumaticsModuleType::CTREPCM);
     m_limelight           = new Limelight(m_drive);
     m_pi                  = new RaspberryPi(m_drive, m_xbox);
     m_climb               = new Climb(m_climb_solenoid, m_xbox);
     m_intake              = new Intake(m_intake_solenoid, m_xbox);
     m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
     m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
-  }
-  catch (std::exception& e) {
-    std::string err_string = "Error instantiating components:  ";
-    err_string += e.what();
-    DriverStation::ReportError(err_string.c_str());
-  }
+  // }
+  // catch (std::exception& e) {
+  //   std::string err_string = "Error instantiating components:  ";
+  //   err_string += e.what();
+  //   DriverStation::ReportError(err_string.c_str());
+  // }
   
   m_compressor->Start();
   m_climb_solenoid->Set(false);
@@ -38,7 +38,7 @@ void Robot::RobotInit()
 
 void Robot::RobotPeriodic()
 {
-  m_limelight->Tick();
+  //m_limelight->Tick();
 }
 
 // I think I have some errors here, I wanna test this
@@ -83,10 +83,11 @@ void Robot::TeleopPeriodic()
       Right Stick - Climb Motor(Up and Down)
   */
 
-  m_pi->Tick();
+  //m_pi->Tick();
   m_intake->Tick();
   m_climb->Tick();
   m_drive->Tick(); 
+  m_limelight->Tick();
   m_shooter->Tick();
 }
 

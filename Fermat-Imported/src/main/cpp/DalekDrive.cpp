@@ -228,12 +228,12 @@ void
 DalekDrive::Tick(){
 	if(canDrive) {
 
-		//Check to see if slowmo is active
-		if(m_rightStick->GetRawButton(2)){
-			driveSlow = true;
-		}else{
-			driveSlow = false;
-		}
+		// //Check to see if slowmo is active
+		// if(m_rightStick->GetRawButton(2)){
+		// 	driveSlow = true;
+		// }else{
+		// 	driveSlow = false;
+		// }
 
 		//Check for the brakes and move accordingly
 		if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
@@ -259,7 +259,7 @@ DalekDrive::Tick(){
 	// SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
 	// SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
 	
-	// Put the variables on the board
-	SmartDashboard::PutBoolean("Drive Active", canDrive);
-	SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));	
+	// // Put the variables on the board
+	// SmartDashboard::PutBoolean("Drive Active", canDrive);
+	// SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));	
 }

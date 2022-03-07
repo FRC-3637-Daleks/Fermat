@@ -4,7 +4,9 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_solenoid = climb_solenoid;
     m_xbox = xbox;
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
-    m_climb_motor->SetNeutralMode(Brake);
+    if (CLIMB_SENSOR_TESING == 0){
+        m_climb_motor->SetNeutralMode(Brake);
+    }
     m_upperLimit = new DigitalInput(UPPER_IR);
     m_lowerLimit = new DigitalInput(LOWER_IR);
     ClimbSafety=true;
@@ -98,12 +100,12 @@ Climb::Tick(){
         }
     }
 
-    if(m_xbox->GetBumperPressed(frc::GenericHID::kLeftHand) && ClimbSafety){
+    if(m_xbox->GetLeftBumperPressed()){ //&& ClimbSafety
         m_climb_solenoid->Toggle();
     }
     
-    if(m_xbox->GetYButton()){
-        ClimbSafety = true;
-    }
+    // if(m_xbox->GetYButton()){
+    //     ClimbSafety = true;
+    // }
     // } 
 }

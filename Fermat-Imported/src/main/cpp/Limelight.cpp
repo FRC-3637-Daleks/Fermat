@@ -7,7 +7,7 @@ Limelight::Limelight(DalekDrive *drive) {
 
 double Limelight::CalcDistance() // (m)
 {
-  return (DIST_COEFFICIENT*pow(area/3, DIST_EXPONENT));
+  return (DIST_COEFFICIENT*pow(area, DIST_EXPONENT));
 }
 
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
@@ -43,7 +43,7 @@ void Limelight::LightOn() {
 }
 
 void Limelight::Tick() { 
-	
+		LightOn();	
 	//Set Limelight area (ta) to a variable
 	area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
 
@@ -63,6 +63,8 @@ void Limelight::Tick() {
 	//Put the hypothetical velocity
 	SmartDashboard::PutNumber("Flywheel Speed for Low Shot", low_velocity);
 	SmartDashboard::PutNumber("Flywheel Speed for High Shot", high_velocity);
+    SmartDashboard::PutNumber("TA", area);
+
 
 	// // Display all the Limelight Varibles on the Smart Dashboard
 	// SmartDashboard::PutNumber("ta", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0));
@@ -73,4 +75,6 @@ void Limelight::Tick() {
 	SmartDashboard::PutNumber("Lime Dist", distance);
 	SmartDashboard::PutNumber("Lime Angle", angle);
 	SmartDashboard::PutNumber("Lime Shoot", high_velocity);
+
+
 }
