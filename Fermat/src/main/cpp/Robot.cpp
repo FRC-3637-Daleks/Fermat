@@ -41,8 +41,6 @@ void Robot::RobotPeriodic()
   m_limelight->Tick();
 }
 
-// I think I have some errors here, I wanna test this
-// We want to be able to test in general
 void Robot::AutonomousInit()
 {
   m_auton->REALLYBAD();
@@ -78,7 +76,7 @@ void Robot::TeleopPeriodic()
         Right - Fastest (From Safe Zome)
 
     CLIMB:
-      Y - Auto Climb (Hold)
+      Y - Auto Climb (Hold) (DISABLED CURRENTLY)
       Left Bumper - Climb Pneumatics (Toggle)
       Right Stick - Climb Motor(Up and Down)
   */

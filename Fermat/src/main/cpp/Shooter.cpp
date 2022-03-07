@@ -30,18 +30,24 @@ Shooter::SetLow(){
 
 void
 Shooter::SetMiss(){
-    m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
+    m_shooter_motor-> Set(-0.7); //lowest it can go to output the ball (can't go out of ring)
 }
 
 void 
 Shooter::SetSpeed(double dist){ // inputs in (m)
-    m_shooter_motor->Set(m_limelight->CalcVelocity(2, dist));
+    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2, dist)));
 }
 
 double
 Shooter::GetSpeed(){
     return m_shooter_motor -> Get();
 }
+
+bool
+Shooter::CheckSpeed(double dist){
+    return (abs(GetSpeed()-m_limelight->CalcVelocity(2, dist))<SHOOT_SPEED_ERROR);
+}
+
 void
 Shooter::Shoot(){
     TurnOnSolenoid();
@@ -132,14 +138,12 @@ Shooter::Tick(){
         autoShoot = !autoShoot;
     }
 
-    // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
-    if (m_xbox->GetXButton()){
-        SetMiss();
-    }
-
     if (autoShoot) {
         AutomaticShooting();
     } else {
         ManualShooting();
+    }
+    if (m_xbox->GetXButton()){
+        SetMiss();
     }
 }
