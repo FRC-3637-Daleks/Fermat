@@ -37,6 +37,18 @@ Intake::AutoIntake(bool toggle) {
     
 }
 
+//Spits out the ball
+//Just wanna test
+bool
+Intake::AutoOutTake(bool toggle){
+if (toggle){
+    UnSuckBalls();
+}
+else
+    m_intake_solenoid->Set(false);
+    m_intake_motor->Set(0);
+}
+
 //Tick function doin tick function things
 /*
   Left Bumper - Activate intake motor
@@ -66,14 +78,16 @@ Intake::Tick() {
         } else {
             AutoIntake(false);
         }
-
-        // if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
-        //     SuckBalls();
-        // }else if (false){
-        //     UnSuckBalls();
-        // }else{
-        //     m_intake_motor->Set(0);
-        // }
+    
+    //wanna see if this is a good way of taking out a ball
+    if (m_xbox->GetBButton()){
+        AutoOutTake(true);
+    }
+    else if(false){
+         AutoOutTake(false);
+    }
+    else 
+     m_intake_motor->Set(0);
 
         // if (m_xbox->GetAButtonPressed()) {
         //     ToggleIntakePneumatics();
