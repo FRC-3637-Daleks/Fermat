@@ -2,9 +2,13 @@
 
 DalekDrive::DalekDrive(XboxController *xbox) {
 	m_left[FRONT]  = new WPI_TalonFX(leftFront);
+	m_left[FRONT]->SetNeutralMode(Brake);
 	m_left[REAR]   = new WPI_TalonFX(leftRear);
+	m_left[REAR]->SetNeutralMode(Brake);
 	m_right[FRONT] = new WPI_TalonFX(rightFront);
+	m_right[FRONT]->SetNeutralMode(Brake);
 	m_right[REAR]  = new WPI_TalonFX(rightRear);
+	m_right[REAR]->SetNeutralMode(Brake);
 	m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
 	m_xbox = xbox;
@@ -88,16 +92,16 @@ DalekDrive::DriveToFeet(double feet)
 void
 DalekDrive::StopLeft(){
 	// send robot left motors in the opposite direction to stop robot
-	m_left[FRONT]->Set(m_left[FRONT]->Get() * -.9);
-	m_left[REAR]->Set(m_left[REAR]->Get() * -.9);
+	m_left[FRONT]->Set(0.0);
+	m_left[REAR]->Set(0.0);
 }
 
 //Stop only the right
 void
 DalekDrive::StopRight() {
 	// send robot left motors in the opposite direction to stop robot
-	m_right[FRONT]->Set(m_right[FRONT]->Get() * -.9);
-	m_right[REAR]->Set(m_right[REAR]->Get() * -.9);
+	m_right[FRONT]->Set(0.0);
+	m_right[REAR]->Set(0.0);
 }
 
 bool
@@ -228,12 +232,12 @@ void
 DalekDrive::Tick(){
 	if(canDrive) {
 
-		// //Check to see if slowmo is active
-		// if(m_rightStick->GetRawButton(2)){
-		// 	driveSlow = true;
-		// }else{
-		// 	driveSlow = false;
-		// }
+		//Check to see if slowmo is active
+		if(m_rightStick->GetRawButton(2)){
+			driveSlow = true;
+		}else{
+			driveSlow = false;
+		}
 
 		//Check for the brakes and move accordingly
 		if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
