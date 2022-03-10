@@ -16,25 +16,21 @@ Shooter::SetHigh(){
     return FromMetersPerSecond(m_limelight->CalcVelocity(2));
 }
 
-void
+double
 Shooter::SetLow(){
-    m_shooter_motor-> Set(FromMetersPerSecond(m_limelight->CalcVelocity(1)));
+    return (FromMetersPerSecond(m_limelight->CalcVelocity(1)));
 }
 
-void
+double
 Shooter::SetMiss(){
-    m_shooter_motor-> Set(0.1); //lowest it can go to output the ball (can't go out of ring)
+    return 0.5; //lowest it can go to output the ball (can't go out of ring)
 }
 
 void 
 Shooter::SetSpeed(double dist){ // inputs in (m)
-    m_shooter_motor->Set(m_limelight->CalcVelocity(2, dist));
+    m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2, dist)));
 }
 
-double
-Shooter::GetSpeed(){
-    return m_shooter_motor -> Get();
-}
 void
 Shooter::Shoot(){
     TurnOnSolenoid();
@@ -63,50 +59,7 @@ Shooter::FromMetersPerSecond(double speed){
     return -1.0*speed/14.177169887609779606984986211852-SHOOT_MOTOR_BOOST;
 }
 
-bool
-Shooter::CheckSpeed(double dist){
-    return abs( abs(GetSpeed()) - abs( FromMetersPerSecond( m_limelight->CalcVelocity(dist) ) ) ) < 0.1;
-}
 
-void
-Shooter::ManualShooting(){
-    double speed=0;
-    bool isFullSpeed = false;
-    if (m_xbox->GetRawAxis(0) > 0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.3));
-        // isFullSpeed = CheckSpeed(3.3);
-    } else if (m_xbox->GetRawAxis(1) > 0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,4.5));
-        // isFullSpeed = CheckSpeed(4.3688);
-    } else if (m_xbox->GetRawAxis(0)< -0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.1844));
-        // isFullSpeed = CheckSpeed(7.1844);
-    } else if (m_xbox->GetRawAxis(1) < -0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,10));
-        // isFullSpeed = CheckSpeed(m_limelight->GetDistance());
-    }
-
-    m_shooter_motor-> Set(speed);
-    SmartDashboard::PutNumber("SHOOTER SPEED", speed);
-    SmartDashboard::PutBoolean("FULL SPEED", isFullSpeed);
-    SmartDashboard::PutNumber("T", isFullSpeed);
-
-    if (m_xbox->GetRightBumperPressed()||isFullSpeed){
-        Shoot();
-    }
-}
-
-void
-Shooter::AutomaticShooting(){
-    if (abs(m_xbox->GetRawAxis(0))+abs(m_xbox->GetRawAxis(1))>0.5){ 
-        SetHigh();
-    } else {
-        m_shooter_motor->Set(0);
-    }
-    if(CheckSpeed(m_limelight->GetDistance())){
-        Shoot();
-    }
-}
 
 /*
   Back Button - Toggle auto shoot
@@ -120,20 +73,25 @@ Shooter::AutomaticShooting(){
 void
 Shooter::Tick(){
 
-    SmartDashboard::PutBoolean("Auto Shoot", autoShoot);
-
-    if(m_xbox->GetBackButtonPressed()){
-        autoShoot = !autoShoot;
-    }
+    double speed=0;
 
     // frc::SmartDashboard::PutBoolean("Shooter Pneumatics State", m_shooter_solenoid->Get());
     if (m_xbox->GetXButton()){
-        SetMiss();
-    }
+        speed = SetMiss();
+    } else if (m_xbox->GetRawAxis(0) > 0.5){
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.3));
+    } else if (m_xbox->GetRawAxis(1) > 0.5){
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,4.5));
+    } else if (m_xbox->GetRawAxis(0)< -0.5){
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.2));
+    } else if (m_xbox->GetRawAxis(1) < -0.5){
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2));\
+    } 
 
-    if (autoShoot) {
-        AutomaticShooting();
-    } else {
-        ManualShooting();
+    m_shooter_motor-> Set(speed);    
+    SmartDashboard::PutNumber("SET SPEED", speed);
+    
+    if (m_xbox->GetRightBumperPressed()){
+        Shoot();
     }
 }

@@ -35,7 +35,7 @@ Auton::REALLYBAD(){
 	// m_shooter->SetSpeed(3.5);
 	// Wait(5.0_s);
 	// // if (!m_shooter->CheckSpeed(3.5)){
-	m_shooter->SetSpeed(-1 * m_shooter->FromMetersPerSecond(m_limelight->CalcVelocity(2, 3.3)));
+	m_shooter->SetSpeed(3.3);
 	Wait(5.0_s);
 	// // }
 	m_shooter->Shoot();
