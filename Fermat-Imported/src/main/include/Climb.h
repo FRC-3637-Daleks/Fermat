@@ -2,10 +2,8 @@
 
 #include "Fermat.h"
 
-#define CLIMB_MOTOR_SPEED 0.40 // %
-#define BARS 3
-#define STAGES 6
-#define CLIMB_SENSOR_TESING	0 //1 for true 0 for false
+#define CLIMB_MOTOR_SPEED   0.40    // %
+#define CLIMB_SENSOR_TESING 0       // 1 for true
 
 
 class Climb{

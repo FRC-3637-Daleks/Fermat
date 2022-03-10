@@ -3,7 +3,8 @@
 // some of this should be in the DalekDrive class, but whatever
 #pragma once
 
-// literally every single #define is a guess, so test one at a time
+// literally every single #define is a guess (and unused) 
+
 #define START_DIST		        // dist from line to tip of triangle
 #define LINE_TO_WALL			//Fill in
 #define START_DIST_FROM_WALL   	//Fill in
