@@ -9,12 +9,14 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	auton_phase		= 0;
 }
 
-// // Some Auton C+V
+// // Some Good Auton C+V
+
 // if (LIMELIGHT_GOOD==1){
 	
 // } else{
 
 // }
+
 // if (PI_GOOD == 1){
 
 // } else {
@@ -23,6 +25,9 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 
 void 
 Auton::REALLYBAD(){
+
+	// The way we do auton when we have no time to do anything.
+
 	m_drive->TankDrive(-.3,-.3,false, false);
 	m_intake->AutoIntake(true);
 	Wait(1.5_s);
@@ -30,11 +35,14 @@ Auton::REALLYBAD(){
 	m_shooter->SetSpeed(3.3);
 	Wait(5.0_s);
 	m_shooter->Shoot();
-	m_pi->SwerveTurn();
+	// m_pi->SwerveTurn();
 }
 
 void
 Auton::Tick() {
+
+	// below is the way we usually do auton
+
     // switch(auton_phase) {
     // 	case 0: //Turn limelight on ;)
     //     	if (LIMELIGHT_GOOD==1){
