@@ -2,16 +2,16 @@
 
 #include "Fermat.h"
 
-#define SHOOT_ANGLE 1 //rad (57 degrees)
-#define HIGH_SHOOT 2.6416 //meters
-#define LOW_SHOOT 1.2192 //meters
-#define START_HEIGHT 0.058 //meters
-#define DIST_COEFFICIENT 0.311 //inches
-#define DIST_EXPONENT -0.456 // inches
-#define ANGLE_COEFFICIENT 0 //rad
-#define ANGLE_EXPONENT 0
-#define ANGLE_PRODUCT 1.59 
-#define ANGLE_OFFSET 0.0228 
+#define SHOOT_ANGLE         1 //rad (57 degrees)
+#define HIGH_SHOOT          2.6416 //meters
+#define LOW_SHOOT           1.2192 //meters
+#define START_HEIGHT        0.058 //meters
+#define DIST_COEFFICIENT    0.311 //inches
+#define DIST_EXPONENT       -0.456 // inches
+#define ANGLE_COEFFICIENT   0 //rad
+#define ANGLE_EXPONENT      0
+#define ANGLE_PRODUCT       1.59 
+#define ANGLE_OFFSET        0.0228 
 
 
 class Limelight {

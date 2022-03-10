@@ -19,7 +19,6 @@
 #define turningErrorThreshold		0.05
 #define pTurn						2			// this number depends on the speed of the robot (weight and handicap)
 
-
 using namespace frc;
 using namespace rev;
 
@@ -51,6 +50,7 @@ class DalekDrive {
 			rightFront,
 			rightRear
 		};
+		
 		bool canDrive = false, driveSlow = false;
 
 		WPI_TalonFX *m_left[2];
