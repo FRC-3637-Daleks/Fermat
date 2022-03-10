@@ -22,8 +22,6 @@ class Shooter {
 		void TurnOffSolenoid();
 		double FromMetersPerSecond(double speed);
 		void Tick();
-		void ManualShooting();
-		void AutomaticShooting();
 		void DisableLimelight();
 		void SetSpeed(double dist);
 		double GetSpeed();

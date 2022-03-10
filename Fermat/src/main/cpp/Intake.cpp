@@ -53,7 +53,7 @@ Intake::AutoOutTake(bool toggle){
 /*
   Left Bumper - Activate intake motor
   A Buttton - Activate intake pneumatics
-  Start Button - Activate auto intake
+  Y Buttton - Spit out the ball
 */
 void
 Intake::Tick() {

@@ -81,8 +81,19 @@ Shooter::CheckSpeed(double dist){
     return abs(abs(GetSpeed())-abs(FromMetersPerSecond(m_limelight->CalcVelocity(dist))))<0.05;
 }
 
+
+
+/*
+  Back Button - Toggle auto shoot
+  Right Bumper - Toggle shooter pneumatics
+  Right Joystick XBOX - Shooter speeds (4 speeds)
+    Up - 0.25
+    Left - 0.5
+    Down - 0.75
+    Right - 1
+*/
 void
-Shooter::ManualShooting(){
+Shooter::Tick(){
     double speed=0;
     bool isFullSpeed = false;
     if (m_xbox->GetRawAxis(0) > 0.5){
@@ -106,43 +117,7 @@ Shooter::ManualShooting(){
     if (m_xbox->GetBumperPressed(frc::GenericHID::kRightHand)||isFullSpeed){
         Shoot();
     }
-}
 
-void
-Shooter::AutomaticShooting(){
-    if (abs(m_xbox->GetRawAxis(0))+abs(m_xbox->GetRawAxis(1))>0.5){ 
-        SetHigh();
-    } else {
-        m_shooter_motor->Set(0);
-    }
-    if(CheckSpeed(m_limelight->GetDistance())){
-        Shoot();
-    }
-}
-
-/*
-  Back Button - Toggle auto shoot
-  Right Bumper - Toggle shooter pneumatics
-  Right Joystick XBOX - Shooter speeds (4 speeds)
-    Up - 0.25
-    Left - 0.5
-    Down - 0.75
-    Right - 1
-*/
-void
-Shooter::Tick(){
-
-    SmartDashboard::PutBoolean("Auto Shoot", autoShoot);
-
-    if(m_xbox->GetBackButtonPressed()){
-        autoShoot = !autoShoot;
-    }
-
-    if (autoShoot) {
-        AutomaticShooting();
-    } else {
-        ManualShooting();
-    }
     if (m_xbox->GetXButton()){
         SetMiss();
     }
