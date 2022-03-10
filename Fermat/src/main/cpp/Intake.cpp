@@ -25,7 +25,7 @@ Intake::ToggleIntakePneumatics() {
 }
 
 //Turns on pneumatics and turns on motor at the same time
-bool
+void
 Intake::AutoIntake(bool toggle) {
     if(toggle) {
         m_intake_solenoid->Set(true);
@@ -39,14 +39,14 @@ Intake::AutoIntake(bool toggle) {
 
 //Spits out the ball
 //Just wanna test
-bool
+void
 Intake::AutoOutTake(bool toggle){
-if (toggle){
-    UnSuckBalls();
-}
-else
-    m_intake_solenoid->Set(false);
-    m_intake_motor->Set(0);
+    if (toggle){
+        UnSuckBalls();
+    }else{
+        m_intake_solenoid->Set(false);
+        m_intake_motor->Set(0);
+    }
 }
 
 //Tick function doin tick function things
@@ -59,39 +59,18 @@ void
 Intake::Tick() {
 
     // frc::SmartDashboard::PutBoolean("Intake Pneumatics State", m_intake_solenoid->Get());
-    
-    SmartDashboard::PutBoolean("Auto Intake", autoIntake);
 
-    if (m_xbox->GetStartButtonPressed()){
-        autoIntake = !autoIntake;
-    }
-
-    if (autoIntake){
-        if((SmartDashboard::GetNumber("Distance", -1) <= 24)&&autoIntake) {
-            AutoIntake(true);
-        }
+    if (m_xbox->GetAButton()){
+        AutoIntake(true);
     } else {
-        // to test next
-        
-        if (m_xbox->GetAButton()){
-            AutoIntake(true);
-        } else {
-            AutoIntake(false);
-        }
+        AutoIntake(false);
+    }
     
     //wanna see if this is a good way of taking out a ball
-    if (m_xbox->GetBButton()){
+    if (m_xbox->GetYButton()){
         AutoOutTake(true);
-    }
-    else if(false){
-         AutoOutTake(false);
-    }
-    else 
-     m_intake_motor->Set(0);
-
-        // if (m_xbox->GetAButtonPressed()) {
-        //     ToggleIntakePneumatics();
-        // }
+    } else {
+        AutoIntake(false);
     }
     
 }

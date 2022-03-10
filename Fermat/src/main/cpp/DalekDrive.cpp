@@ -240,7 +240,6 @@ DalekDrive::GetCanDrive(){
 void
 DalekDrive::Tick(){
 	if(canDrive) {
-
 		//Check to see if slowmo is active
 		if(m_rightStick->GetRawButton(2)){
 			driveSlow = true;
@@ -267,10 +266,6 @@ DalekDrive::Tick(){
 			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
 		}
 	}
-
-	
-	// SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
-	// SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
 	
 	// Put the variables on the board
 	SmartDashboard::PutBoolean("Drive Active", canDrive);

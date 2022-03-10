@@ -12,12 +12,11 @@ class Intake{
         bool SuckBalls();
         bool UnSuckBalls();
         bool ToggleIntakePneumatics();
-        bool AutoIntake(bool toggle);
-        void Tick();(
-        bool AutoOutTake(bool toggle);
+        void AutoIntake(bool toggle);
+        void Tick();
+        void AutoOutTake(bool toggle);
     
     private:
-        bool autoIntake = false;
         WPI_TalonSRX *m_intake_motor;
         frc::Solenoid *m_intake_solenoid;
         frc::XboxController *m_xbox;
