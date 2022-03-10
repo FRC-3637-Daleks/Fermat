@@ -23,23 +23,14 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 
 void 
 Auton::REALLYBAD(){
-	// m_drive->ResetEncoder();
 	m_drive->TankDrive(-.3,-.3,false, false);
 	m_intake->AutoIntake(true);
 	Wait(1.5_s);
-	// // m_drive->DriveToFeet(11);
-	//m_intake->AutoIntake(false);
 	m_drive->TankDrive(0.0, 0.0, false, false);
-	// //m_drive->StopLeft();
-	// //m_drive->StopRight();
-	// m_shooter->SetSpeed(3.5);
-	// Wait(5.0_s);
-	// // if (!m_shooter->CheckSpeed(3.5)){
 	m_shooter->SetSpeed(3.3);
 	Wait(5.0_s);
-	// // }
 	m_shooter->Shoot();
-	// m_shooter->SetSpeed(0);
+	m_pi->SwerveTurn();
 }
 
 void
@@ -86,10 +77,11 @@ Auton::Tick() {
 	// 		}
 	// 	break;
     	
-	// 	//Arnav was here
-	// 	//arnav is the goat
-	// 	//Goat is for greatest of all time
-	// 	//je suis d'accord - visvam
+	// 	// Arnav was here
+	// 	// arnav is the goat
+	// 	// Goat is for greatest of all time
+	// 	// je suis d'accord - visvam
+	//  // ça fraçais est mauvias - qui sait
     // 	case 3: //Get ready to shoot the other collected bawlz 
 	// 		if (LIMELIGHT_GOOD==1){
 	// 			m_shooter -> SetHigh();
