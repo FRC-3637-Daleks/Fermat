@@ -127,10 +127,10 @@ DalekDrive::Turn(double degrees){
 	//double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
 
 	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance){
-		TankDrive(-1.0*0.2*MAX_SPEED, 0.2*MAX_SPEED, false, false);
+		TankDrive(-1.0*MAX_SPEED, MAX_SPEED, false, true);
 		return false;
 	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance){
-		TankDrive(0.2*MAX_SPEED, -1.0*0.2*MAX_SPEED, false, false);
+		TankDrive(MAX_SPEED, -1.0*0.2*MAX_SPEED, false, true);
 		return false;
 	}else {
 		StopLeft();
