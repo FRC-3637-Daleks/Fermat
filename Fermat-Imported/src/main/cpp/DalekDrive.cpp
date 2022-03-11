@@ -243,7 +243,7 @@ DalekDrive::Tick(){
 		}else{
 			driveSlow = false;
 		}
-		
+
 		//Check for the brakes and move accordingly
 		if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
 			StopLeft();
@@ -262,7 +262,7 @@ DalekDrive::Tick(){
 		if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
 			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
 		}
-	} else {
+
 		ResetEncoder();
 	}
 	
