@@ -119,24 +119,22 @@ DalekDrive::Turn(double degrees){
 		else stop return false
 	*/
 	
-	//adjust the degrees to account for the motors overshooting
-	//degrees = degrees>0?(degrees - 20):(degrees+18); //one side is slightly faster than the other
 	double radAngle = degrees * (PI / 180);
 	double totalDistance = (13.5/12) * radAngle;
 	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
+	
 	// SmartDashboard::PutNumber("Turn TotalDist", totalDistance);
-	
 	//double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
-	
-	double speed = ((MAX_SPEED*10*abs(totalDistance)-abs(distanceTraveled))/abs(totalDistance))*MAX_SPEED;
-	// SmartDashboard::PutNumber("Turn Speed", speed);
-	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance&&speed>.31){
-		TankDrive(-1.0*speed, speed, false, false);
+
+	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance){
+		TankDrive(-1.0*0.2*MAX_SPEED, 0.2*MAX_SPEED, false, false);
 		return false;
-	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance&&speed>.31){
-		TankDrive(speed, -1.0*speed, false, false);
+	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance){
+		TankDrive(0.2*MAX_SPEED, -1.0*0.2*MAX_SPEED, false, false);
 		return false;
 	}else {
+		StopLeft();
+		StopRight();
 		return true;
 	}
 }
@@ -230,15 +228,22 @@ DalekDrive::GetCanDrive(){
 */
 void
 DalekDrive::Tick(){
-	if(canDrive) {
-
+	if (m_rightStick->GetRawButtonPressed(3)){
+		canDrive=false;
+		while(!Turn(10)){}
+		canDrive=true;
+	}else if (m_rightStick->GetRawButtonPressed(4)){
+		canDrive=false;
+		while(!Turn(-10)){}
+		canDrive=true;
+	} else if(canDrive) {
 		//Check to see if slowmo is active
 		if(m_rightStick->GetRawButton(2)){
 			driveSlow = true;
 		}else{
 			driveSlow = false;
 		}
-
+		
 		//Check for the brakes and move accordingly
 		if (m_leftStick->GetTrigger()&&!m_rightStick->GetTrigger()){
 			StopLeft();
@@ -257,13 +262,11 @@ DalekDrive::Tick(){
 		if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
 			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
 		}
+	} else {
+		ResetEncoder();
 	}
-
 	
-	// SmartDashboard::PutBoolean("Right Trigger", m_rightStick->GetTrigger());
-	// SmartDashboard::PutBoolean("Left Trigger", m_leftStick->GetTrigger());
-	
-	// // Put the variables on the board
-	// SmartDashboard::PutBoolean("Drive Active", canDrive);
-	// SmartDashboard::PutBoolean("Slow Button", m_rightStick->GetRawButton(2));	
+	// Put the variables on the board
+	SmartDashboard::PutBoolean("Drive Active", canDrive);
+	SmartDashboard::PutBoolean("Slow Active", m_rightStick->GetRawButton(2));	
 }
