@@ -268,5 +268,5 @@ DalekDrive::Tick(){
 	
 	// Put the variables on the board
 	SmartDashboard::PutBoolean("Drive Active", canDrive);
-	SmartDashboard::PutBoolean("Slow Active", m_rightStick->GetRawButton(2));	
+	SmartDashboard::PutBoolean("Slow Active", driveSlow);	
 }
