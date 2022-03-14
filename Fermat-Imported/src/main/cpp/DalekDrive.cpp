@@ -230,15 +230,15 @@ DalekDrive::GetCanDrive(){
 */
 void
 DalekDrive::Tick(){
-	if (m_rightStick->GetRawButtonPressed(4)){
+	if (m_leftStick->GetRawButtonPressed(4)){
 		canDrive=false;
 		while(!Turn(10)){}
 		canDrive=true;
-	} else if (m_rightStick->GetRawButtonPressed(5)){
+	} else if (m_leftStick->GetRawButtonPressed(5)){
 		canDrive=false;
 		while(!Turn(-10)){}
 		canDrive=true;
-	} else if (m_rightStick->GetRawButton(2)) {
+	} else if (m_leftStick->GetRawButton(2)) {
 		canDrive=true;
 	} else if(canDrive) {
 		//Check to see if slowmo is active
