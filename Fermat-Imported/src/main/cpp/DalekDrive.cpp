@@ -225,6 +225,8 @@ DalekDrive::GetCanDrive(){
   Left Joystick Trigger - Brake left
   Right Joystick Trigger - Brake right
   Thumb Button Right Joystick - Slow mode (30% slower)
+  Button 4 - Turn 10 Degrees Left
+  Button 5 - Turn 10 Degrees Right
 */
 void
 DalekDrive::Tick(){
