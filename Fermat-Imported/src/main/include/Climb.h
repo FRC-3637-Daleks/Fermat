@@ -12,7 +12,6 @@ class Climb{
         void Tick();
         void AutoClimb();
     private:
-        bool ClimbSafety = false;
         frc::XboxController *m_xbox;
         frc::Solenoid *m_climb_solenoid;
         WPI_TalonFX *m_climb_motor;
