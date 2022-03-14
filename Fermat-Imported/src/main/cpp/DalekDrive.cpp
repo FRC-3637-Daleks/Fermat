@@ -236,6 +236,8 @@ DalekDrive::Tick(){
 		canDrive=false;
 		while(!Turn(-10)){}
 		canDrive=true;
+	} else if (m_rightStick->GetRawButton(2)) {
+		canDrive=true;
 	} else if(canDrive) {
 		//Check to see if slowmo is active
 		if(m_rightStick->GetRawButton(2)){
