@@ -7,10 +7,6 @@
 class Intake{
     public:
         Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox);
-        bool StartIntake();
-        bool StopIntake();
-        bool SuckBalls();
-        bool UnSuckBalls();
         bool ToggleIntakePneumatics();
         bool AutoIntake(bool toggle);
         void Tick();

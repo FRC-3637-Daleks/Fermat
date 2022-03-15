@@ -6,24 +6,6 @@ Intake::Intake(frc::Solenoid *intake_solenoid, frc::XboxController *xbox){
     m_intake_motor = new WPI_TalonSRX(INTAKE_MOTOR);
 }
 
-//Starts the motor
-bool
-Intake::SuckBalls() {
-    m_intake_motor->Set(INTAKE_MOTOR_SPEED);  
-}
-
-//Reverses the motor
-bool
-Intake::UnSuckBalls() {
-    m_intake_motor->Set(-INTAKE_MOTOR_SPEED);
-}
-
-//Toggles the solenoid for the intake pneumatics
-bool
-Intake::ToggleIntakePneumatics() {
-    m_intake_solenoid->Toggle();
-}
-
 //Turns on pneumatics and turns on motor at the same time
 bool
 Intake::AutoIntake(bool toggle) {
@@ -39,9 +21,9 @@ Intake::AutoIntake(bool toggle) {
 
 //Tick function doin tick function things
 /*
-  Left Bumper - Activate intake motor
-  A Buttton - Activate intake pneumatics
-  Start Button - Activate auto intake
+    Left Bumper - Activate intake motor
+    A Buttton - Activate intake pneumatics
+    Start Button - Activate auto intake
 */
 void
 Intake::Tick() {
@@ -53,17 +35,4 @@ Intake::Tick() {
     } else {
         AutoIntake(false);
     }
-
-    // if (m_xbox->GetBumper(frc::GenericHID::kLeftHand)){
-    //     SuckBalls();
-    // }else if (false){
-    //     UnSuckBalls();
-    // }else{
-    //     m_intake_motor->Set(0);
-    // }
-
-    // if (m_xbox->GetAButtonPressed()) {
-    //     ToggleIntakePneumatics();
-    // }
-    
 }
