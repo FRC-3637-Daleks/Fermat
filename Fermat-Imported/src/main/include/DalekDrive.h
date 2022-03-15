@@ -9,14 +9,14 @@
 #define FREE_LIMIT					20
 #define RAMP_RATE					0.5
 #define MAX_SPEED					0.45		// % of Full Speed (1)
-#define SLOW_SPEED					0.5			// % of MAX_SPEED
+#define SLOW_SPEED					0.35		// % of MAX_SPEED
 #define NUM_MOTORS_PER_SIDE			2
 #define LEFT						0
 #define RIGHT						1
 #define FRONT						0
 #define REAR						1
 #define ENCODER_FEET                6300		// Encoder values for 1 foot
-#define turningErrorThreshold		0.05
+#define TURNING_ERROR				0.05
 #define pTurn						2			// this number depends on the speed of the robot (weight and handicap)
 
 using namespace frc;

@@ -123,18 +123,21 @@ DalekDrive::Turn(double degrees){
 	double totalDistance = (13.5/12) * radAngle;
 	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
 	
-	// SmartDashboard::PutNumber("Turn TotalDist", totalDistance);
+	SmartDashboard::PutNumber("Turn TotalDist", totalDistance);
 	//double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
 
-	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance){
+	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance-TURNING_ERROR){
 		TankDrive(-1.0*MAX_SPEED, MAX_SPEED, false, true);
+		SmartDashboard::PutBoolean("Turn GOOD", false);
 		return false;
-	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance){
+	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance+TURNING_ERROR){
 		TankDrive(MAX_SPEED, -1.0*0.2*MAX_SPEED, false, true);
+		SmartDashboard::PutBoolean("Turn GOOD", false);
 		return false;
 	}else {
 		StopLeft();
 		StopRight();
+		SmartDashboard::PutBoolean("Turn GOOD", true);
 		return true;
 	}
 }

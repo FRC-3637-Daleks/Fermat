@@ -4,7 +4,7 @@
 
 #define SHOOT_ANGLE         1 //rad (57 degrees)
 #define HIGH_SHOOT          2.6416 //meters //2.6416
-#define LOW_SHOOT           1.2192 //meters
+#define LOW_SHOOT           4 //meters
 #define START_HEIGHT        0.058 //meters
 #define DIST_COEFFICIENT    0.311 //inches
 #define DIST_EXPONENT       -0.456 // inches
