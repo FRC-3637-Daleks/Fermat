@@ -23,7 +23,7 @@ Shooter::SetLow(){
 
 double
 Shooter::SetMiss(){
-    return 0.5; //lowest it can go to output the ball (can't go out of ring)
+    return -0.6; //lowest it can go to output the ball (can't go out of ring)
 }
 
 void 
