@@ -27,7 +27,6 @@ Intake::AutoIntake(bool toggle) {
 */
 void
 Intake::Tick() {
-
     frc::SmartDashboard::PutBoolean("A button", m_xbox->GetAButton());
     
     if (m_xbox->GetAButton()){
