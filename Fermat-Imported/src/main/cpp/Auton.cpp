@@ -9,24 +9,10 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	auton_phase		= 0;
 }
 
-// // Some Good Auton C+V
-
-// if (LIMELIGHT_GOOD==1){
-	
-// } else{
-
-// }
-
-// if (PI_GOOD == 1){
-
-// } else {
-
-// }
-
 void 
 Auton::REALLYBAD(){
 
-	// The way we do auton when we have no time to do anything.
+	// The way we do auton when we have no time to do anything (aka this season).
 
 	m_drive->TankDrive(-.3,-.3,false, false);
 	m_intake->AutoIntake(true);
@@ -42,6 +28,7 @@ void
 Auton::Tick() {
 
 	// below is the way we usually do auton
+	// This is the reason why we have some methods as booleans so it is easy to use during auton
 
     // switch(auton_phase) {
     // 	case 0: //Turn limelight on ;)
