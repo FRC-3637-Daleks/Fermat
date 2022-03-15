@@ -9,7 +9,6 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     }
     m_upperLimit = new DigitalInput(UPPER_IR);
     m_lowerLimit = new DigitalInput(LOWER_IR);
-    ClimbSafety=true;
 }
 
 // Untested (Would be nice to have a limit switch for side arm but we probably wont get it)
@@ -73,6 +72,7 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
+    frc::SmartDashboard::PutBoolean("Climb Testing Active", CLIMB_SENSOR_TESING==1);
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
     
     // if(false){//m_xbox->GetYButtonPressed();
