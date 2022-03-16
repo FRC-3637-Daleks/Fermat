@@ -38,14 +38,10 @@
 // devices on the robot
 #define ROBORIO         		"10.36.37.2"
 #define ACCESS_POINT     		"10.36.37.1"
-// #define CAMERA					"10.36.37.16"
-#define CAMERA					"224.0.0.252"
+#define CAMERA					"10.36.37.129"
 #define RASPBERRY_PI_ADDR		"10.36.37.??"
 #define LIMELIGHT_ADDR			"10.36.37.11"
-#define LEVEL_SENSOR_ADDR		"10.36.37.??"
 #define PI						3.14159265358979323846264338327 //pi
-
-
 
 // CAN BUS devices
 enum CAN_IDS {
