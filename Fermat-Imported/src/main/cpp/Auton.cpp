@@ -6,7 +6,7 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	m_intake		= intake;
     m_limelight     = limelight;
 	m_shooter		= shooter;
-	auton_phase		= 0;
+	// auton_phase		= 0;
 }
 
 void 
