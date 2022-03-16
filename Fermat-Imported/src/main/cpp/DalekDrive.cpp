@@ -120,17 +120,17 @@ DalekDrive::Turn(double degrees){
 	*/
 	
 	double radAngle = degrees * (PI / 180);
-	double totalDistance = (13.5/12) * radAngle;
-	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
+	double totalDistance = (13.5 / 12) * radAngle;
+	double distanceTraveled = -1.0 * m_left[FRONT]->GetSelectedSensorPosition() / ENCODER_FEET;
 	
 	SmartDashboard::PutNumber("Turn TotalDist", totalDistance);
 	SmartDashboard::PutNumber("Turn CurrentDist", m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET);
 
-	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance-TURNING_ERROR){
+	if((totalDistance > 0) && (m_left[FRONT]->GetSelectedSensorPosition() / ENCODER_FEET) <= (totalDistance - TURNING_ERROR)){
 		TankDrive(-1.0, 1.0, false, true);
 		SmartDashboard::PutBoolean("Turn GOOD", false);
 		return false;
-	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance+TURNING_ERROR){
+	} else if((totalDistance < 0) && (m_left[FRONT]->GetSelectedSensorPosition() / ENCODER_FEET) >= (totalDistance + TURNING_ERROR)){
 		TankDrive(1.0, -1.0, false, true);
 		SmartDashboard::PutBoolean("Turn GOOD", false);
 		return false;
