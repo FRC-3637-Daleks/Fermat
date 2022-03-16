@@ -10,25 +10,18 @@ void Robot::RobotInit()
   camera.SetResolution(160, 90);   
   camera.SetFPS(15);
 
-  // try {
-    m_xbox                = new frc::XboxController(XBOX);
-    m_drive               = new DalekDrive(m_xbox);
-    m_climb_solenoid      = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, CLIMB);
-    m_intake_solenoid     = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, INTAKE);
-    m_shooter_solenoid    = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, SHOOTER);
-    m_compressor          = new frc::Compressor(PCM, PneumaticsModuleType::CTREPCM);
-    m_limelight           = new Limelight(m_drive);
-    m_pi                  = new RaspberryPi(m_drive, m_xbox);
-    m_climb               = new Climb(m_climb_solenoid, m_xbox);
-    m_intake              = new Intake(m_intake_solenoid, m_xbox);
-    m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
-    m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
-  // }
-  // catch (std::exception& e) {
-  //   std::string err_string = "Error instantiating components:  ";
-  //   err_string += e.what();
-  //   DriverStation::ReportError(err_string.c_str());
-  // }
+  m_xbox                = new frc::XboxController(XBOX);
+  m_drive               = new DalekDrive(m_xbox);
+  m_climb_solenoid      = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, CLIMB);
+  m_intake_solenoid     = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, INTAKE);
+  m_shooter_solenoid    = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, SHOOTER);
+  m_compressor          = new frc::Compressor(PCM, PneumaticsModuleType::CTREPCM);
+  m_limelight           = new Limelight(m_drive);
+  m_pi                  = new RaspberryPi(m_drive, m_xbox);
+  m_climb               = new Climb(m_climb_solenoid, m_xbox);
+  m_intake              = new Intake(m_intake_solenoid, m_xbox);
+  m_shooter             = new Shooter(m_drive ,m_xbox, m_shooter_solenoid, m_limelight);
+  m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
   
   m_compressor->Start();
   m_climb_solenoid->Set(false);
