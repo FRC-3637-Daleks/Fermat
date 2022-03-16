@@ -4,7 +4,7 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     m_climb_solenoid = climb_solenoid;
     m_xbox = xbox;
     m_climb_motor = new WPI_TalonFX(CLIMB_MOTOR);
-    if (CLIMB_SENSOR_TESING == 0){
+    if (CLIMB_SENSOR_TESTING == 0){
         m_climb_motor->SetNeutralMode(Brake);
     }
     m_upperLimit = new DigitalInput(UPPER_IR);
@@ -21,7 +21,7 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
-    frc::SmartDashboard::PutBoolean("Climb Testing Active", CLIMB_SENSOR_TESING==1);
+    frc::SmartDashboard::PutBoolean("Climb Testing Active", CLIMB_SENSOR_TESTING==1);
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
 
     if (CLIMB_SENSOR_TESTING == 0){
