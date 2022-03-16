@@ -14,6 +14,7 @@ Intake::AutoIntake(bool toggle) {
         m_intake_motor->Set(INTAKE_MOTOR_SPEED);
     } else {
         m_intake_solenoid->Set(false);
+        Wait(1.0_s);
         m_intake_motor->Set(0);
     }
     

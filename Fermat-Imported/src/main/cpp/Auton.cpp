@@ -6,7 +6,7 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	m_intake		= intake;
     m_limelight     = limelight;
 	m_shooter		= shooter;
-	auton_phase		= 0;
+	// auton_phase		= 0;
 }
 
 void 
@@ -18,7 +18,7 @@ Auton::REALLYBAD(){
 	m_intake->AutoIntake(true);
 	Wait(1.5_s);
 	m_drive->TankDrive(0.0, 0.0, false, false);
-	m_shooter->SetSpeed(3.3);
+	m_shooter->SetSpeed(4.5);
 	Wait(5.0_s);
 	m_shooter->Shoot();
 	// m_pi->SwerveTurn();

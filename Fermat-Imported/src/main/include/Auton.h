@@ -23,5 +23,5 @@ class Auton {
 		Intake *m_intake;
 		Limelight *m_limelight;
 		Shooter *m_shooter;
-		int auton_phase;
+		// int auton_phase;
 };
