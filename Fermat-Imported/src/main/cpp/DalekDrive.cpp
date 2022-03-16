@@ -124,14 +124,14 @@ DalekDrive::Turn(double degrees){
 	double distanceTraveled = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
 	
 	SmartDashboard::PutNumber("Turn TotalDist", totalDistance);
-	//double speed = ((MAX_SPEED*10*totalDistance-distanceTraveled)/totalDistance)*MAX_SPEED;
+	SmartDashboard::PutNumber("Turn CurrentDist", m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET);
 
 	if(totalDistance>0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET <= totalDistance-TURNING_ERROR){
-		TankDrive(-1.0*MAX_SPEED, MAX_SPEED, false, true);
+		TankDrive(-1.0, 1.0, false, true);
 		SmartDashboard::PutBoolean("Turn GOOD", false);
 		return false;
 	} else if(totalDistance<0&&m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET >= totalDistance+TURNING_ERROR){
-		TankDrive(MAX_SPEED, -1.0*0.2*MAX_SPEED, false, true);
+		TankDrive(1.0, -1.0, false, true);
 		SmartDashboard::PutBoolean("Turn GOOD", false);
 		return false;
 	}else {
@@ -233,14 +233,18 @@ DalekDrive::GetCanDrive(){
 */
 void
 DalekDrive::Tick(){
-	if (m_leftStick->GetRawButtonPressed(4)){
+	if (m_leftStick->GetRawButton(4)){
 		canDrive=false;
-		while(!Turn(10)){}
-		canDrive=true;
-	} else if (m_leftStick->GetRawButtonPressed(5)){
+		if (!Turn(10)){
+			canDrive=true;
+		}
+		
+	} else if (m_leftStick->GetRawButton(5)){
 		canDrive=false;
-		while(!Turn(-10)){}
-		canDrive=true;
+		if (!Turn(-10)){
+			canDrive=true;
+		}
+		
 	} else if (m_leftStick->GetRawButton(2)) {
 		canDrive=true;
 	} else if(canDrive) {
