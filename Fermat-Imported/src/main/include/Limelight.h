@@ -12,6 +12,8 @@
 #define ANGLE_EXPONENT      0
 #define ANGLE_PRODUCT       1.59 
 #define ANGLE_OFFSET        0.0228 
+#define AREA_MAX            10.0
+#define AREA_MIN            0.1
 
 
 class Limelight {

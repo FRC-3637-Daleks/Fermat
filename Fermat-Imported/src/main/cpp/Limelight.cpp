@@ -43,12 +43,14 @@ void Limelight::LightOn() {
 }
 
 void Limelight::Tick() { 
-		LightOn();	
+	
+	LightOn();	
+	
 	//Set Limelight area (ta) to a variable
 	area = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0);
 
 	// set a variable distance using a linear regression of ax+b using tvert on desmos
-	distance = (area>0.001&&area<100000)?CalcDistance():distance;
+	distance = (area>AREA_MIN&&area<AREA_MAX)?CalcDistance():distance;
 
 	//angle?
 	angle = asin (nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0)/distance)*180/PI; 

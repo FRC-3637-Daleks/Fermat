@@ -21,7 +21,7 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
-    frc::SmartDashboard::PutBoolean("Climb Testing Active", CLIMB_SENSOR_TESTING==1);
+    frc::SmartDashboard::PutBoolean("Climb On", CLIMB_SENSOR_TESTING!=1);
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
 
     if (CLIMB_SENSOR_TESTING == 0){
