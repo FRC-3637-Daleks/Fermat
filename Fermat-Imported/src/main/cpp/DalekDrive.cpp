@@ -233,13 +233,13 @@ DalekDrive::GetCanDrive(){
 */
 void
 DalekDrive::Tick(){
-	if (m_leftStick->GetRawButton(4)){
+	if (m_leftStick->GetRawButton(5)){
 		canDrive=false;
 		if (!Turn(10)){
 			canDrive=true;
 		}
 		
-	} else if (m_leftStick->GetRawButton(5)){
+	} else if (m_leftStick->GetRawButton(4)){
 		canDrive=false;
 		if (!Turn(-10)){
 			canDrive=true;
