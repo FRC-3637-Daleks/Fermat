@@ -2,7 +2,7 @@
 
 #include "Fermat.h"
 
-#define SHOOT_ANGLE         1 //rad (57 degrees)
+#define SHOOT_ANGLE         1.0646508437 //rad (57 degrees) //1.0646508437
 #define HIGH_SHOOT          2.6416 //meters //2.6416
 #define LOW_SHOOT           4 //meters
 #define START_HEIGHT        0.058 //meters
