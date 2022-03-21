@@ -21,26 +21,41 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
-    frc::SmartDashboard::PutBoolean("Climb Testing Active", CLIMB_SENSOR_TESTING==1);
+    frc::SmartDashboard::PutBoolean("Climb On", CLIMB_SENSOR_TESTING!=1);
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
 
     if (CLIMB_SENSOR_TESTING == 0){
         if (!(m_upperLimit->Get())){
-            m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            m_climb_motor->Set(CLIMB_MOTOR_SPEED_ADJUST);
             m_climb_solenoid->Set(false);
         } else if (!(m_lowerLimit->Get())){
-            m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            m_climb_motor->Set(-CLIMB_MOTOR_SPEED_ADJUST);
             m_climb_solenoid->Set(false);
         } else {
-            if(m_xbox->GetRawAxis(5)>0.5){
+            if(m_xbox->GetRawAxis(5)>0.5&&m_upperLimit->Get()){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            } else if(m_xbox->GetRawAxis(5)<-0.5){
+            } else if(m_xbox->GetRawAxis(5)<-0.5&&m_lowerLimit->Get()){
                 m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
             } else{
                 //m_climb_motor->Set(m_climb_motor->Get()*-.9);
                 m_climb_motor->Set(0.0);
             }
         }
+        // if (!(m_upperLimit->Get())){
+        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+        //     m_climb_solenoid->Set(false);
+        // } else if (!(m_lowerLimit->Get())){
+        //     m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+        //     m_climb_solenoid->Set(false);
+        // } else {
+        //     if(m_xbox->GetRawAxis(5)>0.5){
+        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+        //     } else if(m_xbox->GetRawAxis(5)<-0.5){
+        //         m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+        //     } else{
+        //         m_climb_motor->Set(0.0);
+        //     }
+        // }
     }
 
     if(m_xbox->GetLeftBumperPressed()){

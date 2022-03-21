@@ -79,14 +79,14 @@ Shooter::Tick(){
     if (m_xbox->GetXButton()){
         speed = SetMiss();
     } else if (m_xbox->GetRawAxis(0) > 0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.3));
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.2512));
     } else if (m_xbox->GetRawAxis(1) > 0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,4.5));
     } else if (m_xbox->GetRawAxis(0)< -0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.2));
     } else if (m_xbox->GetRawAxis(1) < -0.5){
-        // speed = FromMetersPerSecond(m_limelight->CalcVelocity(2));
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(1,6));
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2));
+        // speed = FromMetersPerSecond(m_limelight->CalcVelocity(1,6));
     } 
 
     m_shooter_motor-> Set(speed);    
