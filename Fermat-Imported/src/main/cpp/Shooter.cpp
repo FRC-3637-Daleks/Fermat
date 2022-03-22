@@ -79,9 +79,9 @@ Shooter::Tick(){
     if (m_xbox->GetXButton()){
         speed = SetMiss();
     } else if (m_xbox->GetRawAxis(0) > 0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.2512));
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,3.3));
     } else if (m_xbox->GetRawAxis(1) > 0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,4.5));
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,5));
     } else if (m_xbox->GetRawAxis(0)< -0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.2));
     } else if (m_xbox->GetRawAxis(1) < -0.5){

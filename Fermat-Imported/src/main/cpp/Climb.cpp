@@ -27,28 +27,28 @@ Climb::Tick(){
     if (CLIMB_SENSOR_TESTING == 0){
         // Maybe use adjust speed the more you use the axis
         // m_climb_motor->Set(CLIMB_MOTOR_SPEED/m_xbox->GetRawAxis(5));
-        if( m_xbox->GetRawAxis(5) > 0.5 && m_upperLimit->Get()){
-            m_climb_motor->Set(CLIMB_MOTOR_SPEED / m_xbox->GetRawAxis(5));
-        } else if( m_xbox->GetRawAxis(5) < -0.5 && m_lowerLimit->Get()){
-            m_climb_motor->Set(CLIMB_MOTOR_SPEED / m_xbox->GetRawAxis(5));
-        } else{
-            m_climb_motor->Set(0.0);
-        }
-        // if (!(m_upperLimit->Get())){
-        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-        //     m_climb_solenoid->Set(false);
-        // } else if (!(m_lowerLimit->Get())){
-        //     m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-        //     m_climb_solenoid->Set(false);
-        // } else {
-        //     if(m_xbox->GetRawAxis(5)>0.5){
-        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-        //     } else if(m_xbox->GetRawAxis(5)<-0.5){
-        //         m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-        //     } else{
-        //         m_climb_motor->Set(0.0);
-        //     }
+        // if( m_xbox->GetRawAxis(5) > 0.5 && m_upperLimit->Get()){
+        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED / m_xbox->GetRawAxis(5));
+        // } else if( m_xbox->GetRawAxis(5) < -0.5 && m_lowerLimit->Get()){
+        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED / m_xbox->GetRawAxis(5));
+        // } else{
+        //     m_climb_motor->Set(0.0);
         // }
+        if (!(m_upperLimit->Get())){
+            m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            m_climb_solenoid->Set(false);
+        } else if (!(m_lowerLimit->Get())){
+            m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            m_climb_solenoid->Set(false);
+        } else {
+            if(m_xbox->GetRawAxis(5)>0.5){
+            m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+            } else if(m_xbox->GetRawAxis(5)<-0.5){
+                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+            } else{
+                m_climb_motor->Set(0.0);
+            }
+        }
     }
 
     if(m_xbox->GetLeftBumperPressed()){
