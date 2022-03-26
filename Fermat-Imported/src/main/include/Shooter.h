@@ -20,6 +20,7 @@ class Shooter {
 		void TurnOnSolenoid();
 		void TurnOffSolenoid();
 		double FromMetersPerSecond(double speed);
+		double FromMetersPerSecondNoBoost(double speed);
 		void Tick();
 		void SetSpeed(double dist);
 
