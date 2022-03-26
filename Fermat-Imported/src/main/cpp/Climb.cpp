@@ -34,21 +34,23 @@ Climb::Tick(){
         // } else{
         //     m_climb_motor->Set(0.0);
         // }
-        if (!(m_upperLimit->Get())){
+        if(m_xbox->GetRawAxis(5) > 0.5 && m_lowerLimit->Get()){
             m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            m_climb_solenoid->Set(false);
-        } else if (!(m_lowerLimit->Get())){
+        } else if(m_xbox->GetRawAxis(5) < -0.5 && m_upperLimit->Get()){
             m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            m_climb_solenoid->Set(false);
-        } else {
-            if(m_xbox->GetRawAxis(5)>0.5){
-            m_climb_motor->Set(CLIMB_MOTOR_SPEED);
-            } else if(m_xbox->GetRawAxis(5)<-0.5){
-                m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
-            } else{
-                m_climb_motor->Set(0.0);
-            }
+        } else{
+            m_climb_motor->Set(0.0);
         }
+        
+        // if (!(m_upperLimit->Get())){
+        //     m_climb_motor->Set(CLIMB_MOTOR_SPEED);
+        //     m_climb_solenoid->Set(false);
+        // } else if (!(m_lowerLimit->Get())){
+        //     m_climb_motor->Set(-CLIMB_MOTOR_SPEED);
+        //     m_climb_solenoid->Set(false);
+        // } else {
+            
+        // }
     }
 
     if(m_xbox->GetLeftBumperPressed()){
