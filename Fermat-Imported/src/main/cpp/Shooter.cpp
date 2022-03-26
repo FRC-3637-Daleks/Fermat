@@ -70,8 +70,6 @@ Shooter::FromMetersPerSecondNoBoost(double speed){
 }
 
 
-
-
 /*
   Back Button - Toggle auto shoot
   Right Bumper - Toggle shooter pneumatics
