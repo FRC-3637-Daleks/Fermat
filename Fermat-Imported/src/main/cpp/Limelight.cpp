@@ -7,7 +7,7 @@ Limelight::Limelight(DalekDrive *drive) {
 
 double Limelight::CalcDistance() // (m)
 {
-  return (DIST_COEFFICIENT*pow(area, DIST_EXPONENT));
+  return (DIST_COEFFICIENT*pow(area, DIST_EXPONENT))*0.0254;
 }
 
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
@@ -53,7 +53,7 @@ void Limelight::Tick() {
 	distance = (area>AREA_MIN&&area<AREA_MAX)?CalcDistance():distance;
 
 	//angle?
-	angle = asin (nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0)/distance)*180/PI; 
+	angle = acos (nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0)/distance)*180/PI; 
 
 	//display the hypothetical velocity for the wheel
 	// low_velocity = CalcVelocity(1);
@@ -62,19 +62,8 @@ void Limelight::Tick() {
 	//Put the X-Distance the robot is from the target on the dashboard 
 	SmartDashboard::PutNumber("Horizontal Distance from the Target", distance);
 
-	//Put the hypothetical velocity
-    SmartDashboard::PutNumber("dist", distance);
-
-
 	// // Display all the Limelight Varibles on the Smart Dashboard
 	// SmartDashboard::PutNumber("ta", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0));
 	// SmartDashboard::PutNumber("tx", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0.0));
 	// SmartDashboard::PutNumber("ty", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0.0));
-
-	// Display all Useful data on the Shuffleboard
-	SmartDashboard::PutNumber("Lime Dist", distance);
-	SmartDashboard::PutNumber("Lime Angle", angle);
-	SmartDashboard::PutNumber("Lime Shoot", high_velocity);
-
-
 }
