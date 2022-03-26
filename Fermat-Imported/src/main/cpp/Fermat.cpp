@@ -56,9 +56,8 @@ void Robot::TeleopPeriodic()
   /*
 
     INTAKE:
-      Start Button - Toggle auto intake (no buttons needed after)
-      A Buttton - Activate intake (HOLD)
-      B Button - Swerve turn (follow ball) (HOLD)
+      A Buttton - Activate auto intake
+      B Button - Activate intake
     
     SHOOTER:
       Back Button - Toggle auto shoot   
