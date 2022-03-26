@@ -16,9 +16,13 @@ Auton::REALLYBAD(){
 
 	m_drive->TankDrive(-.3,-.3,false, false);
 	m_intake->AutoIntake(true);
-	Wait(3.0_s); //1.5_s
+	Wait(2.0_s); //1.5_s
 	m_drive->TankDrive(0.0, 0.0, false, false);
-	m_shooter->SetSpeed(4.6541);
+	if (LIMELIGHT_GOOD==1){
+		m_shooter->SetHigh();
+	} else {
+		m_shooter->SetSpeed(4.2164);
+	}
 	Wait(4.0_s);
 	m_intake->AutoIntake(false);
 	m_shooter->Shoot();
