@@ -61,6 +61,7 @@ void Limelight::Tick() {
 
 	//Put the X-Distance the robot is from the target on the dashboard 
 	SmartDashboard::PutNumber("Horizontal Distance from the Target", distance);
+	SmartDashboard::PutNumber("Horizontal Distance from the Target", angle);
 
 	// // Display all the Limelight Varibles on the Smart Dashboard
 	// SmartDashboard::PutNumber("ta", nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ta", 0.0));
