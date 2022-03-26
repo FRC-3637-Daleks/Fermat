@@ -23,7 +23,7 @@ Shooter::SetLow(){
 
 double
 Shooter::SetMiss(){
-    return -0.6; //lowest it can go to output the ball (can't go out of ring)
+    return -0.4; //lowest it can go to output the ball (can't go out of ring)
 }
 
 void 
@@ -59,6 +59,17 @@ Shooter::FromMetersPerSecond(double speed){
     return -1.0*speed/14.177169887609779606984986211852-SHOOT_MOTOR_BOOST;
 }
 
+double 
+Shooter::FromMetersPerSecondNoBoost(double speed){
+    // 5330 rpm = 88.8333333 rps
+    // 2 in radius = 0.0508 m radius
+    // 0.1595929068023614965139022838706 circumferance
+    // 1 speed point
+    // 14.177169887609779606984986211852 meters per seconds per 1 speed point
+    return -1.0*speed/14.177169887609779606984986211852;
+}
+
+
 
 
 /*
@@ -85,7 +96,7 @@ Shooter::Tick(){
     } else if (m_xbox->GetRawAxis(0)< -0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.2));
     } else if (m_xbox->GetRawAxis(1) < -0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2));
+        speed = FromMetersPerSecondNoBoost(m_limelight->CalcVelocity(2));
         // speed = FromMetersPerSecond(m_limelight->CalcVelocity(1,6));
     } 
 

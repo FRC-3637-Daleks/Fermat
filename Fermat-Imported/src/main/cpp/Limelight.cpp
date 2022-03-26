@@ -63,9 +63,7 @@ void Limelight::Tick() {
 	SmartDashboard::PutNumber("Horizontal Distance from the Target", distance);
 
 	//Put the hypothetical velocity
-	SmartDashboard::PutNumber("Flywheel Speed for Low Shot", low_velocity);
-	SmartDashboard::PutNumber("Flywheel Speed for High Shot", high_velocity);
-    SmartDashboard::PutNumber("TA", area);
+    SmartDashboard::PutNumber("dist", distance);
 
 
 	// // Display all the Limelight Varibles on the Smart Dashboard
