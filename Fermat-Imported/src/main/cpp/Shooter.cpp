@@ -71,9 +71,9 @@ Shooter::FromMetersPerSecondNoBoost(double speed){
 
 
 /*
-  Back Button - Toggle auto shoot
+  X Button - Miss
   Right Bumper - Toggle shooter pneumatics
-  Right Joystick XBOX - Shooter speeds (4 speeds)
+  Left Joystick XBOX - Shooter speeds (4 speeds)
     Up - 0.25
     Left - 0.5
     Down - 0.75
