@@ -49,7 +49,7 @@ Climb::Tick(){
             m_climb_motor->Set(0.0);
         }
 
-        if (!m_lowerLimit->Get()||!m_upperLimit->Get()){
+        if (!m_lowerLimit->Get()){
             m_climb_solenoid->Set(false);
         }
     }
