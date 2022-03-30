@@ -7,7 +7,7 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
     m_limelight     = limelight;
 	m_shooter		= shooter;
 	// auton_phase		= 0;
-	autonVersion  	= 0;
+	autonVersion  	= 1;
 }
 
 void 
@@ -23,10 +23,11 @@ Auton::REALLYBAD(){
 		Wait(4.0_s);
 		m_intake->AutoIntake(false);
 	} else if (autonVersion == 1){
+		m_drive->ResetEncoder();
 		m_intake->AutoIntake(true);
 		//total distance = 5.9525 feet
-		m_drive->DriveToFeet(12.92568898);
-		m_intake->AutoIntake(false);
+		while(!m_drive->DriveToFeet(68.0/12.0)){};
+		m_drive->TankDrive(0.0, 0.0, false, false);
 	}
 
 	if (LIMELIGHT_GOOD==1){
@@ -35,12 +36,13 @@ Auton::REALLYBAD(){
 		if (autonVersion==0){
 			m_shooter->SetSpeed(4.2164);
 		} else {
-			m_shooter->SetSpeed(3.93975);
+			m_shooter->SetSpeed(3.8862);
 		}
 		
 	}
 
 	Wait(4.0_s);
+	m_intake->AutoIntake(false);
 	m_shooter->Shoot();
 	Wait(4.0_s);
 	m_shooter->Shoot();

@@ -5,10 +5,10 @@ DalekDrive::DalekDrive(XboxController *xbox) {
 	m_left[REAR]   = new WPI_TalonFX(leftRear);
 	m_right[FRONT] = new WPI_TalonFX(rightFront);
 	m_right[REAR]  = new WPI_TalonFX(rightRear);
-	// m_left[FRONT]->SetNeutralMode(Brake);
-	// m_left[REAR]->SetNeutralMode(Brake);
-	// m_right[FRONT]->SetNeutralMode(Brake);
-	// m_right[REAR]->SetNeutralMode(Brake);
+	m_left[FRONT]->SetNeutralMode(Brake);
+	m_left[REAR]->SetNeutralMode(Brake);
+	m_right[FRONT]->SetNeutralMode(Brake);
+	m_right[REAR]->SetNeutralMode(Brake);
 	m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
 	m_xbox = xbox;
@@ -71,7 +71,7 @@ DalekDrive::DriveToFeet(double feet)
 	double dis = -1.0*m_left[FRONT]->GetSelectedSensorPosition()/ENCODER_FEET;
 	// SmartDashboard::PutNumber("DriveToFeet Dist", dis);
 
-	double speed = 3*SLOW_SPEED*MAX_SPEED;
+	double speed = .5*SLOW_SPEED*MAX_SPEED;
 	// SmartDashboard::PutNumber("DriveToFeet Speed", speed);
 
 	if(feet>0&&abs(m_left[FRONT]->GetSelectedSensorPosition())/ENCODER_FEET <= feet){
@@ -232,6 +232,11 @@ DalekDrive::GetCanDrive(){
 */
 void
 DalekDrive::Tick(){
+	m_left[FRONT]->SetNeutralMode(Coast);
+	m_left[REAR]->SetNeutralMode(Coast);
+	m_right[FRONT]->SetNeutralMode(Coast);
+	m_right[REAR]->SetNeutralMode(Coast);
+	
 	if (m_leftStick->GetRawButton(5)){
 		canDrive=false;
 		if (!Turn(10)){

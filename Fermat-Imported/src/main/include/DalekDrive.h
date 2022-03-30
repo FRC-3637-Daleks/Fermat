@@ -9,7 +9,7 @@
 #define FREE_LIMIT					20
 #define RAMP_RATE					0.5
 #define MAX_SPEED					0.60		// % of Full Speed (1)
-#define SLOW_SPEED					0.40		// % of MAX_SPEED
+#define SLOW_SPEED					0.60		// % of MAX_SPEED
 #define NUM_MOTORS_PER_SIDE			2
 #define LEFT						0
 #define RIGHT						1
