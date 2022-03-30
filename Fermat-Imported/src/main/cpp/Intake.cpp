@@ -22,9 +22,8 @@ Intake::AutoIntake(bool toggle) {
 
 //Tick function doin tick function things
 /*
-    Left Bumper - Activate intake motor
-    A Buttton - Activate intake pneumatics
-    Start Button - Activate auto intake
+    A Buttton - Activate auto intake
+    B Button - Activate intake
 */
 void
 Intake::Tick() {

@@ -57,7 +57,7 @@ DalekDrive::TankDrive(Joystick* leftStick, Joystick* rightStick, bool squaredInp
 	TankDrive(leftStick->GetY(), rightStick->GetY(), squaredInputs, isSlow);
 }
 
-//Another way to call the method but you just put in joysticks (IDK what the difference is between & and *)
+//Another way to call the method but you just put in joysticks (Using References Instead of Pointers)
 void
 DalekDrive::TankDrive(Joystick& leftStick, Joystick& rightStick, bool squaredInputs, bool isSlow)
 {

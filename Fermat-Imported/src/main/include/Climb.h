@@ -5,7 +5,7 @@
 #define CLIMB_MOTOR_SPEED              0.65    // %
 #define CLIMB_MOTOR_SPEED_ADJUST       0.30    // %
 #define CLIMB_SENSOR_TESTING           0       // 1 for true
-
+#define DEADZONE                       0.2
 
 class Climb{
     public:

@@ -56,22 +56,19 @@ void Robot::TeleopPeriodic()
   /*
 
     INTAKE:
-      Start Button - Toggle auto intake (no buttons needed after)
-      A Buttton - Activate intake (HOLD)
-      B Button - Swerve turn (follow ball) (HOLD)
+      A Buttton - Activate auto intake
+      B Button - Activate intake
     
     SHOOTER:
-      Back Button - Toggle auto shoot   
       Right Bumper - Toggle Shooter Pneumatics (HOLD)
       X Button - Miss
-      left Stick - Shooter Speeds (4 speeds)
+      Left Stick XBOX - Shooter Speeds (4 speeds)
         Up - slowest (From start in auton)     
         Left - slower (From tarmac)
         Down - faster (Somewhere in the middle 4m)
         Right - Fastest (From Safe Zome)
 
     CLIMB:
-      Y - Auto Climb (Hold)
       Left Bumper - Climb Pneumatics (Toggle)
       Right Stick - Climb Motor(Up and Down)
   */
