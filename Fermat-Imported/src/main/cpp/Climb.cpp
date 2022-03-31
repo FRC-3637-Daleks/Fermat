@@ -21,6 +21,7 @@ void
 Climb::Tick(){
     frc::SmartDashboard::PutBoolean("Upper Sensor", m_upperLimit->Get());
     frc::SmartDashboard::PutBoolean("Lower Sensor", m_lowerLimit->Get());
+    frc::SmartDashboard::PutBoolean("IR_Good", IR_good);
     frc::SmartDashboard::PutBoolean("Climb On", CLIMB_SENSOR_TESTING==0);
     // frc::SmartDashboard::PutBoolean("Arm Pneumatics State", m_climb_solenoid->Get());
 
@@ -40,18 +41,33 @@ Climb::Tick(){
         //         m_climb_motor->Set(0.0);
         //     }
         // }
-        
-        if(m_xbox->GetRawAxis(5) > DEADZONE && m_lowerLimit->Get()){
-            m_climb_motor->Set(CLIMB_MOTOR_SPEED*abs(m_xbox->GetRawAxis(5)));
-        } else if(m_xbox->GetRawAxis(5) < -DEADZONE && m_upperLimit->Get()){
-            m_climb_motor->Set(-CLIMB_MOTOR_SPEED*abs(m_xbox->GetRawAxis(5)));
-        } else{
-            m_climb_motor->Set(0.0);
+        if (IR_good){
+            if(m_xbox->GetRawAxis(5) > DEADZONE && m_lowerLimit->Get()){
+                m_climb_motor->Set(CLIMB_MOTOR_SPEED*abs(m_xbox->GetRawAxis(5)));
+            } else if(m_xbox->GetRawAxis(5) < -DEADZONE && m_upperLimit->Get()){
+                m_climb_motor->Set(-CLIMB_MOTOR_SPEED*abs(m_xbox->GetRawAxis(5)));
+            } else{
+                m_climb_motor->Set(0.0);
+            }
+
+            if (!m_lowerLimit->Get()){
+                m_climb_solenoid->Set(false);
+            }
+        } else {
+            if(m_xbox->GetRawAxis(5) > DEADZONE){
+                m_climb_motor->Set(0.75*CLIMB_MOTOR_SPEED*abs(m_xbox->GetRawAxis(5)));
+            } else if(m_xbox->GetRawAxis(5) < -DEADZONE){
+                m_climb_motor->Set(-0.75*CLIMB_MOTOR_SPEED*abs(m_xbox->GetRawAxis(5)));
+            } else{
+                m_climb_motor->Set(0.0);
+            }
         }
 
-        if (!m_lowerLimit->Get()){
-            m_climb_solenoid->Set(false);
+        if (m_xbox->GetBackButton() || (!m_lowerLimit->Get() && !m_upperLimit->Get())){
+            IR_good = false;
         }
+
+        
     }
 
     if(m_xbox->GetLeftBumperPressed()){

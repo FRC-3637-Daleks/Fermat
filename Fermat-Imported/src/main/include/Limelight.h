@@ -6,14 +6,14 @@
 #define HIGH_SHOOT          2.6416 //meters //2.6416
 #define LOW_SHOOT           4 //meters
 #define START_HEIGHT        0.058 //meters
-#define DIST_COEFFICIENT    85.7 //inches
-#define DIST_EXPONENT       -0.192 // inches
+#define DIST_COEFFICIENT    43.3 //inches
+#define DIST_EXPONENT       -0.349 // inches
 #define ANGLE_COEFFICIENT   0 //rad
 #define ANGLE_EXPONENT      0
 #define ANGLE_PRODUCT       1.59 
 #define ANGLE_OFFSET        0.0228 
-#define AREA_MAX            10.0
-#define AREA_MIN            0.1
+#define AREA_MAX            0.3
+#define AREA_MIN            0.001
 
 
 class Limelight {
