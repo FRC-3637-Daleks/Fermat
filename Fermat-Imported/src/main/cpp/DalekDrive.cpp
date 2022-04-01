@@ -238,17 +238,9 @@ DalekDrive::Tick(){
 	m_right[REAR]->SetNeutralMode(Coast);
 	
 	if (m_leftStick->GetRawButton(5)){
-		canDrive=false;
-		if (!Turn(10)){
-			canDrive=true;
-		}
-		
+		!Turn(10);
 	} else if (m_leftStick->GetRawButton(4)){
-		canDrive=false;
-		if (!Turn(-10)){
-			canDrive=true;
-		}
-		
+		!Turn(-10);
 	} else if (m_leftStick->GetRawButton(2)) {
 		canDrive=true;
 	} else if(canDrive) {
