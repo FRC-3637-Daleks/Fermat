@@ -9,6 +9,7 @@ Climb::Climb(frc::Solenoid *climb_solenoid, frc::XboxController *xbox){
     }
     m_upperLimit = new DigitalInput(UPPER_IR);
     m_lowerLimit = new DigitalInput(LOWER_IR);
+    IR_good = true;
 }
 
 // Moving arm Tested but not solenoid (should easily work)
