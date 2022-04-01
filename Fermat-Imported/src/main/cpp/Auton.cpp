@@ -8,13 +8,13 @@ Auton::Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *lime
 	m_shooter		= shooter;
 	// auton_phase		= 0;
 	autonVersion  	= 1;
+	frc::SmartDashboard::PutNumber("Auton",autonVersion);
 }
 
 void 
 Auton::REALLYBAD(){
 
 	// The way we do auton when we have no time to do anything (aka this season).
-
 	m_drive->TankDrive(-.3,-.3,false, false);
 	if (autonVersion == 0){
 		m_intake->AutoIntake(true);
