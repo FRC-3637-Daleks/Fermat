@@ -15,7 +15,6 @@ class Auton {
 	public:
 		Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter);
 		void REALLYBAD();
-		void Tick();	
 
 	private:
 		DalekDrive *m_drive;

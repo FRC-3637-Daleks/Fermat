@@ -43,7 +43,7 @@ void Robot::AutonomousInit()
 
 void Robot::AutonomousPeriodic() 
 {
-  // m_auton->Tick();
+  
 }
 
 void Robot::TeleopInit()
