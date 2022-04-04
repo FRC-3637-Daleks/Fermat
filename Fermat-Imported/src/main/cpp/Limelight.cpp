@@ -22,8 +22,8 @@ double Limelight::CalcVelocity(double points) // (m/s)
 }
 
 double Limelight::CalcTurnAngle(double xPos){
-	SmartDashboard::PutNumber("TurnAngle", ANGLE_PRODUCT*xPos + ANGLE_OFFSET);
-	return ANGLE_PRODUCT*xPos + ANGLE_OFFSET;
+	SmartDashboard::PutNumber("TurnAngle", ANGLE_PRODUCT * xPos + ANGLE_OFFSET);
+	return ANGLE_PRODUCT * xPos + ANGLE_OFFSET;
 }
 
 double Limelight::GetAngle(){
