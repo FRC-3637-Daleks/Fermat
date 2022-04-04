@@ -5,10 +5,10 @@ DalekDrive::DalekDrive(XboxController *xbox) {
 	m_left[REAR]   = new WPI_TalonFX(leftRear);
 	m_right[FRONT] = new WPI_TalonFX(rightFront);
 	m_right[REAR]  = new WPI_TalonFX(rightRear);
-	m_left[FRONT]->SetNeutralMode(Brake);
-	m_left[REAR]->SetNeutralMode(Brake);
-	m_right[FRONT]->SetNeutralMode(Brake);
-	m_right[REAR]->SetNeutralMode(Brake);
+	// m_left[FRONT]->SetNeutralMode(Brake);
+	// m_left[REAR]->SetNeutralMode(Brake);
+	// m_right[FRONT]->SetNeutralMode(Brake);
+	// m_right[REAR]->SetNeutralMode(Brake);
 	m_leftStick   = new frc::Joystick(LEFT_JOY);
     m_rightStick  = new frc::Joystick(RIGHT_JOY);
 	m_xbox = xbox;

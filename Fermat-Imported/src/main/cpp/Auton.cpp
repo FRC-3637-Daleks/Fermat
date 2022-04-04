@@ -31,7 +31,7 @@ Auton::REALLYBAD(){
 	}
 
 	if (LIMELIGHT_GOOD==1){
-		m_shooter->SetHigh();
+		m_shooter->SetSpeed(m_shooter->SetHigh());
 	} else {
 		if (autonVersion==0){
 			m_shooter->SetSpeed(4.2164);
@@ -41,10 +41,10 @@ Auton::REALLYBAD(){
 		
 	}
 
-	Wait(4.0_s);
+	Wait(5.0_s);
 	m_intake->AutoIntake(false);
 	m_shooter->Shoot();
-	Wait(4.0_s);
+	Wait(3.0_s);
 	m_shooter->Shoot();
 	// m_pi->SwerveTurn();
 }
