@@ -5,11 +5,13 @@ using namespace frc;
 
 void Robot::RobotInit() 
 {
-  cs::AxisCamera camera = CameraServer::GetInstance()-> AddAxisCamera(CAMERA);  // Initialize Camera
+  cs::AxisCamera shooterCam = CameraServer::GetInstance()-> AddAxisCamera(CAMERA);  // Initialize Camera
+  shooterCam.SetResolution(160, 90);   
+  shooterCam.SetFPS(15);
+
   cs::UsbCamera intakeCam = CameraServer::GetInstance()-> StartAutomaticCapture();
-  // Only use these two lines if there is problems with the camera
-  camera.SetResolution(160, 90);   
-  camera.SetFPS(15);
+  intakeCam.SetResolution(160, 90);   
+  intakeCam.SetFPS(15);
 
   m_xbox                = new frc::XboxController(XBOX);
   m_drive               = new DalekDrive(m_xbox);
