@@ -6,14 +6,11 @@ using namespace frc;
 void Robot::RobotInit() 
 {
   cs::AxisCamera camera = CameraServer::GetInstance()-> AddAxisCamera(CAMERA);  // Initialize Camera
-  cs::UsbCamera intakeCam = CameraServer::GetInstance()->StartAutomaticCapture();
+  cs::UsbCamera intakeCam = CameraServer::GetInstance()-> StartAutomaticCapture();
   // Only use these two lines if there is problems with the camera
   camera.SetResolution(160, 90);   
   camera.SetFPS(15);
- // Get the USB camera from CameraServer
-    cs::UsbCamera camera = frc::CameraServer::StartAutomaticCapture();
-    // Set the resolution
-    camera.SetResolution(640, 480);
+
   m_xbox                = new frc::XboxController(XBOX);
   m_drive               = new DalekDrive(m_xbox);
   m_climb_solenoid      = new frc::Solenoid(PCM, PneumaticsModuleType::CTREPCM, CLIMB);
