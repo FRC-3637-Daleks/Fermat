@@ -6,6 +6,7 @@ using namespace frc;
 void Robot::RobotInit() 
 {
   cs::AxisCamera camera = CameraServer::GetInstance()-> AddAxisCamera(CAMERA);  // Initialize Camera
+  cs::UsbCamera intakeCam = CameraServer::GetInstance()->StartAutomaticCapture();
   // Only use these two lines if there is problems with the camera
   camera.SetResolution(160, 90);   
   camera.SetFPS(15);
