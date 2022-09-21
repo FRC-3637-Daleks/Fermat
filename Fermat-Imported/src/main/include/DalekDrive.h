@@ -44,12 +44,12 @@ class DalekDrive {
 		
 	
 	private:
-		enum MotorCount {
-			leftFront,
-			leftRear,
-			rightFront,
-			rightRear
-		};
+		// enum MotorCount {
+		// 	leftFront=1,
+		// 	leftRear,
+		// 	rightFront,
+		// 	rightRear
+		// };
 		
 		bool canDrive = false, driveSlow = false;
 

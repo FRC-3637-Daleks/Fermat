@@ -5,13 +5,13 @@ using namespace frc;
 
 void Robot::RobotInit() 
 {
-  cs::AxisCamera shooterCam = CameraServer::GetInstance()-> AddAxisCamera(CAMERA);  // Initialize Camera
+  cs::AxisCamera shooterCam = CameraServer::GetInstance()-> AddAxisCamera(SHOOTER_CAMERA);  // Initialize Camera
   shooterCam.SetResolution(160, 90);   
   shooterCam.SetFPS(15);
 
   cs::UsbCamera intakeCam = CameraServer::GetInstance()-> StartAutomaticCapture();
   intakeCam.SetResolution(160, 90);   
-  intakeCam.SetFPS(15);
+  intakeCam.SetFPS(10);
 
   m_xbox                = new frc::XboxController(XBOX);
   m_drive               = new DalekDrive(m_xbox);
@@ -34,7 +34,7 @@ void Robot::RobotInit()
 
 void Robot::RobotPeriodic()
 {
-  //m_limelight->Tick();
+  m_limelight->Tick();
 }
 
 // I think I have some errors here, I wanna test this
@@ -80,7 +80,7 @@ void Robot::TeleopPeriodic()
   m_intake->Tick();
   m_climb->Tick();
   m_drive->Tick(); 
-  m_limelight->Tick();
+  // m_limelight->Tick();
   m_shooter->Tick();
 }
 
@@ -96,7 +96,7 @@ void Robot::TestPeriodic()
 
 void Robot::DisabledInit()
 {
-  
+
 }
 
 

@@ -22,7 +22,8 @@ class Shooter {
 		double FromMetersPerSecond(double speed);
 		double FromMetersPerSecondNoBoost(double speed);
 		void Tick();
-		void SetSpeed(double dist);
+		void SetMotorSpeed(double dist);
+		void SetMotorSpeed();
 
 	private:
 		WPI_TalonSRX *m_shooter_motor;

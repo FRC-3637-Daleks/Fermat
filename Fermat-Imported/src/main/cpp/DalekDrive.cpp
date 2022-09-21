@@ -1,10 +1,10 @@
 #include "Fermat.h"
 
 DalekDrive::DalekDrive(XboxController *xbox) {
-	m_left[FRONT]  = new WPI_TalonFX(leftFront);
-	m_left[REAR]   = new WPI_TalonFX(leftRear);
-	m_right[FRONT] = new WPI_TalonFX(rightFront);
-	m_right[REAR]  = new WPI_TalonFX(rightRear);
+	m_left[FRONT]  = new WPI_TalonFX(LEFT_FRONT_DRIVE);
+	m_left[REAR]   = new WPI_TalonFX(LEFT_REAR_DRIVE);
+	m_right[FRONT] = new WPI_TalonFX(RIGHT_FRONT_DRIVE);
+	m_right[REAR]  = new WPI_TalonFX(RIGHT_REAR_DRIVE);
 	// m_left[FRONT]->SetNeutralMode(Brake);
 	// m_left[REAR]->SetNeutralMode(Brake);
 	// m_right[FRONT]->SetNeutralMode(Brake);
