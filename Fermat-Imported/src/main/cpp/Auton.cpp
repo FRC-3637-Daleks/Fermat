@@ -34,7 +34,8 @@ Auton::REALLYBAD(){
 		m_shooter->SetHigh();
 	} else {
 		if (autonVersion==0){
-			m_shooter->SetSpeed(4.2164);
+			m_shooter->SetHigh();
+			// m_shooter->SetSpeed(4.2164);
 		} else if (autonVersion==1){
 			m_shooter->SetSpeed(3.2766);
 		}
