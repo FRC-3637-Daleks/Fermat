@@ -263,12 +263,14 @@ DalekDrive::Tick(){
 		} else if (m_leftStick->GetTrigger()&&m_rightStick->GetTrigger()){
 			StopLeft();
 			StopRight();
+		} else {
+			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
 		}
 
 		// I think this can just be an else in the above statment		
-		if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
-			TankDrive(m_leftStick, m_rightStick, false, driveSlow);
-		}
+		// if (!(m_leftStick->GetTrigger()||m_rightStick->GetTrigger())){
+		// 	TankDrive(m_leftStick, m_rightStick, false, driveSlow);
+		// }
 
 		ResetEncoder();
 	}

@@ -27,7 +27,7 @@ void Robot::RobotInit()
   m_auton               = new Auton(m_drive, m_pi, m_intake, m_limelight, m_shooter);
   
   m_compressor->Start();
-  m_climb_solenoid->Set(false);
+  //m_climb_solenoid->Set(false);
   m_intake_solenoid->Set(false);
   m_shooter_solenoid->Set(false);
 }
