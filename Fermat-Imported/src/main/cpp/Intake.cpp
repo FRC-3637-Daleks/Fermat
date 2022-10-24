@@ -23,7 +23,7 @@ Intake::AutoIntake(bool toggle) {
 //Tick function doin tick function things
 /*
     A Buttton - Activate auto intake
-    B Button - Activate intake
+    B Button - Reverses intake
 */
 void
 Intake::Tick() {

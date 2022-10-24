@@ -1,13 +1,25 @@
 #include "Fermat.h"
-#include "Limelight.h"
 
 Limelight::Limelight(DalekDrive *drive) {
     m_drive = drive;
 }
 
-double Limelight::CalcDistance() // (m)
-{
-  return (DIST_COEFFICIENT*pow(area, DIST_EXPONENT))*0.0254;
+// double Limelight::CalcDistance() // (m)
+// {
+//   return (DIST_COEFFICIENT*pow(area, DIST_EXPONENT))*0.0254;
+// }
+double Limelight::CalcDistance(){
+	if (mode == 0){
+		return (DIST_COEF_C*pow(area, DIST_EXPO_C))*0.0254;
+	} else if (mode == 1) {
+		return (DIST_COEF_M*pow(area, DIST_EXPO_M))*0.0254;
+	} else {
+		return (DIST_COEF_F*pow(area, DIST_EXPO_F))*0.0254;
+	}
+}
+
+void Limelight::SetMode(int newMode){
+	mode = newMode;
 }
 
 double Limelight::CalcVelocity(double points, double xDistance) // (m/s)
@@ -22,8 +34,8 @@ double Limelight::CalcVelocity(double points) // (m/s)
 }
 
 double Limelight::CalcTurnAngle(double xPos){
-	SmartDashboard::PutNumber("TurnAngle", ANGLE_PRODUCT*xPos + ANGLE_OFFSET);
-	return ANGLE_PRODUCT*xPos + ANGLE_OFFSET;
+	SmartDashboard::PutNumber("TurnAngle", ANGLE_PRODUCT * xPos + ANGLE_OFFSET);
+	return ANGLE_PRODUCT * xPos + ANGLE_OFFSET;
 }
 
 double Limelight::GetAngle(){

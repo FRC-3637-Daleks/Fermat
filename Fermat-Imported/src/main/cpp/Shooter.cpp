@@ -27,8 +27,13 @@ Shooter::SetMiss(){
 }
 
 void 
-Shooter::SetSpeed(double dist){ // inputs in (m)
+Shooter::SetMotorSpeed(double dist){ // inputs in (m)
     m_shooter_motor->Set(FromMetersPerSecond(m_limelight->CalcVelocity(2, dist)));
+}
+
+void 
+Shooter::SetMotorSpeed(){ // inputs in (m)
+    m_shooter_motor->Set(SetHigh());
 }
 
 void
@@ -94,7 +99,7 @@ Shooter::Tick(){
     } else if (m_xbox->GetRawAxis(0)< -0.5){
         speed = FromMetersPerSecond(m_limelight->CalcVelocity(2,7.2));
     } else if (m_xbox->GetRawAxis(1) < -0.5){
-        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2)-0.04); //working limelight
+        speed = FromMetersPerSecond(m_limelight->CalcVelocity(2))-0.04;
         // speed = FromMetersPerSecond(m_limelight->CalcVelocity(1,6));
     } 
 
@@ -103,5 +108,12 @@ Shooter::Tick(){
     
     if (m_xbox->GetRightBumperPressed()){
         Shoot();
+    }
+    if (m_xbox->GetLeftTriggerAxis()>.1){
+        m_limelight->SetMode(2); //far
+    } else if (m_xbox->GetRightTriggerAxis()>.1){
+        m_limelight->SetMode(0); //close
+    } else {
+        m_limelight->SetMode(1); //middle
     }
 }

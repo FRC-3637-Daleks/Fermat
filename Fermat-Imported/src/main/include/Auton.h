@@ -4,6 +4,7 @@
 #pragma once
 
 #define LIMELIGHT_GOOD			0 // 1 for true
+#define AUTON_VERSION			0 // 0 for left
 #define PI_GOOD					0 // 1 for true
 
 using namespace std;
@@ -15,7 +16,6 @@ class Auton {
 	public:
 		Auton(DalekDrive *drive, RaspberryPi *pi, Intake *intake, Limelight *limelight, Shooter *shooter);
 		void REALLYBAD();
-		void Tick();	
 
 	private:
 		DalekDrive *m_drive;
@@ -23,5 +23,5 @@ class Auton {
 		Intake *m_intake;
 		Limelight *m_limelight;
 		Shooter *m_shooter;
-		int auton_phase, autonVersion;
+		// int auton_phase;
 };

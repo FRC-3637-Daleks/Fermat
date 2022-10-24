@@ -38,7 +38,7 @@
 // devices on the robot
 #define ROBORIO         		"10.36.37.2"
 #define ACCESS_POINT     		"10.36.37.1"
-#define CAMERA					"10.36.37.218"
+#define SHOOTER_CAMERA			"10.36.37.218"
 #define RASPBERRY_PI_ADDR		"10.36.37.??"
 #define LIMELIGHT_ADDR			"10.36.37.11"
 #define PI						3.14159265358979323846264338327 //pi
